@@ -1,0 +1,368 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DINH LOC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "E:\\MLN122\\web-game\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/api/timing-scoring.spec.ts",
+      "--project=api"
+    ],
+    "configFile": "E:\\MLN122\\web-game\\playwright.config.ts",
+    "rootDir": "E:/MLN122/web-game/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "E:/MLN122/web-game/test-results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "E:/MLN122/web-game/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/api\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "E:/MLN122/web-game/test-results/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "browser",
+        "name": "browser",
+        "testDir": "E:/MLN122/web-game/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/e2e\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "E:\\MLN122\\web-game\\test-results\\artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "api",
+        "testDir": "E:\\MLN122\\web-game\\tests",
+        "snapshotDir": "E:\\MLN122\\web-game\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5187",
+          "trace": "retain-on-failure",
+          "actionTimeout": 10000
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "api"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/acceptance-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "api\\timing-scoring.spec.ts",
+      "file": "api/timing-scoring.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "deadline: last acknowledged choices settle, blanks score zero and late packets cannot change results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2307,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T13:12:53.415Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "08efddbf25c85bcc81d5-59852ae1062ffaed940a",
+          "file": "api/timing-scoring.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "phase boundaries: review 45 seconds, leaderboard 15, then next round for the same sessions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6561,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T13:12:55.739Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "08efddbf25c85bcc81d5-da376d5bf735f1eb90a4",
+          "file": "api/timing-scoring.spec.ts",
+          "line": 42,
+          "column": 1
+        },
+        {
+          "title": "scoring: 10 per correct task, 90 maximum, no speed bonus, shared ranks and host-only final CSV",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9067,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T13:13:02.306Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "08efddbf25c85bcc81d5-fba02848788432a56151",
+          "file": "api/timing-scoring.spec.ts",
+          "line": 68,
+          "column": 1
+        },
+        {
+          "title": "replay: new run retains sessions, changes assignments and rejects queued old-run answer/submit/host packets",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1383,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m200\u001b[39m\nReceived array: \u001b[31m[409]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m200\u001b[39m\nReceived array: \u001b[31m[409]\u001b[39m\n    at error (E:\\MLN122\\web-game\\tests\\support\\api.ts:29:59)\n    at E:\\MLN122\\web-game\\tests\\api\\timing-scoring.spec.ts:146:83",
+                    "location": {
+                      "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                      "column": 59,
+                      "line": 29
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\api.ts:29\n\n  27 |\n  28 | export async function error(response: APIResponse, statuses: number | number[]) {\n> 29 |   expect(Array.isArray(statuses) ? statuses : [statuses]).toContain(response.status());\n     |                                                           ^\n  30 |   expect(response.headers()['content-type']).toContain('application/json');\n  31 |   const value = await response.json();\n  32 |   expect(value).toEqual(expect.objectContaining({ error: expect.objectContaining({ code: expect.any(String), message: expect.any(String) }) }));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                        "column": 59,
+                        "line": 29
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m200\u001b[39m\nReceived array: \u001b[31m[409]\u001b[39m\n\n   at support\\api.ts:29\n\n  27 |\n  28 | export async function error(response: APIResponse, statuses: number | number[]) {\n> 29 |   expect(Array.isArray(statuses) ? statuses : [statuses]).toContain(response.status());\n     |                                                           ^\n  30 |   expect(response.headers()['content-type']).toContain('application/json');\n  31 |   const value = await response.json();\n  32 |   expect(value).toEqual(expect.objectContaining({ error: expect.objectContaining({ code: expect.any(String), message: expect.any(String) }) }));\n    at error (E:\\MLN122\\web-game\\tests\\support\\api.ts:29:59)\n    at E:\\MLN122\\web-game\\tests\\api\\timing-scoring.spec.ts:146:83"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T13:13:11.381Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\MLN122\\web-game\\test-results\\artifacts\\api-timing-scoring-replay--94fe3--answer-submit-host-packets-api\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "E:\\MLN122\\web-game\\test-results\\artifacts\\api-timing-scoring-replay--94fe3--answer-submit-host-packets-api\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                    "column": 59,
+                    "line": 29
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "08efddbf25c85bcc81d5-12ed993ed88362c3beae",
+          "file": "api/timing-scoring.spec.ts",
+          "line": 117,
+          "column": 1
+        },
+        {
+          "title": "expiry: recovery has five-minute validity and an expired code cannot replace the live device",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2279,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T13:13:13.133Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "08efddbf25c85bcc81d5-298a06864d32dfcc59c2",
+          "file": "api/timing-scoring.spec.ts",
+          "line": 151,
+          "column": 1
+        },
+        {
+          "title": "expiry: an expired room returns 410 and rejects queued mutations",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 829,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T13:13:15.430Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "08efddbf25c85bcc81d5-d28d832ada9a4512dd84",
+          "file": "api/timing-scoring.spec.ts",
+          "line": 168,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-26T13:12:53.070Z",
+    "duration": 23216.236999999997,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

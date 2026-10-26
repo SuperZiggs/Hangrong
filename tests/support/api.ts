@@ -11,6 +11,7 @@ export type Snapshot = {
   teams: { slot: number; teamId: string; name: string; submitted: boolean }[];
   leaderboard: { rank: number; teamId: string; slot: number; name: string; score: number; roundScores: number[]; correctCount: number }[];
   mission?: Mission; draft?: Draft; locked?: boolean; results?: unknown;
+  you?: { teamId: string; slot: number; name: string };
 };
 export type Room = { code: string; hostToken: string; hostPath: string; joinPath: string; expiresAtMs: number };
 export type Team = { slot: number; teamId: string; teamToken: string; name: string; playPath: string };

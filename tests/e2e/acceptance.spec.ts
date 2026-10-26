@@ -50,15 +50,26 @@ test('classroom journey: one host and six isolated phones join, save, refresh an
     await hostPage.goto('/');
     // Assert the required control before arming request waits, so a missing UI cannot leave orphan promises.
     await expect(createButton(hostPage)).toBeVisible();
+    // Transparently record the real server reply before delivery: Chrome discards fetch bodies on full navigation.
+    let createJson: Omit<Room, 'hostToken'> | undefined;
+    await hostPage.route('**/api/rooms', async route => {
+      const response = await route.fetch();
+      createJson = await response.json();
+      await route.fulfill({ response });
+    });
     const createRequest = hostPage.waitForRequest(request => request.method() === 'POST' && /\/api\/rooms$/.test(new URL(request.url()).pathname));
-    const createResponse = hostPage.waitForResponse(response => response.request().method() === 'POST' && /\/api\/rooms$/.test(new URL(response.url()).pathname));
+    const createResponse = hostPage.waitForResponse(response => response.request().method() === 'POST' && /\/api\/rooms$/.test(new URL(response.url()).pathname))
+      .then(response => ({ ok: response.ok(), body: createJson }));
     await createButton(hostPage).click();
     const created = await createResponse;
-    expect(created.ok()).toBeTruthy();
+    expect(created.ok).toBeTruthy();
     const creation = (await createRequest).postDataJSON();
     expect(creation.hostToken).toMatch(/^[A-Za-z0-9_-]{43}$/);
+    expect(created.body).toBeDefined();
+    const room: Room = { ...created.body!, hostToken: creation.hostToken };
+    // A successful create may navigate immediately; inspect storage only in the destination document.
+    await hostPage.waitForURL(new URL(room.hostPath, baseURL).href, { waitUntil: 'domcontentloaded' });
     expect(await localHasToken(hostPage, creation.hostToken)).toBeTruthy();
-    const room: Room = { ...await created.json(), hostToken: creation.hostToken };
     await expect(hostPage.getByText(room.code, { exact: true }).first()).toBeVisible();
     await expect(hostPage.getByRole('img', { name: /QR/i }).or(hostPage.getByLabel(/QR/i)).first()).toBeVisible();
     expect(hostPage.url()).not.toContain(room.hostToken);
@@ -74,14 +85,23 @@ test('classroom journey: one host and six isolated phones join, save, refresh an
       if (await slotField.evaluate(element => element.tagName === 'SELECT')) await slotField.selectOption(String(slot));
       else await slotField.fill(String(slot));
       await nameInput(page).fill(`Nhóm ${slot}`);
-      const joining = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === `/api/rooms/${room.code}/join`);
+      let joinJson: Omit<Team, 'teamToken' | 'name'> | undefined;
+      await page.route(`**/api/rooms/${room.code}/join`, async route => {
+        const response = await route.fetch();
+        joinJson = await response.json();
+        await route.fulfill({ response });
+      });
+      const joining = page.waitForResponse(response => response.request().method() === 'POST' && new URL(response.url()).pathname === `/api/rooms/${room.code}/join`)
+        .then(response => ({ ok: response.ok(), posted: response.request().postDataJSON(), body: joinJson }));
       await joinButton(page).click();
       const response = await joining;
-      expect(response.ok()).toBeTruthy();
-      const posted = response.request().postDataJSON();
+      expect(response.ok).toBeTruthy();
+      const posted = response.posted;
       expect(posted.teamToken).toMatch(/^[A-Za-z0-9_-]{43}$/);
+      expect(response.body).toBeDefined();
+      const team: Team = { ...response.body!, name: `Nhóm ${slot}`, teamToken: posted.teamToken };
+      await page.waitForURL(new URL(team.playPath, baseURL).href, { waitUntil: 'domcontentloaded' });
       expect(await localHasToken(page, posted.teamToken)).toBeTruthy();
-      const team: Team = { ...await response.json(), name: `Nhóm ${slot}`, teamToken: posted.teamToken };
       phones.push({ context, page, team });
       expect(page.url()).not.toContain(team.teamToken);
       await assertNoOverflow(page);

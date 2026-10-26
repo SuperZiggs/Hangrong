@@ -6,8 +6,8 @@ export default defineConfig({
   workers: 1,
   timeout: 45_000,
   expect: { timeout: 7_000 },
-  reporter: [['list'], ['json', { outputFile: 'test-results/acceptance-results.json' }]],
-  outputDir: 'test-results/artifacts',
+  reporter: [['list'], ['json', { outputFile: process.env.ACCEPTANCE_REPORT_FILE ?? 'test-results/acceptance-results.json' }]],
+  outputDir: process.env.ACCEPTANCE_ARTIFACT_DIR ?? 'test-results/artifacts',
   use: {
     baseURL: process.env.ACCEPTANCE_BASE_URL ?? 'http://127.0.0.1:5187',
     trace: 'retain-on-failure',
