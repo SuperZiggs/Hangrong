@@ -4,25 +4,29 @@ import { getCatalog } from '../content';
 import type { RoomView, Phase, Feedback } from '../../shared/game-contracts';
 import { ROUND_TITLES } from '../../shared/game-contracts';
 export function createState(code:string,hostHash:string,now:number,requestId:string):Room{return {id:crypto.randomUUID(),code,hostHash,createRequestId:requestId,createdAtMs:now,expiresAtMs:now+86400000,version:0,runId:null,seed:null,startedAtMs:null,pausedAtMs:null,pausedMs:0,teams:[],receipts:{}};}
-export function joinState(r:Room,slot:number,name:string,hash:string):Team {
-  const existing=r.teams.find(t=>t.slot===slot);
-  if(existing?.tokenHash===hash)return existing;
-  if(r.startedAtMs!==null)throw new GameError('STARTED','Ván đã bắt đầu, không thể thêm nhóm.');
-  if(existing||r.teams.some(t=>t.tokenHash===hash))throw new GameError('SLOT_TAKEN','Vị trí nhóm đã có người tham gia.');
-  const team:Team={teamId:crypto.randomUUID(),slot,name,tokenHash:hash,rounds:[]};
+export function joinState(r:Room,slot:number|undefined,name:string,hash:string):Team {
+  const rejoining=r.teams.find(t=>t.tokenHash===hash);
+  if(rejoining){if(slot!==undefined&&slot!==rejoining.slot)throw new GameError('SLOT_TAKEN','Phiên này đã có lượt tham gia.');return rejoining;}
+  if(r.startedAtMs!==null)throw new GameError('STARTED','Ván đã bắt đầu, không thể thêm lượt tham gia.');
+  const occupied=new Set(r.teams.map(t=>t.slot));
+  let assigned=slot??1;
+  if(slot===undefined)while(occupied.has(assigned))assigned++;
+  if(!Number.isSafeInteger(assigned)||assigned<1)throw new GameError('INVALID_SLOT','Mã lượt tham gia không hợp lệ.',400);
+  if(r.teams.some(t=>t.slot===assigned))throw new GameError('SLOT_TAKEN','Vị trí đã có người tham gia.');
+  const team:Team={teamId:crypto.randomUUID(),slot:assigned,name,tokenHash:hash,rounds:[]};
   r.teams.push(team);r.teams.sort((a,b)=>a.slot-b.slot);return team;
 }
 function random(seed:string){let n=2166136261;for(const c of seed)n=Math.imul(n^c.charCodeAt(0),16777619);return ()=>{n^=n<<13;n^=n>>>17;n^=n<<5;return(n>>>0)/4294967296;};}
 function shuffle<T>(values:T[],rng:()=>number):T[]{const a=[...values];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 export function startRun(r:Room,now:number,seed:string,runId:string){
-  if(r.teams.length<2||r.teams.length>6)throw new GameError('TEAM_COUNT','Cần từ 2 đến 6 nhóm để bắt đầu.');
+  if(r.teams.length<3)throw new GameError('TEAM_COUNT','Cần ít nhất 3 lượt tham gia để bắt đầu.');
   const rng=random(seed),catalog=getCatalog();
   r.runId=runId;r.seed=seed;r.startedAtMs=now;r.pausedAtMs=null;r.pausedMs=0;
   for(const t of r.teams)t.rounds=[];
   for(let round=1;round<=3;round++){
     const bank=shuffle(catalog.filter(m=>m.roundIndex===round),rng);
     r.teams.forEach((team,i)=>{
-      const m=structuredClone(bank[i]);
+      const m=structuredClone(bank[i%bank.length]);
       for(const task of m.tasks){
         const correct=task.correctChoiceId;
         for(const choice of task.choices){const old=choice.id;choice.id=`o-${Math.floor(rng()*0xffffffff).toString(16)}-${Math.floor(rng()*0xffffffff).toString(16)}`;if(old===correct)task.correctChoiceId=choice.id;}

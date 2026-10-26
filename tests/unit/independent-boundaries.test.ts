@@ -5,6 +5,7 @@ function running() {
   const room = createState('123456', 'host-hash', 1_000_000, 'independent-boundary-room');
   const team = joinState(room, 1, 'Nhóm Một', 'team-hash-one');
   joinState(room, 2, 'Nhóm Hai', 'team-hash-two');
+  joinState(room, 3, 'Người Ba', 'team-hash-three');
   startRun(room, 1_000_000, 'independent-boundary-seed', 'independent-boundary-run');
   const task = team.rounds[0].mission.tasks[0];
   const answer = { runId: room.runId!, roundIndex: 1, taskId: task.id, choiceId: task.choices[0].id, seq: 1 };

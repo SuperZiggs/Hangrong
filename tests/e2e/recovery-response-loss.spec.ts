@@ -11,14 +11,14 @@ test('replacement phone reuses its persisted capability after the recovery respo
  });
  await page.goto(`/?room=${room.code}`);
  await expect(page.getByLabel('Mã phòng')).toHaveValue(room.code);
- await page.getByText('Đổi điện thoại hoặc mất phiên nhóm?').click();
+ await page.getByText(/Đổi điện thoại hoặc mất phiên(?: nhóm)?\?/).click();
  await page.getByLabel('Mã phục hồi').fill(issued.recoveryCode);
- await page.getByRole('button',{name:'Khôi phục nhóm'}).click();
+ await page.getByRole('button',{name:/Khôi phục/}).click();
  await expect(page.getByRole('alert')).toBeVisible();
  await page.reload();
- await page.getByText('Đổi điện thoại hoặc mất phiên nhóm?').click();
+ await page.getByText(/Đổi điện thoại hoặc mất phiên(?: nhóm)?\?/).click();
  await page.getByLabel('Mã phục hồi').fill(issued.recoveryCode);
- await page.getByRole('button',{name:'Khôi phục nhóm'}).click();
+ await page.getByRole('button',{name:/Khôi phục/}).click();
  await expect.poll(()=>sent.length).toBe(2);
  expect(sent[1]).toBe(sent[0]);
  await expect(page).toHaveURL(new RegExp(`/play/${room.code}$`));

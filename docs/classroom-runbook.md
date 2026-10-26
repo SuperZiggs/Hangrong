@@ -2,9 +2,9 @@
 
 ## Chuẩn bị và luật chơi
 
-Một máy MC nối máy chiếu; 2–6 nhóm, mỗi nhóm một điện thoại có Internet. MC chọn **Tạo phòng**, chiếu QR hoặc sao chép link. Giữ trình duyệt tạo phòng để điều khiển MC; không xóa dữ liệu trình duyệt. Mỗi nhóm chọn đúng vị trí được phân công và nhập tên. MC có thể sửa tên hoặc loại nhóm vào nhầm trong sảnh. Phòng tồn tại 24 giờ.
+Một máy MC nối máy chiếu; Từ 3 lượt tham gia. Chơi solo: mỗi người một điện thoại. Chơi nhóm: mỗi nhóm một điện thoại đại diện. Có thể trộn hai hình thức trong cùng phòng; không cần khai báo trước số lượng. MC chọn **Tạo phòng**, chiếu QR hoặc sao chép link. Giữ trình duyệt tạo phòng để điều khiển MC; không xóa dữ liệu trình duyệt. Mỗi điện thoại quét QR rồi nhập tên cá nhân hoặc tên nhóm; không chọn vị trí cố định. MC có thể sửa tên hoặc loại lượt vào nhầm trong sảnh. Phòng tồn tại 24 giờ.
 
-Lời dẫn: “Có ba vòng, mỗi vòng một tình huống riêng và ba câu hỏi. Các nhóm cùng thời gian và điểm tối đa. Đúng được 10 điểm, sai/bỏ trống được 0. Không thưởng bấm nhanh. Các bạn có hai phút để đọc, thảo luận và nộp. Trước khi nộp có thể đổi lựa chọn. Hết giờ hệ thống chấm những lựa chọn đã lưu. Sau đó có 45 giây đọc giải thích và 15 giây xem bảng điểm. Đồng điểm thì đồng hạng.”
+Lời dẫn: “Bạn có thể chơi cá nhân hoặc theo nhóm. Mỗi điện thoại gửi một phiếu trả lời. Có ba vòng, mỗi vòng một tình huống riêng và ba câu hỏi. Các nhóm cùng thời gian và điểm tối đa. Đúng được 10 điểm, sai/bỏ trống được 0. Không thưởng bấm nhanh. Các bạn có hai phút để đọc, thảo luận và nộp. Trước khi nộp có thể đổi lựa chọn. Hết giờ hệ thống chấm những lựa chọn đã lưu. Sau đó có 45 giây đọc giải thích và 15 giây xem bảng điểm. Đồng điểm thì đồng hạng.”
 
 ## Ván 10 phút
 
@@ -21,7 +21,7 @@ Lời dẫn: “Có ba vòng, mỗi vòng một tình huống riêng và ba câu
 | 8:45–9:00 | Bảng xếp hạng |
 | 9:00–10:00 | Bảng cuối và MC chốt kiến thức |
 
-Vào phòng và luật chơi nằm ngoài 10 phút. MC không đọc lần lượt sáu đề; các nhóm chơi đồng thời. Máy chiếu hiện đồng hồ, số nhóm nộp và bảng điểm. Hệ thống tự chuyển vòng, không rút ngắn khi nộp sớm. Bảng cuối tiếp tục hiện sau phút chốt.
+Vào phòng và luật chơi nằm ngoài 10 phút. MC không đọc lần lượt tất cả đề; mọi người chơi đồng thời. Ngân hàng mỗi vòng có sáu đề, nên khi đông hơn sáu lượt sẽ có đề được dùng lại cân bằng. Máy chiếu hiện đồng hồ, số nhóm nộp và bảng điểm. Hệ thống tự chuyển vòng, không rút ngắn khi nộp sớm. Bảng cuối tiếp tục hiện sau phút chốt.
 
 Lời chốt: “Độc quyền có thể cùng tồn tại với cạnh tranh. Hãy chỉ rõ cơ chế sức mạnh: điểm vào, dữ liệu, hiệu ứng mạng hoặc chi phí chuyển đổi. Khi tham gia nền kinh tế số, cần kết hợp phản biện, thích nghi và xây quyền chủ động. Quy mô tự nó chưa đủ để kết luận vi phạm.”
 
@@ -29,7 +29,7 @@ Lời chốt: “Độc quyền có thể cùng tồn tại với cạnh tranh. 
 
 - **Mất mạng:** MC bấm **Tạm dừng**. Tổng thời gian tăng bằng thời gian dừng. Chỉ lựa chọn hiện **Đã lưu** mới được xác nhận; lựa chọn chưa lưu có thể mất khi tải lại.
 - **Tải lại:** dùng cùng trình duyệt để giữ nhóm, đề và lựa chọn đã lưu. Không mở phiên ẩn danh mới.
-- **Đổi điện thoại:** MC mở **Nhóm cần đổi điện thoại?**, cấp mã riêng. Máy mới nhập mã phòng rồi mở mục khôi phục. Mã có hiệu lực 5 phút; điện thoại cũ mất quyền, đề và điểm giữ nguyên. Không chiếu mã khôi phục cho cả lớp.
+- **Đổi điện thoại:** MC mở **Cần đổi điện thoại?**, cấp mã riêng. Máy mới nhập mã phòng rồi mở mục khôi phục. Mã có hiệu lực 5 phút; điện thoại cũ mất quyền, đề và điểm giữ nguyên. Không chiếu mã khôi phục cho cả lớp.
 - **Mất phiên MC:** quay lại trình duyệt tạo phòng. Bản đầu chưa có chuyển quyền MC sang máy khác; chuẩn bị máy và nguồn điện trước buổi.
 - **Internet không phục hồi:** dừng đồng hồ, dùng `docs/question-bank.md` cho các nhóm trả lời giấy; mỗi câu đúng 10 điểm. Ghi bảng điểm thủ công riêng.
 - **Ván kết thúc:** **Xuất bảng điểm** để lưu CSV trước **Chơi ván mới**. Ván mới giữ nhóm, bốc lại đề và thay bảng điểm cũ.

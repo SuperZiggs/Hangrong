@@ -60,8 +60,9 @@ export async function state(api: APIRequestContext, room: Room, capability?: str
   }));
   expect(Object.hasOwn(value, 'runId')).toBeTruthy();
   expect(Object.hasOwn(value, 'deadlineMs')).toBeTruthy();
-  for (const team of value.teams) expect(team).toEqual(expect.objectContaining({ slot: expect.any(Number), teamId: expect.any(String), name: expect.any(String), submitted: expect.any(Boolean) }));
-  for (const entry of value.leaderboard) expect(entry).toEqual(expect.objectContaining({ rank: expect.any(Number), teamId: expect.any(String), slot: expect.any(Number), name: expect.any(String), score: expect.any(Number), roundScores: expect.any(Array), correctCount: expect.any(Number) }));
+  // Check the same shape at every index in two matcher steps, avoiding O(entrant count) trace events per snapshot.
+  expect(value.teams).toEqual(value.teams.map(() => expect.objectContaining({ slot: expect.any(Number), teamId: expect.any(String), name: expect.any(String), submitted: expect.any(Boolean) })));
+  expect(value.leaderboard).toEqual(value.leaderboard.map(() => expect.objectContaining({ rank: expect.any(Number), teamId: expect.any(String), slot: expect.any(Number), name: expect.any(String), score: expect.any(Number), roundScores: expect.any(Array), correctCount: expect.any(Number) })));
   return value;
 }
 
@@ -69,7 +70,7 @@ export async function command(api: APIRequestContext, room: Room, action: string
   return api.post(`/api/rooms/${room.code}/host`, { headers: auth(room.hostToken), data: { requestId: requestId(), ...options, action } });
 }
 
-export async function startRoom(api: APIRequestContext, count = 2) {
+export async function startRoom(api: APIRequestContext, count = 3) {
   const room = await createRoom(api);
   const teams = await Promise.all(Array.from({ length: count }, (_, index) => join(api, room, index + 1)));
   await success(await command(api, room, 'start'));
@@ -91,7 +92,8 @@ export function submitBody(snapshot: Snapshot, answers = snapshot.mission!.tasks
 
 export function assertNoSecrets(value: unknown, capabilities: string[]) {
   const json = JSON.stringify(value);
-  for (const capability of capabilities) expect(json).not.toContain(capability);
+  // Empty matches is equivalent to every individual not.toContain check; retain the complete capability set.
+  expect(capabilities.filter(capability => json.includes(capability))).toEqual([]);
   expect(json).not.toMatch(/"(?:hostToken|teamToken|tokenHash|recoveryCode|recoveryHash)"\s*:/i);
 }
 

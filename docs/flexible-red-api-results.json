@@ -1,0 +1,474 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\DINH LOC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "E:\\MLN122\\web-game\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/api/flexible-participation.spec.ts",
+      "--project=api"
+    ],
+    "configFile": "E:\\MLN122\\web-game\\playwright.config.ts",
+    "rootDir": "E:/MLN122/web-game/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "E:/MLN122/web-game/test-results/flexible-red-api-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "api",
+        "name": "api",
+        "testDir": "E:/MLN122/web-game/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/api\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 45000
+      },
+      {
+        "outputDir": "E:/MLN122/web-game/test-results/flexible-red-api-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "browser",
+        "name": "browser",
+        "testDir": "E:/MLN122/web-game/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/e2e\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "api",
+        "testDir": "E:\\MLN122\\web-game\\tests",
+        "snapshotDir": "E:\\MLN122\\web-game\\tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5187",
+          "trace": "retain-on-failure",
+          "actionTimeout": 10000
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "api"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/flexible-red-api-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "api\\flexible-participation.spec.ts",
+      "file": "api/flexible-participation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "flexible threshold: zero, one and two entrants cannot start; exactly three can",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 173,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m200\u001b[39m\nReceived array: \u001b[31m[409]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m200\u001b[39m\nReceived array: \u001b[31m[409]\u001b[39m\n    at error (E:\\MLN122\\web-game\\tests\\support\\api.ts:30:59)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:12:9",
+                    "location": {
+                      "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                      "column": 59,
+                      "line": 30
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\api.ts:30\n\n  28 |\n  29 | export async function error(response: APIResponse, statuses: number | number[]) {\n> 30 |   expect(Array.isArray(statuses) ? statuses : [statuses]).toContain(response.status());\n     |                                                           ^\n  31 |   expect(response.headers()['content-type']).toContain('application/json');\n  32 |   const value = await response.json();\n  33 |   expect(value).toEqual(expect.objectContaining({ error: expect.objectContaining({ code: expect.any(String), message: expect.any(String) }) }));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                        "column": 59,
+                        "line": 30
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected value: \u001b[32m200\u001b[39m\nReceived array: \u001b[31m[409]\u001b[39m\n\n   at support\\api.ts:30\n\n  28 |\n  29 | export async function error(response: APIResponse, statuses: number | number[]) {\n> 30 |   expect(Array.isArray(statuses) ? statuses : [statuses]).toContain(response.status());\n     |                                                           ^\n  31 |   expect(response.headers()['content-type']).toContain('application/json');\n  32 |   const value = await response.json();\n  33 |   expect(value).toEqual(expect.objectContaining({ error: expect.objectContaining({ code: expect.any(String), message: expect.any(String) }) }));\n    at error (E:\\MLN122\\web-game\\tests\\support\\api.ts:30:59)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:12:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T18:17:17.498Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-0b793-not-start-exactly-three-can-api\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-0b793-not-start-exactly-three-can-api\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                    "column": 59,
+                    "line": 30
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6372e8e52f5d4e5eb793-0ded4abd44330c73e522",
+          "file": "api/flexible-participation.spec.ts",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "name-only joining: concurrent saved-capability retries create one stable entrant; duplicate names stay distinct",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 121,
+                  "error": {
+                    "message": "Error: http://127.0.0.1:5187/api/rooms/116611/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: http://127.0.0.1:5187/api/rooms/116611/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:22:19",
+                    "location": {
+                      "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                      "column": 135,
+                      "line": 24
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                        "column": 135,
+                        "line": 24
+                      },
+                      "message": "Error: http://127.0.0.1:5187/api/rooms/116611/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n   at support\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:22:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T18:17:18.012Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-0f625-plicate-names-stay-distinct-api\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-0f625-plicate-names-stay-distinct-api\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                    "column": 135,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6372e8e52f5d4e5eb793-06ef5c20062716dcfc76",
+          "file": "api/flexible-participation.spec.ts",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "classroom cohort 26: shared-IP joins, balanced three-round assignments, concurrent answers/submits and replay",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 118,
+                  "error": {
+                    "message": "Error: http://127.0.0.1:5187/api/rooms/155277/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: http://127.0.0.1:5187/api/rooms/155277/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:40:17",
+                    "location": {
+                      "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                      "column": 135,
+                      "line": 24
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                        "column": 135,
+                        "line": 24
+                      },
+                      "message": "Error: http://127.0.0.1:5187/api/rooms/155277/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n   at support\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:40:17"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T18:17:18.520Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-cdaea--answers-submits-and-replay-api\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-cdaea--answers-submits-and-replay-api\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                    "column": 135,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6372e8e52f5d4e5eb793-89f33d79e373050b28a0",
+          "file": "api/flexible-participation.spec.ts",
+          "line": 37,
+          "column": 31
+        },
+        {
+          "title": "classroom cohort 40: shared-IP joins, balanced three-round assignments, concurrent answers/submits and replay",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 176,
+                  "error": {
+                    "message": "Error: http://127.0.0.1:5187/api/rooms/991130/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: http://127.0.0.1:5187/api/rooms/991130/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:40:17",
+                    "location": {
+                      "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                      "column": 135,
+                      "line": 24
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                        "column": 135,
+                        "line": 24
+                      },
+                      "message": "Error: http://127.0.0.1:5187/api/rooms/991130/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n   at support\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:40:17"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T18:17:19.067Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-68223--answers-submits-and-replay-api\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-68223--answers-submits-and-replay-api\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                    "column": 135,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6372e8e52f5d4e5eb793-2d0282e9fc068bd1df38",
+          "file": "api/flexible-participation.spec.ts",
+          "line": 37,
+          "column": 31
+        },
+        {
+          "title": "entrants beyond six: host rename/remove/recover target the right identity and preserve room/role isolation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "api",
+              "projectName": "api",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 359,
+                  "error": {
+                    "message": "Error: http://127.0.0.1:5187/api/rooms/603171/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: http://127.0.0.1:5187/api/rooms/603171/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:96:17",
+                    "location": {
+                      "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                      "column": 135,
+                      "line": 24
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                        "column": 135,
+                        "line": 24
+                      },
+                      "message": "Error: http://127.0.0.1:5187/api/rooms/603171/join must succeed; status=400, body={\"error\":{\"code\":\"INVALID_INPUT\",\"message\":\"Kiểm tra lại thông tin đã nhập.\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n   at support\\api.ts:24\n\n  22 |\n  23 | export async function success(response: APIResponse) {\n> 24 |   expect(response.ok(), `${response.url()} must succeed; status=${response.status()}, body=${(await response.text()).slice(0, 500)}`).toBeTruthy();\n     |                                                                                                                                       ^\n  25 |   expect(response.headers()['content-type']).toContain('application/json');\n  26 |   return response.json();\n  27 | }\n    at success (E:\\MLN122\\web-game\\tests\\support\\api.ts:24:135)\n    at joinEntrant (E:\\MLN122\\web-game\\tests\\support\\flexible.ts:18:18)\n    at E:\\MLN122\\web-game\\tests\\api\\flexible-participation.spec.ts:96:17"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-26T18:17:19.592Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-5dc95-reserve-room-role-isolation-api\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "E:\\MLN122\\web-game\\test-results\\flexible-red-api-artifacts\\api-flexible-participation-5dc95-reserve-room-role-isolation-api\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\MLN122\\web-game\\tests\\support\\api.ts",
+                    "column": 135,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6372e8e52f5d4e5eb793-fb82329fe3b9e891f8de",
+          "file": "api/flexible-participation.spec.ts",
+          "line": 94,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-26T18:17:17.082Z",
+    "duration": 2917.637,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}

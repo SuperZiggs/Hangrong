@@ -47,7 +47,7 @@ test('persistence: acknowledged draft and settled points survive two actual work
     expect(portOccupied, 'Port 5188 must be free before this test starts its own worker.').toBe(false);
     await boot();
     const room = await createRoom(api);
-    const teams = await Promise.all([join(api, room, 1), join(api, room, 2)]);
+    const teams = await Promise.all([join(api, room, 1), join(api, room, 2), join(api, room, 3)]);
     await success(await command(api, room, 'start'));
     const before = await state(api, room, teams[0].teamToken);
     const fixture = localD1(room);

@@ -3,7 +3,7 @@ import { assertNoKeys, assertNoSecrets, auth, state, type Mission, type Room, ty
 
 const codeInput = (page: Page) => page.getByLabel(/mã phòng/i);
 const slotInput = (page: Page) => page.getByLabel(/vị trí nhóm|số nhóm|chọn nhóm/i);
-const nameInput = (page: Page) => page.getByLabel(/tên nhóm/i);
+const nameInput = (page: Page) => page.getByLabel(/tên hiển thị|tên.*người|tên cá nhân|tên bạn|tên.*nhóm/i);
 const joinButton = (page: Page) => page.getByRole('button', { name: /vào phòng|tham gia/i });
 const createButton = (page: Page) => page.getByRole('button', { name: /tạo phòng/i });
 const choiceControl = (page: Page, text: string) => page.getByRole('button', { name: text, exact: true }).or(page.getByRole('radio', { name: text, exact: true })).first();
@@ -29,7 +29,7 @@ test('landing: accessible Vietnamese room form works at 360px with keyboard focu
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   await expect(codeInput(page)).toBeVisible();
-  await expect(slotInput(page)).toBeVisible();
+  await expect(slotInput(page)).toHaveCount(0);
   await expect(nameInput(page)).toBeVisible();
   await expect(joinButton(page)).toBeVisible();
   await expect(createButton(page)).toBeVisible();
@@ -81,9 +81,7 @@ test('classroom journey: one host and six isolated phones join, save, refresh an
       const page = await context.newPage();
       await page.goto('/');
       await codeInput(page).fill(room.code);
-      const slotField = slotInput(page);
-      if (await slotField.evaluate(element => element.tagName === 'SELECT')) await slotField.selectOption(String(slot));
-      else await slotField.fill(String(slot));
+      await expect(slotInput(page)).toHaveCount(0);
       await nameInput(page).fill(`Nhóm ${slot}`);
       let joinJson: Omit<Team, 'teamToken' | 'name'> | undefined;
       await page.route(`**/api/rooms/${room.code}/join`, async route => {

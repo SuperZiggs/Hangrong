@@ -1,6 +1,6 @@
 # Quyền lực số
 
-Game tiếng Việt cuối bài thuyết trình Kinh tế chính trị Mác–Lênin: 2–6 nhóm, một điện thoại/nhóm, ba vòng tình huống và leaderboard. Tối đa 90 điểm. Chơi 9 phút + 1 phút chốt; vào phòng/phổ biến luật ngoài khung này.
+Game tiếng Việt cuối bài thuyết trình Kinh tế chính trị Mác–Lênin: Từ 3 lượt tham gia; mỗi điện thoại đại diện cho một cá nhân hoặc một nhóm, ba vòng tình huống và leaderboard. Tối đa 90 điểm. Chơi 9 phút + 1 phút chốt; vào phòng/phổ biến luật ngoài khung này.
 
 - [Hướng dẫn MC và phương án dự phòng](docs/classroom-runbook.md)
 - [Ngân hàng câu hỏi và nguồn](docs/question-bank.md)
@@ -32,6 +32,6 @@ API/E2E cần server local; browser tests dùng Chrome đã cài. Có thể đ�
 
 `server/content` chứa 18 tình huống/54 nhiệm vụ và lời giải, chỉ import từ server. `server/game` quyết định random, deadline, chấm và DTO theo quyền. `server/room-store.ts` lưu D1 bằng version CAS. `app/api/rooms` xác thực lệnh; `components/game` hiển thị MC/điện thoại; `hooks/useRoom.ts` đồng bộ.
 
-Token điều khiển 32 byte lưu trong trình duyệt, chỉ hash trong phòng; không vào QR/URL. Phòng hết hạn sau 24 giờ. Không dùng AI runtime hay tài khoản cá nhân. Cùng ván tải lại giữ đề; chơi lại sinh seed/run mới, đề có thể lặp giữa các ván độc lập. Đồng điểm cùng hạng, không thưởng tốc độ.
+Token điều khiển 32 byte lưu trong trình duyệt, chỉ hash trong phòng; không vào QR/URL. Phòng hết hạn sau 24 giờ. Không dùng AI runtime hay tài khoản cá nhân. Không cần chọn vị trí nhóm hay khai báo trước số lượng. Cùng ván tải lại giữ đề; chơi lại sinh seed/run mới, đề có thể lặp giữa các ván độc lập. Đồng điểm cùng hạng, không thưởng tốc độ. Mỗi vòng có sáu tình huống: tối đa sáu lượt nhận đề khác nhau; đông hơn thì phân phối lại cân bằng. Không còn giới hạn sản phẩm sáu nhóm; khả năng phục vụ vẫn phụ thuộc dung lượng và tải của hosting.
 
 Sửa nội dung tại `server/content/data.ts`: mỗi nhiệm vụ gồm prompt, đáp án đúng, ba phương án nhiễu và giải thích. Engine xáo lựa chọn và tạo ID công khai riêng. Chạy unit tests sau khi sửa. Tất cả tình huống hư cấu, không phải chứng cứ về doanh nghiệp thật.

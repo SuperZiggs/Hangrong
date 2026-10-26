@@ -6,7 +6,7 @@ import { joinState,startRun,phaseOf,saveChoice,submitRound,buildView } from '../
 import { GameError } from '../../../../../server/game/types';
 import { enforceLimit } from '../../../../../server/rate-limit';
 type Context={params:Promise<{code:string;operation:string}>};
-const joinSchema=z.object({requestId,slot,name:groupName,teamToken:token}).strict();
+const joinSchema=z.object({requestId,slot:slot.optional(),name:groupName,teamToken:token}).strict();
 const answerSchema=selection.extend({requestId,runId:z.string(),roundIndex:round}).strict();
 const submitSchema=z.object({requestId,runId:z.string(),roundIndex:round,answers:z.array(selection).max(3)}).strict();
 const hostSchema=z.object({requestId,runId:z.string().nullable().optional(),action:z.enum(['start','pause','resume','rename','remove','issue-recovery','replay']),payload:z.record(z.unknown()).optional()}).strict();
@@ -19,7 +19,7 @@ export async function GET(request:Request,context:Context){return endpoint(async
   requireHost(actor);if(phaseOf(r,Date.now()).phase!=='finished')throw new GameError('NOT_FINISHED','Chỉ xuất điểm khi ván đã kết thúc.');
   const rows=buildView(r,actor,Date.now()).leaderboard;
   const cell=(s:string|number)=>`"${String(s).replaceAll('"','""').replace(/^[=+@-]/,"'"+'$&')}"`;
-  const text='\uFEFF'+[['Hạng','Nhóm','Tên','Điểm','Vòng 1','Vòng 2','Vòng 3'],...rows.map(x=>[x.rank,x.slot,x.name,x.score,...x.roundScores])].map(x=>x.map(cell).join(',')).join('\r\n');
+  const text='\uFEFF'+[['Hạng','Số thứ tự','Tên','Điểm','Vòng 1','Vòng 2','Vòng 3'],...rows.map(x=>[x.rank,x.slot,x.name,x.score,...x.roundScores])].map(x=>x.map(cell).join(',')).join('\r\n');
   return new Response(text,{headers:{'Content-Type':'text/csv; charset=utf-8','Content-Disposition':`attachment; filename="quyen-luc-so-${code}.csv"`,'Cache-Control':'no-store'}});
  }
  throw new GameError('NOT_FOUND','Không tìm thấy thao tác.',404);
@@ -40,7 +40,7 @@ export async function POST(request:Request,context:Context){return endpoint(asyn
    }
    const t=r.teams.find(t=>t.recovery?.hash===recoveryHash);
    if(!t||!t.recovery||t.recovery.expiresAtMs<=now)throw new GameError('RECOVERY_INVALID','Mã phục hồi không đúng, hết hạn hoặc đã dùng.',403);
-   if(r.teams.some(x=>x.teamId!==t.teamId&&x.tokenHash===newHash))throw new GameError('TOKEN_IN_USE','Phiên này đang thuộc nhóm khác.',409);
+   if(r.teams.some(x=>x.teamId!==t.teamId&&x.tokenHash===newHash))throw new GameError('TOKEN_IN_USE','Phiên này đang thuộc lượt tham gia khác.',409);
    t.tokenHash=newHash;delete t.recovery;
    const out={code,slot:t.slot,teamId:t.teamId,playPath:`/play/${code}`};
    r.receipts[key]={action:`recover:${newHash}`,reply:out};return out;
@@ -59,15 +59,15 @@ export async function POST(request:Request,context:Context){return endpoint(asyn
    if(b.action==='pause'){if(p.phase==='lobby'||p.phase==='finished')throw new GameError('NOT_PLAYING','Ván chưa đang diễn ra.');if(r.pausedAtMs===null)r.pausedAtMs=now;}
    if(b.action==='resume'){if(r.pausedAtMs!==null){r.pausedMs+=now-r.pausedAtMs;r.pausedAtMs=null;}}
    if(b.action==='rename'||b.action==='remove'){
-    if(p.phase!=='lobby')throw new GameError('STARTED','Chỉ thay đổi nhóm trong sảnh.');
-    const s=slot.safeParse(b.payload?.slot);if(!s.success)throw new GameError('INVALID_INPUT','Chọn vị trí nhóm hợp lệ.',400);
-    const t=r.teams.find(t=>t.slot===s.data);if(!t)throw new GameError('TEAM_NOT_FOUND','Không thấy nhóm này.',404);
+    if(p.phase!=='lobby')throw new GameError('STARTED','Chỉ thay đổi danh sách trong sảnh.');
+    const s=slot.safeParse(b.payload?.slot);if(!s.success)throw new GameError('INVALID_INPUT','Chọn lượt tham gia hợp lệ.',400);
+    const t=r.teams.find(t=>t.slot===s.data);if(!t)throw new GameError('TEAM_NOT_FOUND','Không thấy lượt tham gia này.',404);
     if(b.action==='remove')r.teams=r.teams.filter(x=>x.teamId!==t.teamId);
     else {const n=groupName.safeParse(b.payload?.name);if(!n.success)throw new GameError('INVALID_NAME','Tên nhóm cần 2–30 ký tự.',400);t.name=n.data;}
    }
    if(b.action==='issue-recovery'){
-    const s=slot.safeParse(b.payload?.slot);if(!s.success)throw new GameError('INVALID_INPUT','Chọn nhóm hợp lệ.',400);
-    const t=r.teams.find(t=>t.slot===s.data);if(!t)throw new GameError('TEAM_NOT_FOUND','Không thấy nhóm này.',404);
+    const s=slot.safeParse(b.payload?.slot);if(!s.success)throw new GameError('INVALID_INPUT','Chọn lượt tham gia hợp lệ.',400);
+    const t=r.teams.find(t=>t.slot===s.data);if(!t)throw new GameError('TEAM_NOT_FOUND','Không thấy lượt tham gia này.',404);
     t.recovery={hash:recoveryHash,expiresAtMs:now+300000};out={ok:true,slot:t.slot};
    }
    if(b.action==='replay'){if(p.phase!=='finished')throw new GameError('NOT_FINISHED','Chơi lại sau khi ván đã kết thúc.');for(const t of r.teams)delete t.recovery;startRun(r,now,seed,runId);out={ok:true,runId:r.runId};}

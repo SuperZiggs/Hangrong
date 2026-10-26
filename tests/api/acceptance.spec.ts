@@ -23,7 +23,7 @@ test('validation: room lookup, slot/name boundaries and safe structured errors',
   await error(await request.get('/api/rooms/9999999/state'), [400, 404]);
   const room = await createRoom(request);
   for (const invalid of [
-    { slot: 0, name: 'Nhóm A' }, { slot: 7, name: 'Nhóm A' }, { slot: 1.5, name: 'Nhóm A' },
+    { slot: 0, name: 'Nhóm A' }, { slot: -1, name: 'Nhóm A' }, { slot: 1.5, name: 'Nhóm A' },
     { slot: 1, name: 'x' }, { slot: 1, name: '   ' }, { slot: 1, name: 'x'.repeat(31) },
   ]) {
     await error(await request.post(`/api/rooms/${room.code}/join`, { data: { requestId: requestId(), teamToken: token(), ...invalid } }), 400);
@@ -104,7 +104,7 @@ test('six-team assignment: distinct missions, stable reconnect, no premature ans
   // Duplicate start commands cannot reset the timer or switch the assignment/run.
   const id = requestId();
   const room2 = await createRoom(request);
-  await Promise.all([join(request, room2, 1), join(request, room2, 2)]);
+  await Promise.all([join(request, room2, 1), join(request, room2, 2), join(request, room2, 3)]);
   await success(await command(request, room2, 'start', { requestId: id }));
   const once = await state(request, room2, room2.hostToken);
   await success(await command(request, room2, 'start', { requestId: id }));

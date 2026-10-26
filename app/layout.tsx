@@ -3,7 +3,7 @@ import "./game.css";
 
 export const metadata: Metadata = {
   title: "Quyền lực số — Ai nắm luật chơi?",
-  description: "Game tình huống cùng lớp: nhận diện quyền lực, ứng phó biến cố và giữ quyền chủ động. 2–6 nhóm, 3 vòng, 90 điểm.",
+  description: "Game tình huống cùng lớp: chơi solo hoặc theo nhóm, từ 3 lượt tham gia. Nhận diện quyền lực, ứng phó biến cố và giữ quyền chủ động qua 3 vòng, 90 điểm.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
