@@ -1,0 +1,737 @@
+{
+  "schemaVersion": 1,
+  "status": "production-plan-only",
+  "createdOn": "2026-10-27",
+  "game": "Cuộc đua giành khách",
+  "artBrief": "art-direction.md",
+  "runtimeRoot": "public/arcade/assets",
+  "sourceRoot": "assets/arcade",
+  "playerIdentification": {
+    "paletteCount": 8,
+    "markerShapes": 4,
+    "minimumDistinctCombinations": 26,
+    "labels": "live-player-name-and-number",
+    "equalGameplayStats": true
+  },
+  "budgets": {
+    "bootCompressedMiB": 2,
+    "matchImagesAndFontsMiB": 8,
+    "audioMiB": 6,
+    "maximumAtlasEdgePx": 2048,
+    "paddingAndExtrusionPx": 2
+  },
+  "summary": {
+    "requiredGroups": 47,
+    "visualFrames": 305,
+    "screenAssets": 5,
+    "fontFiles": 2,
+    "sfxCues": 16,
+    "musicLoops": 2
+  },
+  "items": [
+    {
+      "key": "characters.courier",
+      "kind": "atlas",
+      "path": "characters/courier.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "characters/courier.json",
+      "frameSize": [
+        96,
+        96
+      ],
+      "origin": [
+        48,
+        88
+      ],
+      "frames": 72,
+      "directions": [
+        "N",
+        "E",
+        "S",
+        "W"
+      ],
+      "animations": {
+        "idle": 2,
+        "run": 6,
+        "dash": 2,
+        "bump": 2,
+        "celebrate": 6
+      },
+      "source": "builtin-imagegen:approved-seeds-and-whole-strips"
+    },
+    {
+      "key": "characters.parcel",
+      "kind": "atlas",
+      "path": "characters/parcel.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "characters/parcel.json",
+      "frameSize": [
+        96,
+        96
+      ],
+      "origin": [
+        48,
+        88
+      ],
+      "frames": 4,
+      "source": "builtin-imagegen:reference-edit"
+    },
+    {
+      "key": "characters.shadow",
+      "kind": "image",
+      "path": "characters/shadow.png",
+      "required": true,
+      "status": "planned",
+      "frameSize": [
+        64,
+        32
+      ],
+      "frames": 1,
+      "source": "native-canvas:soft-shadow"
+    },
+    {
+      "key": "characters.markers",
+      "kind": "atlas",
+      "path": "characters/markers.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "characters/markers.json",
+      "frameSize": [
+        64,
+        64
+      ],
+      "frames": 4,
+      "source": "native-vector:circle-square-diamond-triangle"
+    },
+    {
+      "key": "characters.customers",
+      "kind": "atlas",
+      "path": "characters/customers.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "characters/customers.json",
+      "frameSize": [
+        96,
+        96
+      ],
+      "frames": 8,
+      "source": "builtin-imagegen:four-customers-two-idle-frames"
+    },
+    {
+      "key": "environment.tiles",
+      "kind": "atlas",
+      "path": "environment/tiles.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "environment/tiles.json",
+      "frameSize": [
+        64,
+        64
+      ],
+      "frames": 64,
+      "groups": {
+        "ground": 12,
+        "roads": 20,
+        "curbs": 12,
+        "water": 8,
+        "bridges": 12
+      },
+      "source": "builtin-imagegen:modular-tile-sheets"
+    },
+    {
+      "key": "environment.props",
+      "kind": "atlas",
+      "path": "environment/props.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "environment/props.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 32,
+      "groups": {
+        "trees": 4,
+        "planters": 4,
+        "lamps": 4,
+        "benches": 4,
+        "crates": 4,
+        "signs": 4,
+        "bollards": 4,
+        "umbrellas": 4
+      },
+      "source": "builtin-imagegen:coherent-prop-sheets"
+    },
+    {
+      "key": "environment.structures",
+      "kind": "atlas",
+      "path": "environment/structures.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "environment/structures.json",
+      "frameSize": [
+        256,
+        256
+      ],
+      "frames": 14,
+      "groups": {
+        "storefronts": 4,
+        "depot": 1,
+        "pTower": 1,
+        "pGate": 2,
+        "sharedBridge": 2,
+        "privateChannel": 2,
+        "promotionStand": 2
+      },
+      "source": "builtin-imagegen:paired-states"
+    },
+    {
+      "key": "ui.icons",
+      "kind": "atlas",
+      "path": "ui/icons.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "ui/icons.json",
+      "frameSize": [
+        64,
+        64
+      ],
+      "frames": 24,
+      "names": [
+        "coin",
+        "parcel",
+        "pickup",
+        "delivery",
+        "p-gate",
+        "bypass",
+        "private-channel",
+        "promotion",
+        "contribution",
+        "timer",
+        "ranking",
+        "dash",
+        "cooldown",
+        "pause",
+        "resume",
+        "reconnect",
+        "offline",
+        "mute",
+        "sound",
+        "help",
+        "fullscreen",
+        "exit",
+        "warning",
+        "success"
+      ],
+      "source": "native-vector:approved-style"
+    },
+    {
+      "key": "ui.panels",
+      "kind": "atlas",
+      "path": "ui/panels.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "ui/panels.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 12,
+      "source": "native-vector:game-signs-and-nine-slice"
+    },
+    {
+      "key": "ui.keycaps",
+      "kind": "atlas",
+      "path": "ui/keycaps.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "ui/keycaps.json",
+      "frameSize": [
+        64,
+        64
+      ],
+      "frames": 12,
+      "names": [
+        "W",
+        "A",
+        "S",
+        "D",
+        "ArrowUp",
+        "ArrowLeft",
+        "ArrowDown",
+        "ArrowRight",
+        "E",
+        "Space",
+        "Escape",
+        "Tab"
+      ],
+      "source": "native-vector:live-keyboard-labels"
+    },
+    {
+      "key": "ui.badges",
+      "kind": "atlas",
+      "path": "ui/badges.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "ui/badges.json",
+      "frameSize": [
+        96,
+        96
+      ],
+      "frames": 6,
+      "source": "native-vector:non-scoring-awards"
+    },
+    {
+      "key": "fx.dash-trail",
+      "kind": "atlas",
+      "path": "fx/dash-trail.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/dash-trail.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.bump-stars",
+      "kind": "atlas",
+      "path": "fx/bump-stars.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/bump-stars.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 6,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.delivery-burst",
+      "kind": "atlas",
+      "path": "fx/delivery-burst.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/delivery-burst.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 6,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.coin-sparkle",
+      "kind": "atlas",
+      "path": "fx/coin-sparkle.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/coin-sparkle.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 6,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.gate-pulse",
+      "kind": "atlas",
+      "path": "fx/gate-pulse.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/gate-pulse.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.route-unlock",
+      "kind": "atlas",
+      "path": "fx/route-unlock.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/route-unlock.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 8,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.promo-confetti",
+      "kind": "atlas",
+      "path": "fx/promo-confetti.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/promo-confetti.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 6,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.immunity-ring",
+      "kind": "atlas",
+      "path": "fx/immunity-ring.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/immunity-ring.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.spawn-marker",
+      "kind": "atlas",
+      "path": "fx/spawn-marker.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/spawn-marker.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "fx.warning-ping",
+      "kind": "atlas",
+      "path": "fx/warning-ping.png",
+      "required": true,
+      "status": "planned",
+      "atlas": "fx/warning-ping.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "frames": 4,
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture"
+    },
+    {
+      "key": "screens.title",
+      "kind": "image",
+      "path": "screens/title-key-art.webp",
+      "required": true,
+      "status": "planned",
+      "size": [
+        1536,
+        864
+      ],
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "bakedLongText": false
+    },
+    {
+      "key": "screens.lobby",
+      "kind": "image",
+      "path": "screens/lobby-backdrop.webp",
+      "required": true,
+      "status": "planned",
+      "size": [
+        1536,
+        864
+      ],
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "bakedLongText": false
+    },
+    {
+      "key": "screens.loading",
+      "kind": "image",
+      "path": "screens/loading-vignette.webp",
+      "required": true,
+      "status": "planned",
+      "size": [
+        1024,
+        512
+      ],
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "bakedLongText": false
+    },
+    {
+      "key": "screens.results",
+      "kind": "image",
+      "path": "screens/results-backdrop.webp",
+      "required": true,
+      "status": "planned",
+      "size": [
+        1536,
+        864
+      ],
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "bakedLongText": false
+    },
+    {
+      "key": "screens.wordmark",
+      "kind": "image",
+      "path": "screens/wordmark.svg",
+      "required": true,
+      "status": "planned",
+      "size": [
+        1000,
+        300
+      ],
+      "source": "native-vector:live-title-with-licensed-font",
+      "bakedLongText": false
+    },
+    {
+      "key": "fonts.title",
+      "kind": "font",
+      "path": "fonts/baloo2-bold-vi.woff2",
+      "required": true,
+      "status": "planned",
+      "source": "https://github.com/google/fonts/tree/main/ofl/baloo2",
+      "weight": 700,
+      "license": "OFL-1.1; retain upstream license"
+    },
+    {
+      "key": "fonts.body",
+      "kind": "font",
+      "path": "fonts/be-vietnam-pro-regular-vi.woff2",
+      "required": true,
+      "status": "planned",
+      "source": "https://github.com/google/fonts/tree/main/ofl/bevietnampro",
+      "weight": 400,
+      "license": "OFL-1.1; retain upstream license"
+    },
+    {
+      "key": "audio.ui-confirm",
+      "kind": "audio",
+      "path": "audio/sfx/ui-confirm.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/ui-confirm.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.ui-back",
+      "kind": "audio",
+      "path": "audio/sfx/ui-back.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/ui-back.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.countdown",
+      "kind": "audio",
+      "path": "audio/sfx/countdown.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/countdown.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.start",
+      "kind": "audio",
+      "path": "audio/sfx/start.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/start.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.pickup",
+      "kind": "audio",
+      "path": "audio/sfx/pickup.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/pickup.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.delivery",
+      "kind": "audio",
+      "path": "audio/sfx/delivery.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/delivery.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.coin",
+      "kind": "audio",
+      "path": "audio/sfx/coin.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/coin.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.dash",
+      "kind": "audio",
+      "path": "audio/sfx/dash.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/dash.mp3",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.bump",
+      "kind": "audio",
+      "path": "audio/sfx/bump.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/bump.mp3",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.footstep",
+      "kind": "audio",
+      "path": "audio/sfx/footstep.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/footstep.mp3",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.error",
+      "kind": "audio",
+      "path": "audio/sfx/error.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/error.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.gate-open",
+      "kind": "audio",
+      "path": "audio/sfx/gate-open.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/gate-open.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.promo",
+      "kind": "audio",
+      "path": "audio/sfx/promo.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/promo.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.event-warning",
+      "kind": "audio",
+      "path": "audio/sfx/event-warning.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/event-warning.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.result-win",
+      "kind": "audio",
+      "path": "audio/sfx/result-win.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/result-win.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "audio.result-other",
+      "kind": "audio",
+      "path": "audio/sfx/result-other.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/sfx/result-other.mp3",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sourceFileSelection": "audition-and-record-original-archive-filename",
+      "loop": false
+    },
+    {
+      "key": "music.menu",
+      "kind": "audio",
+      "path": "audio/music/menu-loop.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/music/menu-loop.mp3",
+      "source": "https://opengameart.org/content/menu-music-1",
+      "author": "wipics",
+      "license": "CC0-1.0",
+      "loop": true
+    },
+    {
+      "key": "music.match",
+      "kind": "audio",
+      "path": "audio/music/city-loop.ogg",
+      "required": true,
+      "status": "planned",
+      "fallback": "audio/music/city-loop.mp3",
+      "source": "https://opengameart.org/content/city-loop-0",
+      "author": "wipics",
+      "license": "CC0-1.0",
+      "loop": true
+    }
+  ],
+  "acceptance": {
+    "allRequiredAccepted": true,
+    "sourceAndLicenseRecorded": true,
+    "sha256RecordedAfterProduction": true,
+    "noMissingRuntimeKeys": true,
+    "noFakeTransparency": true,
+    "noFinalPlaceholders": true,
+    "engineReviewRequired": true
+  }
+}
