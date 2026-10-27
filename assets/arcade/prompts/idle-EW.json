@@ -1,0 +1,16 @@
+[
+  {
+    "direction": "E",
+    "animation": "idle",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-7ddeb8f5-4995-4bdf-a0f5-51102d85773f.png",
+    "prompt": "Edit this reference canvas into ONE horizontal TWO-frame IDLE sprite strip, SAME courier toy robot facing RIGHT/EAST in both frames. EXACT same mint cap, ivory shell, visor eyes, coral satchel on the same side, proportions, orthographic top-down camera and upper-left light as the seed. Exactly two equal slots across full canvas width, one complete robot centered per slot, same foot baseline and scale. Frame1 neutral relaxed pose; frame2 subtle breathing and blink only. No stepping, no turning or extra frames. Genuine alpha transparency, no ground, shadows, labels, scenery or watermark. Polished production cartoon sprites, not a poster."
+  },
+  {
+    "direction": "W",
+    "animation": "idle",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-19a34ce4-91ca-41a2-8c18-9cfe30bdd5fc.png",
+    "prompt": "Edit this reference canvas into ONE horizontal TWO-frame IDLE sprite strip, SAME courier toy robot facing LEFT/WEST in both frames. EXACT same mint cap, ivory shell, visor eyes, coral satchel on the same side, proportions, orthographic top-down camera and upper-left light as the seed. Exactly two equal slots across full canvas width, one complete robot centered per slot, same foot baseline and scale. Frame1 neutral relaxed pose; frame2 subtle breathing and blink only. No stepping, no turning or extra frames. Genuine alpha transparency, no ground, shadows, labels, scenery or watermark. Polished production cartoon sprites, not a poster."
+  }
+]

@@ -1,0 +1,8 @@
+import {readFile,stat} from 'node:fs/promises';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+const catalog=JSON.parse(await readFile('docs/arcade/assets.catalog.json','utf8')),provenance=JSON.parse(await readFile('assets/arcade/provenance.json','utf8'));let images=0,audio=0,frames=0;
+for(const item of catalog.items){const path=`public/arcade/assets/${item.path}`,data=await readFile(path),entry=provenance.entries[item.key];assert.equal(entry.status,'accepted',item.key);assert.ok(entry.source&&entry.license,item.key);assert.equal(createHash('sha256').update(data).digest('hex'),entry.sha256,item.key);
+ if(item.kind==='audio')audio+=data.length;else if(!item.key.startsWith('screens.'))images+=data.length;
+ if(item.atlas){const raw=await readFile(`public/arcade/assets/${item.atlas}`),atlas=JSON.parse(raw);assert.equal(createHash('sha256').update(raw).digest('hex'),entry.atlasSha256);assert.equal(Object.keys(atlas.frames).length,item.frames,item.key);assert.ok(atlas.meta.size.w<=2048&&atlas.meta.size.h<=2048);frames+=item.frames;}
+ if(item.fallback){const bytes=await readFile(`public/arcade/assets/${item.fallback}`);assert.equal(createHash('sha256').update(bytes).digest('hex'),entry.fallbackSha256);audio+=bytes.length;}
+ assert.ok((await stat(path)).size>50);
+}assert.equal(catalog.items.length,47);assert.equal(frames+1,305);assert.ok(images<=8*1024**2);assert.ok(audio<=6*1024**2);console.log(`47 accepted asset groups,305 frames; images/fonts ${(images/1024**2).toFixed(2)}MiB, audio ${(audio/1024**2).toFixed(2)}MiB; SHA256/atlas/fallback checks PASS.`);

@@ -1,0 +1,436 @@
+{
+  "game": "Cuộc đua giành khách",
+  "review": "Review board, courier anchors/alpha and actual Chrome engine screenshots reviewed; font Vietnamese cmap and audio decode/export validated. Classroom human audition/playtest remains separate.",
+  "entries": {
+    "characters.courier": {
+      "status": "accepted",
+      "source": "builtin-imagegen:approved-seeds-and-whole-strips",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "3d5b0c7136321cdc3030a57f9f999e539145efb5075c8fd0b88d2673db55e64d",
+      "path": "characters/courier.png",
+      "atlasSha256": "69a96509f43f62bddb8073e824099752dbc4c0f3f2673a093871769a6a878ee1",
+      "frames": 72
+    },
+    "characters.parcel": {
+      "status": "accepted",
+      "source": "builtin-imagegen:reference-edit",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "809c0335ccdd55f84a7098ffc01b512c7f7860c22db3db95a9edb6b8fc67c68d",
+      "path": "characters/parcel.png",
+      "atlasSha256": "da83df5d5dde0e6479337439906bfa9b597d4571f46ec710f5af70d5923d5538",
+      "frames": 4
+    },
+    "characters.shadow": {
+      "status": "accepted",
+      "source": "native-canvas:soft-shadow",
+      "license": "Original project artwork",
+      "sha256": "f576b67cd65104d637a0f9c5d933e0d8741bb081bc6f5bee7dd5e193f2ee5afc",
+      "path": "characters/shadow.png"
+    },
+    "characters.markers": {
+      "status": "accepted",
+      "source": "native-vector:circle-square-diamond-triangle",
+      "license": "Original project artwork",
+      "sha256": "869a875d4e0434771734968527b0b4e5498e11c4a964365c6ae924b395421454",
+      "path": "characters/markers.png",
+      "atlasSha256": "0ccede87e4a20a92c44232856e705fa2a4f01f5d0e0580e335e562612d6df948",
+      "frames": 4
+    },
+    "characters.customers": {
+      "status": "accepted",
+      "source": "builtin-imagegen:four-customers-two-idle-frames",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "dfba482fdda8ba8ae43576a993a85d5fabd8db1dbeec00836a655fbce422104c",
+      "path": "characters/customers.png",
+      "atlasSha256": "e212abafcc52167a89240ff00d673bc68a18b74ca0960ecf777c2c25bf1e2564",
+      "frames": 8
+    },
+    "environment.tiles": {
+      "status": "accepted",
+      "source": "builtin-imagegen:modular-tile-sheets",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "4da7c0c1c8818a1a76f777f6252d8f0e096e6a42dead9efb122ed69fb4bc0a46",
+      "path": "environment/tiles.png",
+      "atlasSha256": "6db877971efd009981775168e7bfb95bb8b67052be6949c37b969e0717a838cb",
+      "frames": 64
+    },
+    "environment.props": {
+      "status": "accepted",
+      "source": "builtin-imagegen:coherent-prop-sheets",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "b2c28d443e54d134026c2deaf714a91a73b08dacffbad9cc34d88c17c1741b95",
+      "path": "environment/props.png",
+      "atlasSha256": "95102ec3d158f9560dd53a78b97991de50040b25da44b6d14f0ed5b5a8da8ed0",
+      "frames": 32
+    },
+    "environment.structures": {
+      "status": "accepted",
+      "source": "builtin-imagegen:paired-states",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "c64423a37922b5fec463744bacbe790b5ed903f6effb4690e9b99ac4bc99fd08",
+      "path": "environment/structures.png",
+      "atlasSha256": "40027b75cb8548551e10c445f94646609cc10800b281a70cbac048c15fdb75af",
+      "frames": 14
+    },
+    "ui.icons": {
+      "status": "accepted",
+      "source": "native-vector:approved-style",
+      "license": "Original project artwork",
+      "sha256": "ec8322b226d2713822e757d135cc84edfdc0adbe3fd3893f4c6ae06b1de7ffa9",
+      "path": "ui/icons.png",
+      "atlasSha256": "61e940f1962b0c988e557886d4a1e4b0430794f8f33807b7df5a7690715254a7",
+      "frames": 24
+    },
+    "ui.panels": {
+      "status": "accepted",
+      "source": "native-vector:game-signs-and-nine-slice",
+      "license": "Original project artwork",
+      "sha256": "e304fb0eeff42156c7a1ee3339eeb9bca78f7f3f2a0578057a45c8112c50aa47",
+      "path": "ui/panels.png",
+      "atlasSha256": "e3c15007fdaf5f88946df94b0fa787f8b9924c290c9582b2f56eb312b987b425",
+      "frames": 12
+    },
+    "ui.keycaps": {
+      "status": "accepted",
+      "source": "native-vector:live-keyboard-labels",
+      "license": "Original project artwork",
+      "sha256": "a505a22b0a9c91daa53244c410e291b94b888055b037ce78c2c402b6e09c040f",
+      "path": "ui/keycaps.png",
+      "atlasSha256": "e8c6aebe7835f70440e6e637c7407e2ef1bd4e0d48b50b452b03be77309c0a4a",
+      "frames": 12
+    },
+    "ui.badges": {
+      "status": "accepted",
+      "source": "native-vector:non-scoring-awards",
+      "license": "Original project artwork",
+      "sha256": "d7280afa87e474d3ad66b26e668728c75438ef0204ba05a84b255b4510254c0b",
+      "path": "ui/badges.png",
+      "atlasSha256": "fd0474d29b78af68deff71ddc29ec9e421b4946de6dc64f04b16ac88c06f3609",
+      "frames": 6
+    },
+    "fx.dash-trail": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "ca961cba1b60f6551e191958244cbd772bfe48e4845ba614798c35aba2f1381f",
+      "path": "fx/dash-trail.png",
+      "atlasSha256": "c53d548b4fe3a08292effaa556c4ae419cb7d081e2130f1b355d5a6c289e6ae1",
+      "frames": 4
+    },
+    "fx.bump-stars": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "c340c5bcc7e1109da8320b1be570ed429a6f4dd4981f8084a54035ddbe0eedd8",
+      "path": "fx/bump-stars.png",
+      "atlasSha256": "d69a5ba3519d69bf0471875763237fb35f1fe0f099d2b65a6ac76a56758cf54a",
+      "frames": 6
+    },
+    "fx.delivery-burst": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "0dd8f9e0443f664a8024822eb056cf97ff19b7398a4c21ada05459e60e483c47",
+      "path": "fx/delivery-burst.png",
+      "atlasSha256": "93e73822547b9594daef7dece43bc80c9f51a569ee2a38e1e5d005240656b90a",
+      "frames": 6
+    },
+    "fx.coin-sparkle": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "e1515c9d63b83b813e3cc76c48d13c65923b512e6ae9fd345c7af46dc041a309",
+      "path": "fx/coin-sparkle.png",
+      "atlasSha256": "59711d682b1fdfa60ebc8df78ec91c21e4472d6aa1c9f1e76578747e2f601bb8",
+      "frames": 6
+    },
+    "fx.gate-pulse": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "d3ef34152453c1bb85cf90e268e35e2aa72fc5b37422d084443a6068ca67ff41",
+      "path": "fx/gate-pulse.png",
+      "atlasSha256": "1c26fe5236417f46ceec6c38badc025d79c03181a72f171f2ed32ac79ec32cc9",
+      "frames": 4
+    },
+    "fx.route-unlock": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "6d548540daac611be2495f49a8cd6ac8574a75bc486d287582a7babc3a8cf9ae",
+      "path": "fx/route-unlock.png",
+      "atlasSha256": "a1f77b06c7b6f6a6f6814604962dec8eba8c60c8a2cde6728c4e65762d9a4d96",
+      "frames": 8
+    },
+    "fx.promo-confetti": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "10caf08bce41f4b2df4fe91661c81a6b040185d28061ce4c4fb3c351a1f415e8",
+      "path": "fx/promo-confetti.png",
+      "atlasSha256": "ec3a641228bcfeb0c258741aaf53552d91fc2be256bd6eb418a629faeeabcbaf",
+      "frames": 6
+    },
+    "fx.immunity-ring": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "d3ef34152453c1bb85cf90e268e35e2aa72fc5b37422d084443a6068ca67ff41",
+      "path": "fx/immunity-ring.png",
+      "atlasSha256": "439def8ed841e25907494937638a88617e9f3b0a7406c41bd1d859df7573e1af",
+      "frames": 4
+    },
+    "fx.spawn-marker": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "028fb260a659710f27173ec59b3886ff796665c092a7f2d7b1aa1595e3a2e5f1",
+      "path": "fx/spawn-marker.png",
+      "atlasSha256": "9a3f72c2226480676fbc2d81fe0ecf9d6a52b6e259a5fa99072b341b4d0f2752",
+      "frames": 4
+    },
+    "fx.warning-ping": {
+      "status": "accepted",
+      "source": "builtin-imagegen:whole-strip-or-native-particle-texture",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "a6b4bfb2ad177f935cb2da3ae6b2b204bb65d915526095503a7ef23b8ecb910e",
+      "path": "fx/warning-ping.png",
+      "atlasSha256": "b0203edb54475b3c457a963e237e5d671e22d4c7cb3479b8b9b20f2626ceee96",
+      "frames": 4
+    },
+    "screens.title": {
+      "status": "accepted",
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "6ac3d5caad0f06aaa8e1a44e43a9fdad57ce71c4841e82970859bbad6fedadcb",
+      "path": "screens/title-key-art.webp"
+    },
+    "screens.lobby": {
+      "status": "accepted",
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "be591d09a15c4d58a0d9628b49e73326504285036a95a6a6f847c407713cb945",
+      "path": "screens/lobby-backdrop.webp"
+    },
+    "screens.loading": {
+      "status": "accepted",
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "9a7b687e9297d20869b021fa93dfadb18adce8f1c0e6f00504a86bd86879bd98",
+      "path": "screens/loading-vignette.webp"
+    },
+    "screens.results": {
+      "status": "accepted",
+      "source": "builtin-imagegen:approved-city-courier-style",
+      "license": "Generated with built-in imagegen; retain service terms",
+      "sha256": "8dd98b3a33135f40eb3ef16b1800eb390356d0641a2b871a57e2a38bf2e24073",
+      "path": "screens/results-backdrop.webp"
+    },
+    "screens.wordmark": {
+      "status": "accepted",
+      "source": "native-vector:live-title-with-licensed-font",
+      "license": "Original project artwork",
+      "sha256": "7504b989f9700656397bb77abb3e491e81a60eed9cf71732922df1b3e9c91fd9",
+      "path": "screens/wordmark.svg"
+    },
+    "fonts.title": {
+      "status": "accepted",
+      "source": "https://github.com/google/fonts/tree/main/ofl/baloo2",
+      "license": "OFL-1.1; retain upstream license",
+      "sha256": "d1d07a40297a7574e583ab26a9875f963de5fbc2f6785405819dcecce10fa2fc",
+      "path": "fonts/baloo2-bold-vi.woff2"
+    },
+    "fonts.body": {
+      "status": "accepted",
+      "source": "https://github.com/google/fonts/tree/main/ofl/bevietnampro",
+      "license": "OFL-1.1; retain upstream license",
+      "sha256": "faf8cc6101fb54717add74c87610ed1cc7fcdaddb07fd01639d82a7a670739e2",
+      "path": "fonts/be-vietnam-pro-regular-vi.woff2"
+    },
+    "audio.ui-confirm": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "9bff647cd431f7b7dc29453ada2d99e2ac76f5e3519fbf91fa23e7be240c5fc3",
+      "path": "audio/sfx/ui-confirm.ogg",
+      "fallbackSha256": "a4f000b9c0b5e2c2db4aa0208fd504aca5eee8dbe1b7d169354ac18b0fe2efe8",
+      "pack": "interface",
+      "originalFile": "Audio/click_001.ogg"
+    },
+    "audio.ui-back": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "e64fbb3d158773f0331913bc18e083ea70a7cd1d3071de0590e9e04d5bbb5ac3",
+      "path": "audio/sfx/ui-back.ogg",
+      "fallbackSha256": "1bebac5a5c529f88e917f55ded53707d52b2fb911a443459a4219c7ea5d514e0",
+      "pack": "interface",
+      "originalFile": "Audio/back_001.ogg"
+    },
+    "audio.countdown": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "21909073d446a44cb982904dc80f04592314b7289dd1384c90b163b0a5208bfd",
+      "path": "audio/sfx/countdown.ogg",
+      "fallbackSha256": "f393b468301d323dcacc2df8a668e6a5a6af51ecd0d04c5ba1f7b1537d54cf74",
+      "pack": "interface",
+      "originalFile": "Audio/click_004.ogg"
+    },
+    "audio.start": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "646a1eb3f0e6bbc38eb3f3f65711a1fbbb17b95e3dddbe75203f929a2fb7e9c2",
+      "path": "audio/sfx/start.ogg",
+      "fallbackSha256": "82b5b04484d9a9eef1539c898bcfa0eea0d469768339cb57fad1d22854a67ed3",
+      "pack": "interface",
+      "originalFile": "Audio/confirmation_001.ogg"
+    },
+    "audio.pickup": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "dc16b1285d080453ecee8f0fd0d3daadbf202eda38edefdaa9af845ca2a42425",
+      "path": "audio/sfx/pickup.ogg",
+      "fallbackSha256": "d9c0a407fe3acd8cf6a8c22e695453602e8efd9b07adc10725b78dc573daa7a5",
+      "pack": "interface",
+      "originalFile": "Audio/drop_001.ogg"
+    },
+    "audio.delivery": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "839040b8adcf75deb2fc0cd251d5f7de446e3f0371b2aa8110ca52de9bbc8eac",
+      "path": "audio/sfx/delivery.ogg",
+      "fallbackSha256": "d9ddda27fdc90c4f847ee0152f856a636c0141bd285124cfa7fa82a0a1a3d9a9",
+      "pack": "interface",
+      "originalFile": "Audio/confirmation_002.ogg"
+    },
+    "audio.coin": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "3d651b32c807bbc6ae8e6e742a44be54f83be7338a6e83d9a246a32f1a3717f5",
+      "path": "audio/sfx/coin.ogg",
+      "fallbackSha256": "0da6f62f05aa350eca1e6c3d48dab129b73063502f03dd5002d33c5452eec94f",
+      "pack": "interface",
+      "originalFile": "Audio/bong_001.ogg"
+    },
+    "audio.dash": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0-1.0",
+      "sha256": "c2fa94181043b5d8e71df7cca68fe44776474e1ff72ff156a53ef79b49a696bf",
+      "path": "audio/sfx/dash.ogg",
+      "fallbackSha256": "3ab33ebecf20b8ee6c035fdc1532d58e080f3879eb410899c11450143941025c",
+      "pack": "impact",
+      "originalFile": "Audio/footstep_carpet_001.ogg"
+    },
+    "audio.bump": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0-1.0",
+      "sha256": "dd03ff8ee5e71c49b0685616947ac7fc5d710b424ade83d2f8bdd7b4fa3caf63",
+      "path": "audio/sfx/bump.ogg",
+      "fallbackSha256": "87d604d97130063356718dfb4193aadb16babca497bd7c3483f56abaae0cfacd",
+      "pack": "impact",
+      "originalFile": "Audio/impactSoft_medium_000.ogg"
+    },
+    "audio.footstep": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "license": "CC0-1.0",
+      "sha256": "463db86c54a5df1868b06597502b7ce113d7c1d4bef310c0a61c3c1b722f7b22",
+      "path": "audio/sfx/footstep.ogg",
+      "fallbackSha256": "95b6a947196af4b72e70068033c35dc2095deddb5c0447f9aca78e13ca8e4a62",
+      "pack": "impact",
+      "originalFile": "Audio/footstep_concrete_000.ogg"
+    },
+    "audio.error": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "e43ad58f4fafd16924f10eed220e5c21f9ba6c33c4173e82836b00e855cdd059",
+      "path": "audio/sfx/error.ogg",
+      "fallbackSha256": "1afd3eb0ff9517a134d8a50e1d04b57ad30dd4f8763f3c52f77b7e8472271363",
+      "pack": "interface",
+      "originalFile": "Audio/error_001.ogg"
+    },
+    "audio.gate-open": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "adb254a4b95dfdc35d2da3f2e7a54a90a7aca1f1d57f5b1c5c8652d66bb4d6c8",
+      "path": "audio/sfx/gate-open.ogg",
+      "fallbackSha256": "c39fba589ba609c80e22572baf0dfc14c668c61014bc3a4ff30b04ae8f63a68d",
+      "pack": "interface",
+      "originalFile": "Audio/confirmation_003.ogg"
+    },
+    "audio.promo": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "33877178607ee8e9ad3d3cfe58816455c525c5654250aa3d1013cd3b31db16c7",
+      "path": "audio/sfx/promo.ogg",
+      "fallbackSha256": "1ecf762f3810244cfcfd477a48dc8e14f50580d1cc79162916f3527a72115a7e",
+      "pack": "interface",
+      "originalFile": "Audio/confirmation_004.ogg"
+    },
+    "audio.event-warning": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "e4b2cbaa18122c19599766abcf4bdb9ead236fa0086c3446ae40e2a490bbe00a",
+      "path": "audio/sfx/event-warning.ogg",
+      "fallbackSha256": "29a7b6e26c760606d61446b48193812f22431585afa25a99c218ea1fbc58625e",
+      "pack": "interface",
+      "originalFile": "Audio/error_003.ogg"
+    },
+    "audio.result-win": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "decf833bc83821e50770387e801470e5cc3d81830d8ecea2f2f2f76de29a9410",
+      "path": "audio/sfx/result-win.ogg",
+      "fallbackSha256": "d9ddda27fdc90c4f847ee0152f856a636c0141bd285124cfa7fa82a0a1a3d9a9",
+      "pack": "interface",
+      "originalFile": "Audio/confirmation_002.ogg"
+    },
+    "audio.result-other": {
+      "status": "accepted",
+      "source": "https://kenney.nl/assets/interface-sounds",
+      "license": "CC0-1.0",
+      "sha256": "fcec91f2428682688abba67fa11fb35847760571d99c6ebf06a875b84b00d559",
+      "path": "audio/sfx/result-other.ogg",
+      "fallbackSha256": "82b5b04484d9a9eef1539c898bcfa0eea0d469768339cb57fad1d22854a67ed3",
+      "pack": "interface",
+      "originalFile": "Audio/confirmation_001.ogg"
+    },
+    "music.menu": {
+      "status": "accepted",
+      "source": "https://opengameart.org/content/menu-music-1",
+      "license": "CC0-1.0",
+      "sha256": "16aa1bc6d29302167adc5dc971d18786a5c309b4726f7b1d8fd2e00b8cf52ca1",
+      "path": "audio/music/menu-loop.ogg",
+      "fallbackSha256": "b7c85029a0eda94d0c8517bd93c023d3a80e770f5ebe784299bb3b2d1dace9b8"
+    },
+    "music.match": {
+      "status": "accepted",
+      "source": "https://opengameart.org/content/city-loop-0",
+      "license": "CC0-1.0",
+      "sha256": "1889ff2c6013ebbe2bd90bd280fcce1269d7fe84606a45755b8f10e25f27a713",
+      "path": "audio/music/city-loop.ogg",
+      "fallbackSha256": "7df4cfc1366642aea12fd14a824377d80f9a2488f85dfa2d327c8ad35bae2d20"
+    }
+  },
+  "bytes": {
+    "characters": 811062,
+    "environment": 1945733,
+    "ui": 123392,
+    "fx": 138617,
+    "fonts": 147292,
+    "screens": 696807,
+    "audio": 3564164
+  }
+}

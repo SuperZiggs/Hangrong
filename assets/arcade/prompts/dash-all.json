@@ -1,0 +1,30 @@
+[
+  {
+    "direction": "N",
+    "animation": "dash",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-914fa9b6-66f7-4f50-ad74-00ede16795e3.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing NORTH, back view away from viewer in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency. For the back view, coral bag stays on VIEWER LEFT in every pose, strap crosses from upper right to lower left. Production cartoon animation, not a poster."
+  },
+  {
+    "direction": "E",
+    "animation": "dash",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-4c0b070b-e013-4211-9c5a-7d2748b09a65.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing EAST, right-facing profile in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency.  Production cartoon animation, not a poster."
+  },
+  {
+    "direction": "S",
+    "animation": "dash",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-1388486b-aa0a-4ac0-895e-98d20dd2398c.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing SOUTH, front toward viewer in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency.  Production cartoon animation, not a poster."
+  },
+  {
+    "direction": "W",
+    "animation": "dash",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-ef23c861-3ecf-445b-8904-d725cc554f4c.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing WEST, left-facing profile in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency.  Production cartoon animation, not a poster."
+  }
+]

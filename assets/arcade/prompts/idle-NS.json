@@ -1,0 +1,16 @@
+[
+  {
+    "direction": "N",
+    "animation": "idle",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-a20b0840-5e9c-4829-a428-b1c1e60e8d4e.png",
+    "prompt": "Edit the supplied reference canvas into ONE horizontal TWO-frame IDLE breathing sprite strip of the exact same courier robot, facing N (back away from viewer) in BOTH frames. Preserve exact mint cap, ivory shell, dark visor, coral satchel, camera, upper-left light and proportions. Exactly TWO equal-width slots covering the full canvas width, full character centered in each, same baseline and height. Pose1 relaxed neutral; pose2 tiny gentle body breathing and blink, no stepping, no direction change, no camera movement. Satchel stays on the SAME anatomical side as the reference in both frames. Transparent background, no ground/shadow/labels/scenery/extra poses. Production cartoon game sprites, not concept art."
+  },
+  {
+    "direction": "S",
+    "animation": "idle",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-3fa4ba76-9b19-4e5a-ad7e-5e6149f5ce61.png",
+    "prompt": "Edit the supplied reference canvas into ONE horizontal TWO-frame IDLE breathing sprite strip of the exact same courier robot, facing S (front toward viewer) in BOTH frames. Preserve exact mint cap, ivory shell, dark visor, coral satchel, camera, upper-left light and proportions. Exactly TWO equal-width slots covering the full canvas width, full character centered in each, same baseline and height. Pose1 relaxed neutral; pose2 tiny gentle body breathing and blink, no stepping, no direction change, no camera movement. Satchel stays on the SAME anatomical side as the reference in both frames. Transparent background, no ground/shadow/labels/scenery/extra poses. Production cartoon game sprites, not concept art."
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "direction": "N",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-f0d45701-dc0a-4dbe-837f-ae9006dee3bc.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing NORTH, only back view away from viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating. Coral bag must remain VIEWER LEFT, strap upper right to lower left, in ALL frames. Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  },
+  {
+    "direction": "E",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-0e5cc8fb-a0ef-4858-a4cc-1931b4bc3941.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing EAST, right-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  },
+  {
+    "direction": "S",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-cd7695b1-b98e-4393-92c9-404e0c9d3ec9.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing SOUTH, front toward viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  },
+  {
+    "direction": "W",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-8b946921-721e-47a5-8676-c5667f94179e.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing WEST, left-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  }
+]

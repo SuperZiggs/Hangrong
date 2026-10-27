@@ -1,0 +1,22 @@
+[
+  {
+    "key": "run-N-repair",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-20569969-642e-4554-b16d-19e08d76b870.png",
+    "prompt": "Repair image1 six-frame running strip using image2 approved back-view courier. Preserve ALL six poses, same exact six equal slots, character scale, mint cap, ivory shell and genuine transparent background. ONLY correct the coral satchel/black strap in frames3 and6: the bag MUST stay on VIEWER LEFT, strap from upper viewer right shoulder to lower viewer left bag, exactly like frames1,2,4,5 and the reference. Never mirror the bag side. Keep all robots facing directly away NORTH. No scenery, text or shadows."
+  },
+  {
+    "key": "tiles",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-2bbdd971-46d3-438a-918e-9b5fc72c2fde.png",
+    "prompt": "Production sprite tile sheet for a playful 2D top-down toy courier city, ivory sand, mint teal, muted coral, violet accents, dark teal thin linework, upper-left soft light. Exactly 8 columns by8 rows,64 equal SQUARE tiles, no gaps, no outside margins, each tile fills its entire cell edge to edge. Orthographic overhead, NO isometric diamonds or perspective. Ordered row-major: first12 varied cream paving/grass/brick ground tiles; next20 grey-blue quiet roads with clean solid and dashed lane marking straight/intersection/corner variants; next12 cream curb edge/corner tiles on paving; next8 teal water tiles with sparse small ripples; last12 wooden bridge deck/railing entrance/edge/center tiles running vertically. Modular seamless edges. No text, characters, objects, letters, labels, grid numbers or watermark. Texture atlas, not scenery or concept art."
+  },
+  {
+    "key": "props",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-98e5799a-296b-4b7c-af98-84a213607338.png",
+    "prompt": "Production game prop sprite sheet matching a playful mint/ivory/coral toy courier city. Orthographic top-down three-quarter view, front faces short, upper-left soft light, dark teal outlines, rounded polished cartoon forms. EXACTLY8 columns x4 rows,32 equal cells, isolated full objects centered with generous transparent margins, no objects touching other cells. Row1:4 different green trees then4 colorful flower planters. Row2:4 street lamps then4 park benches. Row3:4 parcel crates then4 road signs with simple arrows only. Row4:4 bollards then4 cafe umbrellas with tables. Consistent prop scale across classes, trees taller than planters. TRUE transparent alpha canvas, no ground panels, shadows tiny attached only, no labels, no letters, no extra objects, no poster."
+  },
+  {
+    "key": "structures",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-70a48e5d-4a6d-4e15-bd49-81b12025eb90.png",
+    "prompt": "Production game building sprite atlas, playful rounded toy city, mint/cream/coral/violet/gold palette, dark teal outlines, upper-left light. Orthographic top-down three-quarter, same angle for all objects, NOT isometric diamond. EXACTLY7 columns x2 rows,14 equal cells, one whole structure centered per cell on genuine alpha transparency, clear spacing. Row1 left to right: mint cafe storefront; coral bakery storefront; gold grocery storefront; teal flower shop storefront; parcel depot with stacks; violet platform tower with single letter P; closed violet toll arch with barrier. Row2: same violet toll arch with raised open barrier; wooden shared pedestrian bridge closed with striped barrier; same bridge open barrier raised; small private courier dispatch booth locked shutters; same private booth glowing open counter; yellow promotion kiosk plain quiet; same kiosk with colorful pennants and bright sign. Same paired geometry for open/closed states. No long text, people, ground scenery, watermark or labels. Cartoon game assets at readable game scale."
+  }
+]

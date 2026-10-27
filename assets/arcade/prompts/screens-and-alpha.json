@@ -1,0 +1,22 @@
+[
+  {
+    "key": "customers-alpha",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-1cbb3898-2d77-4e6d-a84b-827fbc413afa.png",
+    "prompt": "Remove the ENTIRE dark gradient background from this exact8-customer sprite sheet. Keep all eight whole characters and their colors, outlines and poses unchanged. Return the SAME4 columns x2 rows on actual transparent alpha, including transparent gaps between hair, hands and bodies. NO colored background, NO checkerboard pattern, NO halos, NO floor. This is production game cutout preparation."
+  },
+  {
+    "key": "lobby",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-49286d5c-ae1f-4f66-9144-056c2217e9ef.png",
+    "prompt": "Use the reference's exact illustrated toy courier city style and mint/ivory robot identity. Wide16:9 peaceful game lobby backdrop: sunlit parcel depot courtyard by canal, colorful mint/coral shops on far left and right, three little courier robots waiting together beside neat parcel crates near lower left, teal trees and bunting. Keep center70% light cream paving and soft pale sky with very little detail for live player roster overlay. Cheerful, warm, polished storybook game world. No text, lettering, labels or UI."
+  },
+  {
+    "key": "loading",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-4064a1ba-05fa-4a48-ae4d-36cfe15697d5.png",
+    "prompt": "Use the reference's exact illustrated toy courier style and mint/ivory robot identity. Wide2:1 game loading vignette: one tiny mint courier robot carrying a cream parcel walking across a curved small wooden canal bridge, soft teal water, two trees and little gold sparkles, all concentrated at bottom center, light warm ivory negative space around. Very clean charming spot illustration, coherent rounded dark teal outlines, upper-left sun. No words, progress bars, labels or UI."
+  },
+  {
+    "key": "results",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-985633b4-5ce1-4700-b3e1-acf55a247f76.png",
+    "prompt": "Use the reference's exact illustrated toy courier city style. Wide16:9 game celebration backdrop: warm cream paper-like sky and spacious empty central plaza taking75% ofimage, decorative teal/coral/violet ribbon confetti only around edges, little stacked parcels, mint leafy planters and three cute courier robots celebrating together tiny at bottom corners. Bright gold afternoon, no central trophy that obscures live ranking. Production game results background with generous quiet center. No text, lettering, scores or UI."
+  }
+]

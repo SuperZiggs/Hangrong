@@ -1,0 +1,22 @@
+[
+  {
+    "key": "customers",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-be0112a5-a16d-415b-a4b6-2ef97d670e8d.png",
+    "prompt": "Polished playful toy-city 2D game art, mint teal, ivory cream, muted coral and violet with gold accents, dark teal outlines, upper-left soft warm light, rounded friendly forms, coherent with the supplied courier reference. No words, letters, labels or watermarks. Create a production character sheet with exactly4 columns x2 rows,8 equal square cells on genuine transparent alpha. Four human customer characters: apron baker, student with round glasses, friendly florist with curly hair, grey-haired cafe owner. First row idle neutral for each, second row same person subtle smile/wave idle second pose. Same body size and foot baseline within every cell. Orthographic top-down three-quarter full body. Humans, not robots, no ground, no shadows, each fully inside its cell with clear transparent margins."
+  },
+  {
+    "key": "parcel",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-6011395b-fa43-481d-866e-7a2176408875.png",
+    "prompt": "Polished playful toy-city 2D game art, mint teal, ivory cream, muted coral and violet with gold accents, dark teal outlines, upper-left soft warm light, rounded friendly forms, coherent with the supplied courier reference. No words, letters, labels or watermarks. A horizontal production sprite strip of exactly4 isolated cardboard parcel overlay sprites,4 equal slots, no courier. The SAME small cream cuboid parcel with coral strap and teal sticker, shown oriented NORTH thenEAST thenSOUTH thenWEST, top-down three-quarter camera. Transparent alpha, clean silhouette, same size, centered in each equal cell, no shadow, no hands, no ground. Designed to overlay in front of the courier at waist height."
+  },
+  {
+    "key": "title",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-63ffb954-c151-41dc-9825-495b3a524214.png",
+    "prompt": "Polished playful toy-city 2D game art, mint teal, ivory cream, muted coral and violet with gold accents, dark teal outlines, upper-left soft warm light, rounded friendly forms, coherent with the supplied courier reference. No words, letters, labels or watermarks. Wide16:9 finished game key art. A lively miniature canal city with mint cafe, coral bakery, tiny wooden bridges, violet platform toll arch, yellow kiosk, trees and whimsical parcel routes. The supplied mint courier robot dashes through foreground at center-right holding a cream parcel, two other little couriers playfully block each other behind. Dynamic but friendly. Leave LEFT THIRD as calm warm cream sky/pavement negative space for a live HTML title, and RIGHT EDGE light quiet for form overlay. Detailed delightful city concentrated around middle and bottom. Bright sunny afternoon, rich illustrated storybook game title composition, no text."
+  },
+  {
+    "key": "run-N-final",
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-406558e7-e10d-4c70-ac4d-8829853d36da.png",
+    "prompt": "Create ONE entirely NEW six-frame NORTH RUN animation strip from this approved reference canvas. Six equal horizontal slots across the FULL width, same mint/ivory courier robot facing straight AWAY in every frame, no face visible. A CORAL BAG is permanently attached at the robot's LEFT HIP as seen by the VIEWER: LEFT side of EACH of the six frames. Black strap always descends from VIEWER RIGHT shoulder to VIEWER LEFT hip. Never alternate, mirror or relocate the bag. Frame1 right foot forward,2passing,3left foot forward,4passing,5right foot forward,6passing. Same head size and foot baseline, tiny bouncy run, same cap/ivory shell/proportions/upper-left light. Full character within every slot. Genuine alpha, no floor, shadows, text or FX."
+  }
+]

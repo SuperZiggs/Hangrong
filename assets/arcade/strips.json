@@ -1,0 +1,162 @@
+[
+  {
+    "direction": "N",
+    "animation": "run",
+    "frames": 6,
+    "path": "raw/run-N-final.png",
+    "prompt": "Create ONE entirely NEW six-frame NORTH RUN animation strip from this approved reference canvas. Six equal horizontal slots across the FULL width, same mint/ivory courier robot facing straight AWAY in every frame, no face visible. A CORAL BAG is permanently attached at the robot's LEFT HIP as seen by the VIEWER: LEFT side of EACH of the six frames. Black strap always descends from VIEWER RIGHT shoulder to VIEWER LEFT hip. Never alternate, mirror or relocate the bag. Frame1 right foot forward,2passing,3left foot forward,4passing,5right foot forward,6passing. Same head size and foot baseline, tiny bouncy run, same cap/ivory shell/proportions/upper-left light. Full character within every slot. Genuine alpha, no floor, shadows, text or FX.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-406558e7-e10d-4c70-ac4d-8829853d36da.png"
+  },
+  {
+    "direction": "E",
+    "animation": "run",
+    "frames": 6,
+    "path": "raw/run-E.png",
+    "prompt": "six-frame run whole-strip preserving approved directional courier seed",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-54ece4a8-45e0-4505-a74e-2a05cdfaead7.png"
+  },
+  {
+    "direction": "S",
+    "animation": "run",
+    "frames": 6,
+    "path": "raw/run-S.png",
+    "prompt": "six-frame run whole-strip preserving approved directional courier seed",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-d025afd8-9007-4fd9-b45b-0e3c296d3c71.png"
+  },
+  {
+    "direction": "W",
+    "animation": "run",
+    "frames": 6,
+    "path": "raw/run-W.png",
+    "prompt": "six-frame run whole-strip preserving approved directional courier seed",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-c5306ee2-c746-4280-87a3-76baea71b989.png"
+  },
+  {
+    "direction": "N",
+    "animation": "idle",
+    "frames": 2,
+    "path": "raw/idle-N.png",
+    "prompt": "Edit the supplied reference canvas into ONE horizontal TWO-frame IDLE breathing sprite strip of the exact same courier robot, facing N (back away from viewer) in BOTH frames. Preserve exact mint cap, ivory shell, dark visor, coral satchel, camera, upper-left light and proportions. Exactly TWO equal-width slots covering the full canvas width, full character centered in each, same baseline and height. Pose1 relaxed neutral; pose2 tiny gentle body breathing and blink, no stepping, no direction change, no camera movement. Satchel stays on the SAME anatomical side as the reference in both frames. Transparent background, no ground/shadow/labels/scenery/extra poses. Production cartoon game sprites, not concept art.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-a20b0840-5e9c-4829-a428-b1c1e60e8d4e.png"
+  },
+  {
+    "direction": "S",
+    "animation": "idle",
+    "frames": 2,
+    "path": "raw/idle-S.png",
+    "prompt": "Edit the supplied reference canvas into ONE horizontal TWO-frame IDLE breathing sprite strip of the exact same courier robot, facing S (front toward viewer) in BOTH frames. Preserve exact mint cap, ivory shell, dark visor, coral satchel, camera, upper-left light and proportions. Exactly TWO equal-width slots covering the full canvas width, full character centered in each, same baseline and height. Pose1 relaxed neutral; pose2 tiny gentle body breathing and blink, no stepping, no direction change, no camera movement. Satchel stays on the SAME anatomical side as the reference in both frames. Transparent background, no ground/shadow/labels/scenery/extra poses. Production cartoon game sprites, not concept art.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-3fa4ba76-9b19-4e5a-ad7e-5e6149f5ce61.png"
+  },
+  {
+    "direction": "E",
+    "animation": "idle",
+    "frames": 2,
+    "path": "raw/idle-E.png",
+    "prompt": "Edit this reference canvas into ONE horizontal TWO-frame IDLE sprite strip, SAME courier toy robot facing RIGHT/EAST in both frames. EXACT same mint cap, ivory shell, visor eyes, coral satchel on the same side, proportions, orthographic top-down camera and upper-left light as the seed. Exactly two equal slots across full canvas width, one complete robot centered per slot, same foot baseline and scale. Frame1 neutral relaxed pose; frame2 subtle breathing and blink only. No stepping, no turning or extra frames. Genuine alpha transparency, no ground, shadows, labels, scenery or watermark. Polished production cartoon sprites, not a poster.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-7ddeb8f5-4995-4bdf-a0f5-51102d85773f.png"
+  },
+  {
+    "direction": "W",
+    "animation": "idle",
+    "frames": 2,
+    "path": "raw/idle-W.png",
+    "prompt": "Edit this reference canvas into ONE horizontal TWO-frame IDLE sprite strip, SAME courier toy robot facing LEFT/WEST in both frames. EXACT same mint cap, ivory shell, visor eyes, coral satchel on the same side, proportions, orthographic top-down camera and upper-left light as the seed. Exactly two equal slots across full canvas width, one complete robot centered per slot, same foot baseline and scale. Frame1 neutral relaxed pose; frame2 subtle breathing and blink only. No stepping, no turning or extra frames. Genuine alpha transparency, no ground, shadows, labels, scenery or watermark. Polished production cartoon sprites, not a poster.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-19a34ce4-91ca-41a2-8c18-9cfe30bdd5fc.png"
+  },
+  {
+    "direction": "N",
+    "animation": "dash",
+    "frames": 2,
+    "path": "raw/dash-N.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing NORTH, back view away from viewer in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency. For the back view, coral bag stays on VIEWER LEFT in every pose, strap crosses from upper right to lower left. Production cartoon animation, not a poster.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-914fa9b6-66f7-4f50-ad74-00ede16795e3.png"
+  },
+  {
+    "direction": "E",
+    "animation": "dash",
+    "frames": 2,
+    "path": "raw/dash-E.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing EAST, right-facing profile in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency.  Production cartoon animation, not a poster.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-4c0b070b-e013-4211-9c5a-7d2748b09a65.png"
+  },
+  {
+    "direction": "S",
+    "animation": "dash",
+    "frames": 2,
+    "path": "raw/dash-S.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing SOUTH, front toward viewer in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency.  Production cartoon animation, not a poster.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-1388486b-aa0a-4ac0-895e-98d20dd2398c.png"
+  },
+  {
+    "direction": "W",
+    "animation": "dash",
+    "frames": 2,
+    "path": "raw/dash-W.png",
+    "prompt": "Edit the reference into ONE horizontal TWO-frame DASH sprite strip. Exactly the SAME courier toy robot facing WEST, left-facing profile in BOTH frames. Preserve mint cap, ivory shell, dark visor, coral satchel on same anatomical side, outline, camera and proportions. Two equal frame slots fill full canvas width, one complete robot centered per slot, same foot baseline. Frame1 leans into a dash, arms tucked; frame2 extends into a quick forward sprint pose. Character stays within its slot. No turning, no scenery, no shadows or baked FX streaks, no labels or extra characters. Genuine transparency.  Production cartoon animation, not a poster.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-ef23c861-3ecf-445b-8904-d725cc554f4c.png"
+  },
+  {
+    "direction": "N",
+    "animation": "bump",
+    "frames": 2,
+    "path": "raw/bump-N.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing NORTH, only back view away from viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death. Coral bag must remain VIEWER LEFT, strap upper right to lower left, in ALL frames. Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-e526a2ef-c689-4bc7-8d5b-8b42b74a398c.png"
+  },
+  {
+    "direction": "E",
+    "animation": "bump",
+    "frames": 2,
+    "path": "raw/bump-E.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing EAST, right-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-31746ad7-6008-41f0-a2d8-d2b91afcd622.png"
+  },
+  {
+    "direction": "S",
+    "animation": "bump",
+    "frames": 2,
+    "path": "raw/bump-S.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing SOUTH, front toward viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-248741ce-4bf2-45df-b089-d0b267317198.png"
+  },
+  {
+    "direction": "W",
+    "animation": "bump",
+    "frames": 2,
+    "path": "raw/bump-W.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing WEST, left-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-f54382d4-9e33-49f6-a7b4-932d589dc940.png"
+  },
+  {
+    "direction": "N",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "raw/celebrate-N.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing NORTH, only back view away from viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating. Coral bag must remain VIEWER LEFT, strap upper right to lower left, in ALL frames. Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-f0d45701-dc0a-4dbe-837f-ae9006dee3bc.png"
+  },
+  {
+    "direction": "E",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "raw/celebrate-E.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing EAST, right-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-0e5cc8fb-a0ef-4858-a4cc-1931b4bc3941.png"
+  },
+  {
+    "direction": "S",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "raw/celebrate-S.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing SOUTH, front toward viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-cd7695b1-b98e-4393-92c9-404e0c9d3ec9.png"
+  },
+  {
+    "direction": "W",
+    "animation": "celebrate",
+    "frames": 6,
+    "path": "raw/celebrate-W.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 6-frame CELEBRATE production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing WEST, left-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 6 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Six successive small cheerful victory poses: arms lift, cheerful hop anticipation, hop lift, little fist pump, land, settle. Preserve the specified facing direction even when celebrating.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot.",
+    "originPath": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-8b946921-721e-47a5-8676-c5667f94179e.png"
+  }
+]

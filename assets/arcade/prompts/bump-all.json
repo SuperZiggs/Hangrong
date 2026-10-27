@@ -1,0 +1,30 @@
+[
+  {
+    "direction": "N",
+    "animation": "bump",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-e526a2ef-c689-4bc7-8d5b-8b42b74a398c.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing NORTH, only back view away from viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death. Coral bag must remain VIEWER LEFT, strap upper right to lower left, in ALL frames. Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  },
+  {
+    "direction": "E",
+    "animation": "bump",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-31746ad7-6008-41f0-a2d8-d2b91afcd622.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing EAST, right-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  },
+  {
+    "direction": "S",
+    "animation": "bump",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-248741ce-4bf2-45df-b089-d0b267317198.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing SOUTH, front toward viewer in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  },
+  {
+    "direction": "W",
+    "animation": "bump",
+    "frames": 2,
+    "path": "C:\\Users\\DINH LOC\\.codex\\generated_images\\01a1799d-04f8-7ec2-939a-2c0cf5f05223\\exec-f54382d4-9e33-49f6-a7b4-932d589dc940.png",
+    "prompt": "Edit this approved reference canvas into ONE horizontal 2-frame BUMP production game sprite strip. Exact SAME mint-and-ivory chibi courier robot facing WEST, left-facing profile in EVERY frame. Same cap, dark visor, ivory shell, coral satchel, camera, upper-left light, outline and anatomy. Exactly 2 equal-width slots covering the full canvas width, one complete robot centered in each slot at same scale and foot baseline. Frame1 startled small backward recoil with arms spread, frame2 recovering balance. No falling apart, no hurt/death.  Genuine alpha transparency; no ground, scenery, shadows, FX, text, watermark or extra figures. Keep character inside each slot."
+  }
+]

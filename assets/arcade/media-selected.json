@@ -1,0 +1,98 @@
+{
+  "audio.ui-confirm": {
+    "pack": "interface",
+    "originalFile": "Audio/click_001.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.ui-back": {
+    "pack": "interface",
+    "originalFile": "Audio/back_001.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.countdown": {
+    "pack": "interface",
+    "originalFile": "Audio/click_004.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.start": {
+    "pack": "interface",
+    "originalFile": "Audio/confirmation_001.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.pickup": {
+    "pack": "interface",
+    "originalFile": "Audio/drop_001.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.delivery": {
+    "pack": "interface",
+    "originalFile": "Audio/confirmation_002.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.coin": {
+    "pack": "interface",
+    "originalFile": "Audio/bong_001.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.dash": {
+    "pack": "impact",
+    "originalFile": "Audio/footstep_carpet_001.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.bump": {
+    "pack": "impact",
+    "originalFile": "Audio/impactSoft_medium_000.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.footstep": {
+    "pack": "impact",
+    "originalFile": "Audio/footstep_concrete_000.ogg",
+    "source": "https://kenney.nl/assets/impact-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.error": {
+    "pack": "interface",
+    "originalFile": "Audio/error_001.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.gate-open": {
+    "pack": "interface",
+    "originalFile": "Audio/confirmation_003.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.promo": {
+    "pack": "interface",
+    "originalFile": "Audio/confirmation_004.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.event-warning": {
+    "pack": "interface",
+    "originalFile": "Audio/error_003.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.result-win": {
+    "pack": "interface",
+    "originalFile": "Audio/confirmation_002.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  },
+  "audio.result-other": {
+    "pack": "interface",
+    "originalFile": "Audio/confirmation_001.ogg",
+    "source": "https://kenney.nl/assets/interface-sounds",
+    "license": "CC0-1.0"
+  }
+}
