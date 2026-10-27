@@ -2,6 +2,10 @@
 
 Hai phần tách biệt: website React/Vinext tại `/arcade`, service realtime Cloudflare Durable Objects trong `realtime/`. Dữ liệu, API và D1 của game câu hỏi giữ nguyên.
 
+## Cập nhật luật hàng ngày28/10/2026
+
+Bản v2 bổ sung hồi hàng theo điểm45 giây, kho riêng2 kiện và mang2 kiện riêng, cùng3 khách trung tâm nhận85% đích giao mới từ phút3. Cần cập nhật đồng thời website và realtime. Phòng lưu theo cấu trúc cũ vẫn giữ roster/xu/đơn; ván cũ đang chơi hoặc tạm dừng chuyển sang gián đoạn với thông báo cập nhật luật, MC chọn Chơi lại để khởi tạo v2. Không xóa D1 hoặc thư mục dữ liệu để cập nhật. Phòng cũ đã có kết quả tiếp tục đọc được.
+
 ## Local đã sử dụng
 
 Node24 LTS, npm và Chrome. Từ thư mục repo:

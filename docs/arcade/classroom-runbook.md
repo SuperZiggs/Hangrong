@@ -15,10 +15,13 @@ Game mô phỏng hư cấu dùng để trải nghiệm và thảo luận về n�
 
 “Dùng WASD hoặc mũi tên để chạy, E để nhận và giao hàng, Space để lướt và xô nhẹ. Người chơi có thể chắn nhau, nhưng không ai bị loại. Đi theo dấu nhận/giao và bản đồ nhỏ. Cầu vòng miễn phí; đi qua cổng P có thể phát sinh phí trên đơn đang mang.”
 
-- Một người mang tối đa một đơn; giao đúng điểm nhận xu. Va chạm không làm mất hàng.
+- Một người mang 1 kiện công khai hoặc tối đa 2 kiện riêng của mình, không trộn hai loại. Mỗi lần E nhận/giao 1 kiện; hai kiện cùng đích thì nhấn E hai lần. Va chạm không làm mất hàng.
 - Đợt đơn đầu xuất hiện đồng thời, mọi người cách điểm nhận gần nhất cùng120 đơn vị. Ô vàng trên bản đồ nhỏ là tiệm riêng, cùng số với nhân vật.
-- Giữ E khoảng1 giây ở tiệm của mình để bỏ đơn. Space hồi4 giây.
+- Mỗi điểm lấy hàng thường có 1 kiện; khi bị lấy sẽ đếm ngược 45 giây rồi có kiện mới ở đúng điểm đó, không đợi giao xong. Khuyến mãi là nguồn hàng bổ sung độc lập.
+- Giữ E khoảng1 giây ở tiệm của mình để bỏ toàn bộ hàng đang mang. Space hồi4 giây.
 - Quầy cạnh tiệm: khuyến mãi8 xu; kênh riêng40 xu. Điểm góp gần lối chung: góp5 xu hoặc phần còn thiếu. Khi góp đủ, mọi người dùng được cầu chung.
+- Kênh riêng sinh 1 kiện trị giá 8 xu mỗi20 giây, tích tối đa2 kiện chưa lấy. Kho riêng và số kiện đang mang được hiển thị riêng. Đơn khuyến mãi là công khai nên đối thủ vẫn nhận được; đơn riêng chỉ chủ tiệm nhận được.
+- P ghi phí riêng cho từng kiện khi đi qua. Hai kiện riêng chưa ghi phí qua P lúc phí4 sẽ chịu tổng8 xu; đi vòng miễn phí. Mỗi kiện chỉ ghi phí một lần và thanh toán một lần.
 - Tab mở/đóng bảng xếp hạng; Escape mở/đóng menu. Mở menu hoặc đổi tab trình duyệt sẽ dừng thao tác của nhân vật; phòng vẫn chạy.
 
 ## Nhịp10 phút
@@ -27,11 +30,15 @@ Game mô phỏng hư cấu dùng để trải nghiệm và thảo luận về n�
 |---|---|
 |0–60 giây|Chạy thử; tại giây60 đặt lại xu, đơn và nâng cấp thử|
 |60–180|Chặng1|
-|180–360|Chặng2|
+|180–360|Thêm3 khách trung tâm phía bên kia sông; 85% đơn công khai mới giao về đây, 15% về hai bên. Điểm lấy hàng giữ nguyên|
 |360–540|Chặng3; phí cổng P đổi từ2 lên4 xu|
 |540–600|Chốt kết quả, không cộng xu mới; MC thảo luận|
 
 MC có thể tạm dừng và tiếp tục. Chơi lại yêu cầu xác nhận, giữ danh sách và đặt lại toàn bộ tiến độ ván. Đồng xu cùng hạng, không thưởng tốc độ mạng.
+
+Khách trung tâm nhận được nhiều kiện từ nhiều người cùng lúc. Mỗi kiện phải đúng khách được chỉ định; việc một người giao trước không làm mất đơn của người khác. Tỷ lệ85/15 tính trên đơn mới được tạo (gồm thường và khuyến mãi), không phải đơn đã giao; đơn cũ giữ nguyên đích khi sang chặng.
+
+Sau khi cập nhật từ luật cũ, MC bắt đầu ván mới hoặc chọn Chơi lại để dùng luật mới. Ván cũ đang chơi/tạm dừng được giữ tiến độ để xem và báo gián đoạn; không âm thầm đặt lại xu. Kết quả cũ đã hoàn tất vẫn đọc được.
 
 ## Mất kết nối
 

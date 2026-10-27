@@ -1,16 +1,19 @@
 import Phaser from 'phaser';
 import type {Player,PublicSnapshot} from '../../../shared/arcade/types';
 import {courierFrames,markerShapes,playerPalette} from '../assets/manifest';
+import {carriedOrders} from '../../../shared/arcade/cargo';
 export class ActorView{
- readonly root:Phaser.GameObjects.Container;private sprite:Phaser.GameObjects.Sprite;private parcel:Phaser.GameObjects.Image;private ring:Phaser.GameObjects.Image;private label:Phaser.GameObjects.Text;private hitUntil=0;private lastTick=-1;private corrections:number[]=[];
+ readonly root:Phaser.GameObjects.Container;private sprite:Phaser.GameObjects.Sprite;private parcel:Phaser.GameObjects.Image;private secondParcel:Phaser.GameObjects.Image;private cargoBadge:Phaser.GameObjects.Text;private ring:Phaser.GameObjects.Image;private label:Phaser.GameObjects.Text;private hitUntil=0;private lastTick=-1;private corrections:number[]=[];
  constructor(private scene:Phaser.Scene,p:Player,private index:number,private own:boolean){
   const color=playerPalette[index%8],shape=markerShapes[Math.floor(index/8)%4];
   const shadow=scene.add.image(0,1,'characters.shadow').setDisplaySize(40,20);
   this.ring=scene.add.image(0,3,'characters.markers',shape).setTint(color).setDisplaySize(38,22).setAlpha(own?.95:.5);
   this.sprite=scene.add.sprite(0,0,'characters.courier',`courier/S/idle/01`).setOrigin(.5,88/96).setScale(.9);
   this.parcel=scene.add.image(0,0,'characters.parcel','parcel/S').setOrigin(.5,88/96).setScale(.9).setVisible(false);
+  this.secondParcel=scene.add.image(10,-13,'characters.parcel','parcel/S').setOrigin(.5,88/96).setScale(.76).setVisible(false);
+  this.cargoBadge=scene.add.text(24,-42,'×2',{fontFamily:'ArcadeTitle,Arial',fontSize:'14px',color:'#183c48',backgroundColor:'#ffc857',padding:{x:4,y:2}}).setOrigin(.5).setVisible(false);
   this.label=scene.add.text(0,-79,`${own?'BẠN · ':''}${index+1} ${p.name}`,{fontFamily:'ArcadeBody,Arial',fontSize:own?'13px':'11px',fontStyle:own?'bold':'normal',color:own?'#ffffff':'#183c48',backgroundColor:own?'#183c48':'#fff4db',padding:{x:7,y:4}}).setOrigin(.5);
-  this.root=scene.add.container(p.x,p.y,[shadow,this.ring,this.sprite,this.parcel,this.label]);
+  this.root=scene.add.container(p.x,p.y,[shadow,this.ring,this.sprite,this.parcel,this.secondParcel,this.cargoBadge,this.label]);
  }
  bump(until:number){this.hitUntil=until;}
  update(p:Player,s:PublicSnapshot,time:number,delta:number,target=p){
@@ -21,7 +24,8 @@ export class ActorView{
   const anim=s.phase==='results'?'celebrate':time<this.hitUntil?'bump':p.dashRemainingMs>0&&p.connected?'dash':p.moving&&p.connected?'run':'idle';
   const rate=anim==='run'?90:anim==='idle'?450:anim==='celebrate'?150:110;
   this.sprite.setFrame(`courier/${p.direction}/${anim}/${String(Math.floor(time/rate)%courierFrames[anim]+1).padStart(2,'0')}`);
-  this.parcel.setVisible(!!p.carriedOrderId||('hasOrder'in p&&!!p.hasOrder)).setFrame(`parcel/${p.direction}`);
+  const count=carriedOrders(p,s.orders).length||('carriedCount'in p?Number(p.carriedCount):'hasOrder'in p&&p.hasOrder?1:0);
+  this.parcel.setVisible(count>0).setFrame(`parcel/${p.direction}`);this.secondParcel.setVisible(count>1).setFrame(`parcel/${p.direction}`);this.cargoBadge.setVisible(count>1);
   this.ring.setAlpha(p.pushProtectionMs>0?.95:this.own?.9:.5);
  }
  destroy(){this.root.destroy();}

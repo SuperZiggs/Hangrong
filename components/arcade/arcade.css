@@ -10,3 +10,5 @@
 .host-person{display:flex;align-items:center;gap:7px;border-top:1px solid #ded3b9;padding:8px 0}.host-person strong{flex:1;font-size:14px}.host-person button{font-size:11px}.arcade-results .arcade-button{margin:10px auto}
 
 .arcade-market{font-size:9px;line-height:1.5;color:var(--violet);margin:10px 0 0}
+.hud-order{max-width:340px}.hud-order>small{display:block;line-height:1.6}.hud-order .hud-private-stock{color:#137e73;font-weight:700;border-top:1px dashed #c8d8c0;margin-top:3px;padding-top:2px}.hud-order>strong{line-height:1.5}
+@media(max-width:700px){.arcade-hud-main{max-width:calc(100vw - 146px);align-items:flex-start;gap:7px;padding:8px}.hud-order{max-width:calc(100vw - 225px)}.hud-order>small{font-size:8px}.hud-order>span{font-size:8px}.arcade-event-banner{top:145px}}

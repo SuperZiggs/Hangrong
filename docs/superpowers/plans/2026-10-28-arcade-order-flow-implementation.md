@@ -1,6 +1,6 @@
 # Arcade order flow v2 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Implement the approved per-point public cooldown, two-parcel private cargo, and 85/15 central delivery flow.
 
@@ -36,11 +36,11 @@
 
 **Interfaces:** Existing world/interaction/snapshot exports remain. Add `Player.carriedOrderIds` with `carriedOrderId` as primary alias, `World.rulesVersion`, ordinary slot `{orderId,nextAt}` state and separate public destination counters; expose active central destinations through the map. Shared inventory readers handle absent arrays in legacy records. `restoreWorldForCurrentRules(world: World): boolean` recognizes old persisted active/paused games, preserves progress, marks interruption and returns whether storage changed. No client input may set inventory, destination, coins or phase.
 
-- [ ] Verify 115-test baseline, then have independent author produce requirements-derived matrix/tests and valid RED evidence before any production edit.
-- [ ] Implement per-slot take-time deadlines, private stock/cargo capacity and exactly-once settlement/abandon/fees, keeping compatibility alias synchronized.
-- [ ] Add active central destinations at 180,000ms with controlled 17/3 assignment independent of private spawns; keep old destinations and existing order targets.
-- [ ] Version fresh worlds; recognize legacy active/paused records and preserve them safely as interrupted with a clear new-run message, without resetting roster/economy. Old finished results stay readable; host replay starts v2. Do not enumerate WebSockets per simulation tick.
-- [ ] Run new independent rule suites, old unit suite with only author-sanctioned supersession, typecheck; expected all applicable tests PASS. Commit implementation and ledger outcomes.
+- [x] Verify 115-test baseline, then have independent author produce requirements-derived matrix/tests and valid RED evidence before any production edit.
+- [x] Implement per-slot take-time deadlines, private stock/cargo capacity and exactly-once settlement/abandon/fees, keeping compatibility alias synchronized.
+- [x] Add active central destinations at 180,000ms with controlled 17/3 assignment independent of private spawns; keep old destinations and existing order targets.
+- [x] Version fresh worlds; recognize legacy active/paused records and preserve them safely as interrupted with a clear new-run message, without resetting roster/economy. Old finished results stay readable; host replay starts v2. Do not enumerate WebSockets per simulation tick.
+- [x] Run new independent rule suites, old unit suite with only author-sanctioned supersession, typecheck; expected all applicable tests PASS. Commit implementation and ledger outcomes.
 
 ### Task 2: Readable playfield, cargo HUD and timers
 
@@ -48,10 +48,10 @@
 
 **Interfaces:** Render current authoritative slots/map/cargo from task 1; preserve primary-order navigation while prioritizing delivery, then eligible pickup for spare private capacity. HUD identifies separate waiting stock/carried count and fee/net values. DOM/scene never changes economic state.
 
-- [ ] Run independent targeted UI expectations RED before edits.
-- [ ] Add dynamically arriving customers and announcement, parcel-type markers, empty slot countdowns, private stock count, visible two-parcel cargo and per-item net/fee details. Show both target and eligible second pickup without making E hints disagree with authority.
-- [ ] Preserve keyboard controls, reduced-effects preference, single-map camera and legacy public/owner privacy. Test 3:00 before/after snapshots in Chrome, HUD for two parcels, and two deliveries sharing one customer.
-- [ ] Run relevant units/typecheck/Chrome tests; expected PASS and screenshots have readable labels at 1366x768. Commit and ledger results.
+- [x] Run independent targeted UI expectations RED before edits.
+- [x] Add dynamically arriving customers and announcement, parcel-type markers, empty slot countdowns, private stock count, visible two-parcel cargo and per-item net/fee details. Show both target and eligible second pickup without making E hints disagree with authority.
+- [x] Preserve keyboard controls, reduced-effects preference, single-map camera and legacy public/owner privacy. Test 3:00 before/after snapshots in Chrome, HUD for two parcels, and two deliveries sharing one customer.
+- [x] Run relevant units/typecheck/Chrome tests; expected PASS and screenshots have readable labels at 1366x768. Commit and ledger results.
 
 ### Task 3: Integrated verification and local handoff
 
@@ -67,3 +67,4 @@
 ## Self-review
 
 All design sections map to tasks 1–3. Shared cargo/map interfaces flow from task 1 to both renderers in task 2; server version handling flows into task 3 runbook and integration. The three tasks are one feature with coupled inventory/privacy/UI boundaries, not separate products. Verification focuses on actual state transitions and privacy rather than mirror tests of the implementation.
+
