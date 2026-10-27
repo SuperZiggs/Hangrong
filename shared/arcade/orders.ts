@@ -12,7 +12,7 @@ export function createOrder(world:World,source:Order['source']='common',ownerId:
 export function spawnOrders(world:World,_dtMs:number){
  const count=Object.keys(world.players).length;
  const waiting=Object.values(world.orders).filter(o=>!o.settled&&!o.ownerId&&!o.privateOwnerId&&(o.source==='common'||!o.source)).length;
- if(world.elapsedMs>=world.nextCommonSpawnAt&&waiting<count){createOrder(world);world.nextCommonSpawnAt=world.elapsedMs+750;}
+ if(world.elapsedMs>=world.nextCommonSpawnAt&&waiting<count){const opening=world.orderCounter===0&&Object.keys(world.orders).length===0;for(let i=0;i<(opening?count:1);i++)createOrder(world);world.nextCommonSpawnAt=world.elapsedMs+750;}
  for(const p of Object.values(world.players)){
   if(p.privateChannel&&world.elapsedMs>=p.privateNextAt&&!Object.values(world.orders).some(o=>!o.settled&&!o.ownerId&&o.privateOwnerId===p.playerId)){
    createOrder(world,'private',p.playerId,{x:p.home.x,y:p.home.y+72});p.privateNextAt=world.elapsedMs+RULES.privateIntervalMs;
@@ -25,11 +25,11 @@ export function spawnOrders(world:World,_dtMs:number){
 export function applyInteraction(world:World,playerId:PlayerId):GameEvent[]{
  const p=world.players[playerId];if(!p)return [];
  if(p.carriedOrderId){const o=world.orders[p.carriedOrderId];if(o&&!o.settled&&o.ownerId===playerId&&near(p,o.delivery)){
-  o.settled=true;p.carriedOrderId=null;const fee=o.lockedFee??0;p.coins+=Math.max(0,o.value-fee);p.delivered++;p.feesPaid+=fee;
-  return [{id:`delivery:${o.id}`,kind:'delivery',playerId,at:world.elapsedMs,x:p.x,y:p.y,text:`+${o.value-fee} xu`}];
+  o.settled=true;p.carriedOrderId=null;const fee=o.lockedFee??0;p.coins+=Math.max(0,o.value-fee);p.delivered++;if(fee>0)p.platformDeliveries=(p.platformDeliveries??0)+1;p.feesPaid+=fee;
+  return [{id:`delivery:${o.id}`,kind:'delivery',playerId,privateOwnerId:o.privateOwnerId??undefined,at:world.elapsedMs,x:p.x,y:p.y,text:`+${o.value-fee} xu`}];
  }return [];}
  const target=Object.values(world.orders).filter(o=>!o.settled&&!o.ownerId&&(!o.privateOwnerId||o.privateOwnerId===playerId)&&near(p,o.pickup)).sort((a,b)=>Math.hypot(a.pickup.x-p.x,a.pickup.y-p.y)-Math.hypot(b.pickup.x-p.x,b.pickup.y-p.y))[0];
- if(target){target.ownerId=playerId;p.carriedOrderId=target.id;return [{id:`pickup:${target.id}`,kind:'pickup',playerId,at:world.elapsedMs,x:p.x,y:p.y}];}return [];
+ if(target){target.ownerId=playerId;p.carriedOrderId=target.id;return [{id:`pickup:${target.id}`,kind:'pickup',playerId,privateOwnerId:target.privateOwnerId??undefined,at:world.elapsedMs,x:p.x,y:p.y}];}return [];
 }
-export function abandonOrder(world:World,playerId:PlayerId):GameEvent[]{const p=world.players[playerId];if(!p?.carriedOrderId||!near(p,p.home))return [];const id=p.carriedOrderId;delete world.orders[id];p.carriedOrderId=null;p.abandonMs=0;return [{id:`abandon:${id}`,kind:'abandon',playerId,at:world.elapsedMs}];}
+export function abandonOrder(world:World,playerId:PlayerId):GameEvent[]{const p=world.players[playerId];if(!p?.carriedOrderId||!near(p,p.home))return [];const id=p.carriedOrderId,privateOwnerId=world.orders[id]?.privateOwnerId??undefined;delete world.orders[id];p.carriedOrderId=null;p.abandonMs=0;return [{id:`abandon:${id}`,kind:'abandon',playerId,privateOwnerId,at:world.elapsedMs}];}
 export function recordGateCrossings(world:World){for(const p of Object.values(world.players)){const inside=inRect(p,world.map.gate);if(inside&&!p.insideGate&&p.carriedOrderId){const o=world.orders[p.carriedOrderId];if(o&&o.lockedFee===null)o.lockedFee=world.gateFee;}p.insideGate=inside;}}

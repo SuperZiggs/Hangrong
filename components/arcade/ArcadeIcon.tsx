@@ -1,0 +1,2 @@
+import atlas from '../../game/arcade/assets/ui-icons.json';
+export function ArcadeIcon({name,size=24}:{name:string;size?:number}){const frame=(atlas.frames as Record<string,{frame:{x:number;y:number}}>)[name]?.frame;if(!frame)return null;const scale=size/64;return <span aria-hidden="true" style={{display:'inline-block',flexShrink:0,width:size,height:size,backgroundImage:"url('/arcade/assets/ui/icons.png')",backgroundSize:`${atlas.meta.size.w*scale}px ${atlas.meta.size.h*scale}px`,backgroundPosition:`${-frame.x*scale}px ${-frame.y*scale}px`}}/>;}

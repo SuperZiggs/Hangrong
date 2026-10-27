@@ -3,6 +3,7 @@ import {join} from 'node:path';
 import {describe,it,expect} from 'vitest';
 const catalog=JSON.parse(readFileSync('docs/arcade/assets.catalog.json','utf8'));
 describe('complete shipped arcade asset catalogue',()=>{
+ it('distributes font license notices beside the public font payload',()=>{for(const name of ['baloo2-OFL.txt','bevietnampro-OFL.txt']){const path=join('public/arcade/assets/licenses',name);expect(existsSync(path),`Missing distributed notice${name}`).toBe(true);expect(readFileSync(path,'utf8')).toMatch(/SIL OPEN FONT LICENSE/i);}});
  for(const item of catalog.items)it(`ships ${item.key} with required files and frame count`,()=>{
   const path=join('public/arcade/assets',item.path);expect(existsSync(path),`Missing production asset ${item.key}`).toBe(true);
   expect(readFileSync(path).length).toBeGreaterThan(50);

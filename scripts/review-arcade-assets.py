@@ -28,7 +28,8 @@ assert sum(totals[k] for k in ['characters','environment','ui','fx','fonts'])<=8
 assert totals['audio']<=6*1024**2
 accepted='--accept'in sys.argv
 if accepted:
+ (OUT/'runtime.json').write_text(json.dumps({'entries':[{**item,'status':'accepted'} for item in catalog['items']],'status':'accepted'},ensure_ascii=False),encoding='utf-8')
  for entry in entries.values():entry['status']='accepted'
 review='Review board, courier anchors/alpha and actual Chrome engine screenshots reviewed; font Vietnamese cmap and audio decode/export validated. Classroom human audition/playtest remains separate.' if accepted else 'Pending final in-engine and review-board approval'
 (SRC/'provenance.json').write_text(json.dumps({'game':catalog['game'],'review':review,'entries':entries,'bytes':totals},ensure_ascii=False,indent=2),encoding='utf-8')
-print(json.dumps(totals));print('Validated47 groups and305 frames; generated review board and candidate provenance.')
+print(json.dumps(totals));print('Validated47 groups and305 frames; provenance '+('accepted.' if accepted else 'candidate.'))

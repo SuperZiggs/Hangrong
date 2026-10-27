@@ -1,0 +1,12 @@
+Music sources selected for this project:
+
+Menu Music — wipics — CC0
+https://opengameart.org/content/menu-music-1
+Original media: https://opengameart.org/sites/default/files/menu_3.ogg
+
+City Loop — wipics — CC0
+https://opengameart.org/content/city-loop-0
+Original media: https://opengameart.org/sites/default/files/city-loop_0.mp3
+
+The shipped OGG/MP3 copies are normalized exports. Credits and upstream
+source URLs are retained here and in assets/arcade/provenance.json.

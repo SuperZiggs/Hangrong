@@ -30,6 +30,7 @@ yarn-error.log*
 
 # Local environment and keys
 .env*
+!.env.arcade.example
 .dev.vars*
 *.pem
 

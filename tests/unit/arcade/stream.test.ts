@@ -1,0 +1,7 @@
+import {it,expect} from 'vitest';import {createWorld} from '../../../shared/arcade/world';import {projectSnapshot} from '../../../shared/arcade/snapshot';import {applySnapshotPatch} from '../../../shared/arcade/transport';import {SnapshotStream,actorKey} from '../../../shared/arcade/stream';
+it('shares public encoding while reconstructing private state only for its owner and MC',()=>{
+ const w=createWorld({seed:'stream',initialCoins:20,roster:[{playerId:'a',name:'An'},{playerId:'b',name:'Bình'}]}),actors=[{role:'public'},{role:'host'},{role:'player',playerId:'a'},{role:'player',playerId:'b'}] as const,stream=new SnapshotStream();
+ const first=stream.frames(w,actors);const current=actors.map(a=>JSON.parse(first.get(actorKey(a))!).snapshot);w.players.a.privateChannel=true;w.orders.secret={id:'secret',pickup:{x:1,y:2},delivery:{x:3,y:4},value:8,ownerId:'a',privateOwnerId:'a',lockedFee:0,settled:false};w.players.a.carriedOrderId='secret';w.players.a.x+=12;w.tick=2;
+ const second=stream.frames(w,actors);actors.forEach((a,i)=>{const wire=JSON.parse(second.get(actorKey(a))!);const next=wire.type==='patch'?applySnapshotPatch(current[i],wire.patch):wire.snapshot;expect(next).toEqual(JSON.parse(JSON.stringify(projectSnapshot(w,a))));expect(next.players.a.x).toBe(w.players.a.x);});
+ expect(second.get('public:')).not.toContain('secret');expect(second.get('player:b')).not.toContain('secret');
+});

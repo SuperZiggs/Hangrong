@@ -1,0 +1,6 @@
+import {it,expect} from 'vitest';import {createWorld,stepWorld} from '../../../shared/arcade/world';import {generateMap} from '../../../shared/arcade/maps';import {isFree} from '../../../shared/arcade/motion';
+it.each([3,6,14,26])('gives all%s entrants the same distance to an initial pickup, with separate valid spawns',count=>{
+ const map=generateMap(count,'fair-opening'),distance=map.spawns.map(p=>Math.min(...map.pickups.map(q=>Math.hypot(p.x-q.x,p.y-q.y))));expect(Math.max(...distance)-Math.min(...distance)).toBeLessThan(1);
+ const w=createWorld({seed:'fair-opening',initialCoins:20,roster:Array.from({length:count},(_,i)=>({playerId:String(i),name:`Nhóm${i}`}))});for(const p of map.spawns)expect(isFree(w,p)).toBe(true);for(let i=0;i<count;i++)for(let j=i+1;j<count;j++)expect(Math.hypot(map.spawns[i].x-map.spawns[j].x,map.spawns[i].y-map.spawns[j].y)).toBeGreaterThanOrEqual(28);
+});
+it('opens with a full public parcel wave rather than giving the first spawn a19-second head start',()=>{const w=createWorld({seed:'wave',initialCoins:20,roster:Array.from({length:26},(_,i)=>({playerId:String(i),name:`Nhóm${i}`}))});stepWorld(w,new Map(),50);expect(Object.values(w.orders).filter(o=>!o.ownerId&&!o.privateOwnerId)).toHaveLength(26);});

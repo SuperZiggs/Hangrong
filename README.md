@@ -1,5 +1,14 @@
 # Quyền lực số
 
+Chế độ hành động mới **Cuộc đua giành khách** ở `/arcade`: chạy, tranh đơn, giao hàng, lướt/xô và cùng mở lối đi. Tối thiểu3 người, đã xây bộ kiểm tra26 kết nối; bản local cần2 service. Chạy `npm run arcade:dev`, mở `http://127.0.0.1:5189/arcade`.
+
+- [Hướng dẫn MC của game hành động](docs/arcade/classroom-runbook.md)
+- [Cấu hình local/hosting và phần chưa được triển khai](docs/arcade/deployment.md)
+- [Bộ asset và nguồn](assets/arcade/provenance.json)
+- [Kiểm chứng, hiệu năng và giới hạn diễn tập](docs/arcade/playtest-report.md)
+
+Nội dung bên dưới mô tả chế độ câu hỏi cũ, được giữ nguyên.
+
 Game tiếng Việt cuối bài thuyết trình Kinh tế chính trị Mác–Lênin: Từ 3 lượt tham gia; mỗi điện thoại đại diện cho một cá nhân hoặc một nhóm, ba vòng tình huống và leaderboard. Tối đa 90 điểm. Chơi 9 phút + 1 phút chốt; vào phòng/phổ biến luật ngoài khung này.
 
 - [Hướng dẫn MC và phương án dự phòng](docs/classroom-runbook.md)

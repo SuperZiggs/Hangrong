@@ -40,4 +40,7 @@ for name,source in [('menu-loop','menu-source.ogg'),('city-loop','city-source.mp
     for ext in ['ogg','mp3']:
         subprocess.run([ffmpeg,'-hide_banner','-loglevel','error','-y','-i',str(raw/source),'-af','loudnorm=I=-22:TP=-2:LRA=8','-ar','44100','-ac','2',str(out/f'audio/music/{name}.{ext}')],check=True)
 (ROOT/'assets/arcade/media-selected.json').write_text(json.dumps(selected,indent=2),encoding='utf-8')
+(out/'licenses').mkdir(parents=True,exist_ok=True)
+for notice in licenses.iterdir():
+    if notice.is_file():shutil.copy2(notice,out/'licenses'/notice.name)
 print('Exported2 Vietnamese fonts,16 SFX cues in OGG/MP3 and2 music loops.')

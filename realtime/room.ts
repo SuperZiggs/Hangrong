@@ -6,12 +6,15 @@ import {constrainPlayer} from '../shared/arcade/motion';
 import type {Actor,InputFrame,World} from '../shared/arcade/types';
 import {ArcadeError,errorResponse,hash,json,readBody,validRequest,validToken} from './auth';
 import {inputSchema} from './protocol';
+import {SnapshotStream,actorKey} from '../shared/arcade/stream';
+import {InputInbox} from '../shared/arcade/input-inbox';
 export interface RealtimeEnv{ARCADE_ROOMS:DurableObjectNamespace<ArcadeRoom>;ARCADE_ALLOWED_ORIGINS?:string;ARCADE_PUBLIC_WS_URL?:string;}
 type Entrant={playerId:string;name:string;hash:string;recovery?:{hash:string;expires:number}};
 type Stored={code:string;createRequestId:string;hostHash:string;expiresAtMs:number;roster:Entrant[];world:World;receipts:Record<string,{action:string;reply:Record<string,unknown>}>;recoveries:Record<string,{playerId:string;hash:string}>};
 type Attachment={actor:Actor|null;hash:string|null;createdAt:number;seenAt:number;seq:number;rateAt:number;rateCount:number};
 export class ArcadeRoom extends DurableObject<RealtimeEnv>{
- private data:Stored|null=null;private timer:ReturnType<typeof setInterval>|null=null;private lastTickAt=0;private accumulator=0;private inputs=new Map<string,{frame:InputFrame;at:number}>();private disconnected=new Map<string,number>();private tickCostMs=0;
+ private stream=new SnapshotStream();private updateSeq=0;
+ private data:Stored|null=null;private timer:ReturnType<typeof setInterval>|null=null;private lastTickAt=0;private accumulator=0;private inputs=new InputInbox();private disconnected=new Map<string,number>();private tickCostMs=0;
  constructor(ctx:DurableObjectState,env:RealtimeEnv){super(ctx,env);ctx.blockConcurrencyWhile(async()=>{this.data=await ctx.storage.get<Stored>('room')??null;if(this.data&&!this.data.world.paused&&!['lobby','results','interrupted'].includes(this.data.world.phase)){this.data.world.phase='interrupted';await this.save();}});}
  private async save(){if(this.data)await this.ctx.storage.put('room',this.data);}
  private requireRoom(){if(!this.data)throw new ArcadeError('ROOM_NOT_FOUND','Không tìm thấy phòng.',404);if(Date.now()>=this.data.expiresAtMs)throw new ArcadeError('ROOM_EXPIRED','Phòng đã hết hạn.',410);return this.data;}
@@ -20,14 +23,15 @@ export class ArcadeRoom extends DurableObject<RealtimeEnv>{
  private currentActor(meta:Attachment){const d=this.requireRoom();if(!meta.actor)return null;if(meta.actor.role==='public')return meta.actor;if(meta.actor.role==='host')return meta.hash===d.hostHash?meta.actor:null;return d.roster.some(p=>p.playerId===meta.actor?.playerId&&p.hash===meta.hash)?meta.actor:null;}
  private wsUrl(request:Request){const u=new URL(request.url);const base=this.env.ARCADE_PUBLIC_WS_URL??`${u.protocol==='https:'?'wss:':'ws:'}//${u.host}`;return `${base.replace(/\/$/,'')}/rooms/${this.requireRoom().code}/socket`;}
  private snapshot(actor:Actor){return {...projectSnapshot(this.requireRoom().world,actor),serverNowMs:Date.now(),tickCostMs:this.tickCostMs};}
- private send(ws:WebSocket,value:unknown){try{ws.send(JSON.stringify(value));}catch{/* Closed peer; disconnect event releases its body. */}}
- private broadcast(){if(!this.data)return;for(const ws of this.ctx.getWebSockets()){const meta=ws.deserializeAttachment() as Attachment;const actor=this.currentActor(meta);if(actor)this.send(ws,{type:'snapshot',snapshot:this.snapshot(actor)});}}
+ private send(ws:WebSocket,value:unknown){try{ws.send(typeof value==='string'?value:JSON.stringify(value));}catch{/* Closed peer; disconnect event releases its body. */}}
+ private broadcast(){if(!this.data)return;const peers=this.ctx.getWebSockets().map(ws=>({ws,actor:this.currentActor(ws.deserializeAttachment() as Attachment)})).filter((p):p is {ws:WebSocket;actor:Actor}=>!!p.actor);if(!peers.length)return;const frames=this.stream.frames(this.data.world,peers.map(p=>p.actor),{serverNowMs:Date.now(),tickCostMs:this.tickCostMs,updateSeq:++this.updateSeq});for(const peer of peers)this.send(peer.ws,frames.get(actorKey(peer.actor))!);}
  private stop(){if(this.timer)clearInterval(this.timer);this.timer=null;this.accumulator=0;}
- private startTimer(){this.stop();this.lastTickAt=Date.now();this.timer=setInterval(()=>this.tick(),RULES.tickMs);}
+ private startTimer(){this.stop();this.lastTickAt=Date.now();this.timer=setInterval(()=>this.tick(),RULES.tickMs);void this.ctx.storage.setAlarm(Date.now()+20000);}
+ async alarm(){const w=this.data?.world;if(w&&!w.paused&&!['lobby','interrupted'].includes(w.phase)&&w.elapsedMs<RULES.endMs)await this.ctx.storage.setAlarm(Date.now()+20000);}
  private tick(){if(!this.data)return;const w=this.data.world;if(w.paused||w.phase==='lobby'||w.phase==='interrupted'){this.stop();return;}const now=Date.now(),gap=now-this.lastTickAt;this.lastTickAt=now;
   if(gap>3000){w.paused=true;w.events.push({id:`lag:${w.tick}`,kind:'warning',text:'Máy chủ chậm nhịp. MC có thể tiếp tục sau khi kết nối ổn định.',at:w.elapsedMs});this.stop();void this.save();this.broadcast();return;}
   this.accumulator+=gap;const started=performance.now();let changed=false,steps=0;
-  while(this.accumulator>=RULES.tickMs&&steps++<60){this.accumulator-=RULES.tickMs;const frames=new Map<string,InputFrame>();for(const [id,input] of this.inputs)if(now-input.at<=RULES.inputLeaseMs)frames.set(id,input.frame);
+  while(this.accumulator>=RULES.tickMs&&steps++<60){this.accumulator-=RULES.tickMs;const frames=this.inputs.sample(now);
    for(const [id,at]of this.disconnected)if(now-at>=RULES.disconnectMs&&w.players[id]){w.players[id].connected=false;this.inputs.delete(id);this.disconnected.delete(id);}
    const result=stepWorld(w,frames,RULES.tickMs);changed=changed||result.phaseChanged;
   }
@@ -76,8 +80,8 @@ export class ArcadeRoom extends DurableObject<RealtimeEnv>{
    if(b.runId!==undefined&&b.runId!==null&&b.runId!==d.world.runId)throw new ArcadeError('STALE_RUN','Lệnh thuộc ván cũ.',409);let reply:Record<string,unknown>={ok:true};
    if(action==='start'||action==='replay'){
     if(action==='start'&&d.world.phase!=='lobby')throw new ArcadeError('STARTED','Ván đã bắt đầu.',409);if(d.roster.length<3)throw new ArcadeError('MIN_PLAYERS','Cần ít nhất 3 người tham gia.',409);
-    d.world=createWorld({seed:crypto.randomUUID(),initialCoins:20,roster:d.roster.map(p=>({playerId:p.playerId,name:p.name}))});this.inputs.clear();this.disconnected.clear();for(const ws of this.ctx.getWebSockets()){const m=ws.deserializeAttachment() as Attachment;m.seq=-1;ws.serializeAttachment(m);}this.startTimer();reply={ok:true,runId:d.world.runId};
-   }else if(action==='pause'){if(['lobby','results','interrupted'].includes(d.world.phase))throw new ArcadeError('NOT_PLAYING','Ván chưa đang diễn ra.',409);d.world.paused=true;this.stop();}
+    d.world=createWorld({seed:crypto.randomUUID(),initialCoins:20,roster:d.roster.map(p=>({playerId:p.playerId,name:p.name}))});this.inputs.clear();this.disconnected.clear();for(const p of d.roster)this.disconnected.set(p.playerId,Date.now());for(const ws of this.ctx.getWebSockets()){const m=ws.deserializeAttachment() as Attachment;m.seq=-1;ws.serializeAttachment(m);const a=this.currentActor(m);if(a?.playerId)this.disconnected.delete(a.playerId);}this.startTimer();reply={ok:true,runId:d.world.runId};
+   }else if(action==='pause'){if(['lobby','results','interrupted'].includes(d.world.phase))throw new ArcadeError('NOT_PLAYING','Ván chưa đang diễn ra.',409);d.world.paused=true;this.inputs.clear();this.stop();}
    else if(action==='resume'){if(d.world.paused){d.world.paused=false;this.startTimer();}}
    else if(action==='rename'||action==='remove'||action==='issue-recovery'){
     const p=d.roster.find(p=>p.playerId===payload.playerId);if(!p)throw new ArcadeError('PLAYER_MISSING','Không tìm thấy người chơi.',404);
@@ -104,6 +108,6 @@ export class ArcadeRoom extends DurableObject<RealtimeEnv>{
    if(f.runId===w.runId&&f.seq>meta.seq&&!['lobby','results','interrupted'].includes(w.phase)&&!w.paused){meta.seq=f.seq;this.inputs.set(actor.playerId,{frame:f,at:now});w.players[actor.playerId].lastInputSeq=f.seq;}
   }else throw new ArcadeError('INVALID_MESSAGE','Không có loại thao tác này.');ws.serializeAttachment(meta);
  }catch(e){const err=e instanceof ArcadeError?e:new ArcadeError('SERVER_ERROR','Không xử lý được gói tin.',500);this.send(ws,{type:'error',error:{code:err.code,message:err.message}});}}
- webSocketClose(ws:WebSocket){try{const m=ws.deserializeAttachment() as Attachment;if(m.actor?.playerId){this.inputs.delete(m.actor.playerId);this.disconnected.set(m.actor.playerId,Date.now());}}catch{}}
+ webSocketClose(ws:WebSocket){try{const m=ws.deserializeAttachment() as Attachment;if(m.actor?.playerId){const another=this.ctx.getWebSockets().some(peer=>peer!==ws&&peer.readyState===1&&this.currentActor(peer.deserializeAttachment() as Attachment)?.playerId===m.actor!.playerId);if(!another){this.inputs.delete(m.actor.playerId);this.disconnected.set(m.actor.playerId,Date.now());}}}catch{}}
  webSocketError(ws:WebSocket){this.webSocketClose(ws);}
 }

@@ -34,6 +34,7 @@ test('landing: accessible Vietnamese room form works at 360px with keyboard focu
   await expect(joinButton(page)).toBeVisible();
   await expect(createButton(page)).toBeVisible();
   await assertNoOverflow(page);
+  await expect(codeInput(page)).toBeEnabled();
   await codeInput(page).focus();
   await expect(codeInput(page)).toBeFocused();
   await page.keyboard.press('Tab');

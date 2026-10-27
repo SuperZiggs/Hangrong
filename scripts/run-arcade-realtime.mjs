@@ -5,5 +5,6 @@ const args=process.argv.slice(2),value=(name,fallback)=>{const i=args.indexOf(na
 const port=value('--port','5191'),ip=value('--ip','127.0.0.1');
 if(!/^\d+$/.test(port)||Number(port)<1024||Number(port)>65535)throw new Error('Invalid port');
 const env={...process.env,WRANGLER_LOG_PATH:resolve('.wrangler/arcade-realtime.log')};
-const child=spawn(process.execPath,[fileURLToPath(new URL('../node_modules/wrangler/bin/wrangler.js',import.meta.url)),'dev','--local','--config','realtime/wrangler.jsonc','--persist-to','.wrangler/arcade-state','--port',port,'--ip',ip,'--inspector-port','0'],{cwd:fileURLToPath(new URL('..',import.meta.url)),env,stdio:'inherit',windowsHide:true});
+const variables=['ARCADE_ALLOWED_ORIGINS','ARCADE_PUBLIC_WS_URL'].flatMap(key=>process.env[key]?['--var',`${key}:${process.env[key]}`]:[]);
+const child=spawn(process.execPath,[fileURLToPath(new URL('../node_modules/wrangler/bin/wrangler.js',import.meta.url)),'dev','--local','--config','realtime/wrangler.jsonc','--persist-to','.wrangler/arcade-state','--port',port,'--ip',ip,'--inspector-port','0',...variables],{cwd:fileURLToPath(new URL('..',import.meta.url)),env,stdio:'inherit',windowsHide:true});
 for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>child.kill(signal));child.on('exit',code=>process.exit(code??1));

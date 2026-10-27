@@ -16,7 +16,11 @@
     "test:unit": "vitest run",
     "test:api": "playwright test --project=api",
     "test:e2e": "playwright test --project=browser",
-    "test:all": "npm run test:unit && npm run test:api && npm run test:e2e"
+    "test:all": "npm run test:unit && npm run test:api && npm run test:e2e",
+    "arcade:dev": "node scripts/run-arcade-local.mjs",
+    "arcade:realtime": "node scripts/run-arcade-realtime.mjs",
+    "arcade:load": "node scripts/arcade-load.mjs",
+    "arcade:assets": "node scripts/verify-arcade-assets.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -32,6 +36,8 @@
     "lucide-react": "^1.31.0",
     "next": "16.3.4",
     "next-themes": "^0.4.6",
+    "phaser": "4.2.1",
+    "qrcode": "1.5.4",
     "radix-ui": "^1.6.7",
     "react": "19.2.6",
     "react-day-picker": "^10.0.1",
@@ -42,14 +48,15 @@
     "sonner": "^2.0.8",
     "tailwind-merge": "3.6.0",
     "vaul": "^1.1.2",
-    "zod": "^3.25.76",
-    "qrcode": "1.5.4"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",
     "@cloudflare/workers-types": "4.20260515.1",
+    "@playwright/test": "1.64.1",
     "@tailwindcss/postcss": "4.2.1",
     "@types/node": "22.19.19",
+    "@types/qrcode": "1.5.6",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.2",
@@ -65,10 +72,9 @@
     "typescript": "5.9.3",
     "vinext": "1.0.0-beta.5",
     "vite": "8.0.13",
-    "wrangler": "4.92.0",
     "vitest": "5.0.5",
-    "@playwright/test": "1.64.1",
-    "@types/qrcode": "1.5.6"
+    "wrangler": "4.92.0",
+    "ws": "8.18.0"
   },
   "type": "module",
   "overrides": {

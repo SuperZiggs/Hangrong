@@ -1,0 +1,11 @@
+import {it,expect} from 'vitest';import {createWorld,stepWorld} from '../../../shared/arcade/world';import {projectSnapshot} from '../../../shared/arcade/snapshot';import {SnapshotStream} from '../../../shared/arcade/stream';import {applySnapshotPatch} from '../../../shared/arcade/transport';import type {InputFrame} from '../../../shared/arcade/types';
+it('hides private pickup/delivery event identities and positions even after the private receipt is pruned',()=>{
+ const w=createWorld({seed:'private-events',initialCoins:20,roster:[{playerId:'a',name:'An'},{playerId:'b',name:'Bình'}]});w.players.a.x=300;w.players.a.y=300;w.orders['secret-event-order']={id:'secret-event-order',pickup:{x:300,y:300},delivery:{x:300,y:300},value:8,ownerId:null,privateOwnerId:'a',lockedFee:null,settled:false};
+ const frame:InputFrame={runId:w.runId,seq:1,moveX:0,moveY:0,interactPressed:true,dashPressed:false,abandonHeld:false};stepWorld(w,new Map([['a',frame]]),50);stepWorld(w,new Map([['a',{...frame,seq:2}]]),50);delete w.orders['secret-event-order'];
+ expect(w.events.some(e=>e.id.includes('secret-event-order'))).toBe(true);for(const actor of [{role:'public'},{role:'player',playerId:'b'}] as const)expect(JSON.stringify(projectSnapshot(w,actor))).not.toContain('secret-event-order');expect(JSON.stringify(projectSnapshot(w,{role:'player',playerId:'a'}))).toContain('secret-event-order');
+});
+it('restores private events for owner and MC in full and delta streams without exposing them to other actors',()=>{
+ const w=createWorld({seed:'stream-events',initialCoins:20,roster:[{playerId:'a',name:'An'},{playerId:'b',name:'Bình'}]}),stream=new SnapshotStream(),actors=[{role:'public'},{role:'host'},{role:'player',playerId:'a'},{role:'player',playerId:'b'}] as const;const first=stream.frames(w,actors),bases=actors.map(a=>JSON.parse(first.get(`${a.role}:${'playerId'in a?a.playerId:''}`)!).snapshot);
+ w.tick=2;w.events.push({id:'delivery:private-only-event',kind:'delivery',playerId:'a',privateOwnerId:'a',at:0,x:300,y:300});const next=stream.frames(w,actors);
+ actors.forEach((a,i)=>{const frame=JSON.parse(next.get(`${a.role}:${'playerId'in a?a.playerId:''}`)!);const s=frame.type==='snapshot'?frame.snapshot:applySnapshotPatch(bases[i],frame.patch);expect(JSON.stringify(s).includes('private-only-event')).toBe(i===1||i===2);});
+});
