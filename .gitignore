@@ -52,3 +52,4 @@ yarn-error.log*
 /assets/arcade/raw/
 /assets/arcade/previews/
 /realtime/.wrangler/
+/realtime/work/

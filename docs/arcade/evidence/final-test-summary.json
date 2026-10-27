@@ -1,0 +1,450 @@
+{
+  "verifiedCodeCommit": "ecbf51282b02a4f339c4e70a5fe884875c59add5",
+  "unit": {
+    "passed": 115,
+    "files": 18,
+    "command": "vitest run --maxWorkers=1"
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "realtimeDryRun": "PASS, no deployment",
+  "assetGroups": 47,
+  "frames": 305,
+  "apiProduction": {
+    "sourceReport": "test-results/api-readflight.json",
+    "stats": {
+      "startTime": "2026-10-27T16:49:44.325Z",
+      "duration": 97659.293,
+      "expected": 39,
+      "skipped": 3,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "create contract: idempotent room and public snapshot contain no capabilities",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "validation: room lookup, slot/name boundaries and safe structured errors",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "join race: one slot owner, idempotent retry and same-token rejoin",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "start boundary and authority: one team cannot start and public/team cannot control host",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "six-team assignment: distinct missions, stable reconnect, no premature answer keys",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "isolation: capabilities from another room cannot obtain or mutate private state",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "autosave ordering: later sequence wins over retries and reordered requests",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "submit atomicity: invalid choices do not partially save or lock a round",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "submit concurrency: all six submissions persist, retries are safe and deadline remains",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "pause: mutations rejected while remaining time is frozen and resume preserves it",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "recovery: host-only one-use credential revokes old device and retains mission/draft",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "lobby controls: rename trims, remove revokes the removed capability",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A01 room request/capability retries are atomic and expire in 24h",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A02 name-only joins: retry races preserve identity, duplicate names differ, malformed names/capabilities fail",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A03 minimum three, 26 same-IP entrants, no late joins, saved player reconnect remains possible",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A04 every host action/export enforces roles and room boundaries, public snapshots contain no capabilities",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A05 host retries do not double-apply; pause freezes time; replay retains roster and rejects stale run",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A06 recovery response-loss retry succeeds only for same replacement capability; old token loses control",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A07 socket input cannot forge money/time/position, remote pickup, another player, or host control",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A08 stale run/sequence ignored, input expires at 250ms, disconnect releases blocking body around 3s",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A09 26 actual sockets share one IP, make activity, validate origin/auth timeout and bound malformed frames",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "A11 original quiz API and security isolation survive arcade creation",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "a second socket cannot regress the player input acknowledgement or replace newer intent",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "silent traffic loss releases a still-open socket body and valid traffic restores it",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "paused real runtime restart releases absent entrants on resume and preserves their progress",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "legacy maximum identifier cannot block slotless joining",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "pre-change persisted room keeps its original capabilities, run, mission and acknowledged draft",
+        "outcome": "skipped",
+        "statuses": [
+          "skipped"
+        ]
+      },
+      {
+        "title": "flexible threshold: zero, one and two entrants cannot start; exactly three can",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "name-only joining: concurrent saved-capability retries create one stable entrant; duplicate names stay distinct",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "classroom cohort 26: shared-IP joins, balanced three-round assignments, concurrent answers/submits and replay",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "classroom cohort 40: shared-IP joins, balanced three-round assignments, concurrent answers/submits and replay",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "entrants beyond six: host rename/remove/recover target the right identity and preserve room/role isolation",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "real duration: six independent teams complete 120/45/15 × 3 and retain final board for a minute",
+        "outcome": "skipped",
+        "statuses": [
+          "skipped"
+        ]
+      },
+      {
+        "title": "lost recovery response can be retried only by the same replacement capability",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "persistence: acknowledged draft and settled points survive two actual worker restarts",
+        "outcome": "skipped",
+        "statuses": [
+          "skipped"
+        ]
+      },
+      {
+        "title": "deadline: last acknowledged choices settle, blanks score zero and late packets cannot change results",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "phase boundaries: review 45 seconds, leaderboard 15, then next round for the same sessions",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "scoring: 10 per correct task, 90 maximum, no speed bonus, shared ranks and host-only final CSV",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "replay: new run retains sessions, changes assignments and rejects queued old-run answer/submit/host packets",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "expiry: recovery has five-minute validity and an expired code cannot replace the live device",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "expiry: an expired room returns 410 and rejects queued mutations",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "recovery after grading: new device retains points and current assignment while old device is revoked",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      }
+    ],
+    "selectedMetrics": []
+  },
+  "browserProduction": {
+    "sourceReport": "test-results/browser-readflight.json",
+    "stats": {
+      "startTime": "2026-10-27T16:51:22.518Z",
+      "duration": 266055.902,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "landing: accessible Vietnamese room form works at 360px with keyboard focus",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "classroom journey: one host and six isolated phones join, save, refresh and report offline honestly",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "E01 Vietnamese arcade lobby has accessible create/join controls and fits small screens",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "E02 real create/join/start/play/pause/replay flow renders a readable canvas and captures actual browser metrics",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "E03 held keys generate one E/Space edge; blur/typing stop movement and reconnect keeps identity",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "three real keyboard clients contest one parcel, obstruct movement and deliver across the river",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "Escape closes local settings and Tab closes local ranking without moving the player",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "unmuting after a gesture loads licensed music; settings expose separate volume controls",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "flexible phone form: 360px solo/group display name and code only, no fixed position selection",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "flexible lobby: solo/groups coexist, three are required, seventh entrant appears and refresh never duplicates",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "replacement phone reuses its persisted capability after the recovery response is lost",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      },
+      {
+        "title": "submit sends the latest choice while an earlier autosave response is delayed",
+        "outcome": "expected",
+        "statuses": [
+          "passed"
+        ]
+      }
+    ],
+    "selectedMetrics": [
+      {
+        "name": "player-reconciliation.json",
+        "value": [
+          "5.584885554093148",
+          "6.327043497133843",
+          "9.532622308985992"
+        ]
+      },
+      {
+        "name": "keyboard-contest-evidence.json",
+        "value": {
+          "players": 3,
+          "winner": "Sen",
+          "order": "a23c57b9-o1",
+          "coins": 30,
+          "delivered": 1
+        }
+      }
+    ]
+  },
+  "frozenAcceptanceSha256": {
+    "tests/unit/arcade/independent-acceptance.test.ts": "9100ca8a30005954fee52445eec74c09aefe323889d08472f25fce722abeeeae",
+    "tests/api/arcade-independent.spec.ts": "d5ee4d8d39b6812404082f15eed7cf76910e89c78c9481d9c5686d49f773946d",
+    "tests/e2e/arcade-independent.spec.ts": "509da07fa4ed823b93cb52b61be8c98c322e45a51748f806da34792c317aeebe",
+    "tests/support/arcade-independent.ts": "295cc7a019e7b753c0eaf8c9eb6411e8c5af6613b06f4cb7f83f4844a296813e"
+  },
+  "separateReal600s": "real-600s.json; unchanged A10 passed, timeline unchanged",
+  "runtimeSourcesSha256": {
+    "realtime/room.ts": "a7236bed2838719bd81f651464f40af469efb155c7f4c4c1870af731dde3b69d",
+    "server/room-store.ts": "96e706d35c01193ad80d152634d2bc4d52d553bd9ec9d315290ff9263ebb3a51",
+    "shared/arcade/world.ts": "308807183d0895842101f5e7d612100979c9bf9436b64212f78d7886fa8e1fc0"
+  }
+}
