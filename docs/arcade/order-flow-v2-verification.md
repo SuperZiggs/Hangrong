@@ -21,7 +21,7 @@ Giữ nguyên toàn bộ asset và dependency; bổ sung số kiện, nhãn lo�
 
 | Kiểm tra | Kết quả |
 |---|---|
-| Unit |145/145 trên20 file đạt sau phần luật và giao diện|
+| Unit |147/147 trên21 file đạt, gồm hai ca bổ sung phím E thật sau review|
 | TypeScript |`tsc --noEmit` đạt|
 | Chrome mới |3/3 đạt: nhặt thực/cooldown, HUD2 kiện riêng, khách trung tâm xuất hiện trong cảnh đã chạy|
 | Worker thực + lifecycle |4/4 đạt; riêng45s refill chạy47,4s, gồm pause/reconnect và hàng chưa giao|

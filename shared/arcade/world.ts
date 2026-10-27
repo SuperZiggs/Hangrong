@@ -1,5 +1,5 @@
 import {activateCentralCustomers,generateMap} from './maps';
-import {carriedOrders} from './cargo';
+import {carriedOrders,nextPickup} from './cargo';
 import {advanceMotion} from './motion';
 import {announcements,phaseAt} from './clock';
 import {abandonOrder,applyInteraction,near,recordGateCrossings,spawnOrders} from './orders';
@@ -34,7 +34,13 @@ export function stepWorld(world:World,inputs:ReadonlyMap<PlayerId,InputFrame>,dt
  recordGateCrossings(world);
  for(const p of Object.values(world.players)){
   p.promotionCooldownMs=Math.max(0,p.promotionCooldownMs-dtMs);const f=inputs.get(p.playerId);if(!f||f.runId!==world.runId||!p.connected){p.abandonMs=0;continue;}
-  if(f.abandonHeld&&carriedOrders(p,world.orders).length&&near(p,p.home)){p.abandonMs+=dtMs;if(p.abandonMs>=1000)events.push(...abandonOrder(world,p.playerId));p.lastActionSeq=f.seq;continue;}p.abandonMs=0;
+  if(f.abandonHeld&&carriedOrders(p,world.orders).length&&near(p,p.home)){
+   p.abandonMs+=dtMs;
+   if(p.abandonMs>=1000){events.push(...abandonOrder(world,p.playerId));p.lastActionSeq=f.seq;continue;}
+   // A fresh E tap can collect a second parcel where home and stock overlap.
+   // Sustained E still abandons all cargo at the same 1000ms threshold.
+   if(!f.interactPressed||f.seq<=p.lastActionSeq||!nextPickup(p,world.orders)){p.lastActionSeq=f.seq;continue;}
+  }else p.abandonMs=0;
   if(f.interactPressed&&f.seq>p.lastActionSeq){p.lastActionSeq=f.seq;const action=applyInteraction(world,p.playerId);events.push(...action);
    if(action.length===0&&!p.carriedOrderId){const station=world.map.stations.find(s=>(!s.ownerId||s.ownerId===p.playerId)&&near(p,s));if(station)events.push(...(station.kind==='contribution'?contributeSharedRoute(world,p.playerId):buyUpgrade(world,p.playerId,station.kind)));}
   }
