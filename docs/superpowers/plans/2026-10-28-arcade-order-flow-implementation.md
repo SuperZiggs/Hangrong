@@ -59,9 +59,9 @@
 
 **Interfaces:** Real HTTP/WebSocket API remains unchanged; use separate worktree test ports so the original local game is undisturbed until final handoff.
 
-- [ ] Build production, realtime dry-run, run full applicable unit/API/browser suites and new independent acceptance. Record obsolete v1 assertions and their author's justification, all commands and failures/fixes. No need repeat the old real 600-second gate unless phase timing changes.
-- [ ] Verify multiplayer pickup cooldown, two-parcel privacy/settlement through practical integration plus UI; inspect actual screenshots and asset budget.
-- [ ] Request one fresh whole-branch review with spec, plan, ledger and base `d3dae7e`; regrade findings, fix Important/Critical in one test-first pass, record Minor for user.
+- [x] Build production, realtime dry-run, run full applicable unit/API/browser suites and new independent acceptance. Record obsolete v1 assertions and their author's justification, all commands and failures/fixes. No need repeat the old real 600-second gate unless phase timing changes. Full API retains one pre-existing quiz40 stall, reproduced against the old build; scoped arcade gate14/14 passes, see the explicit ruling and verification report.
+- [x] Verify multiplayer pickup cooldown, two-parcel privacy/settlement through practical integration plus UI; inspect actual screenshots and asset budget.
+- [x] Request one fresh whole-branch review with spec, plan, ledger and base `d3dae7e`; regrade findings, fix Important/Critical in one test-first pass, record Minor for user.
 - [ ] Commit final docs/evidence and safely fast-forward the clean original checkout locally, retaining worktree raw assets/evidence. Build original or copy only verified dist; restart only the owned local launcher after checking PID/command. Keep original data and explain that a new game is needed. No push or cloud deployment.
 
 ## Self-review

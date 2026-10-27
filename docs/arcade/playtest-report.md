@@ -1,5 +1,7 @@
 # Kiểm chứng bản local — Cuộc đua giành khách
 
+> Báo cáo lịch sử v1. Bản điều chỉnh nguồn hàng/khách trung tâm ngày28/10/2026 có bằng chứng riêng tại [order-flow-v2-verification.md](order-flow-v2-verification.md). Kết quả dưới đây mô tả các lượt v1; đặc biệt lượt v2 còn tái hiện lỗi quiz40 người có từ trước nên không dùng kết quả API v1 để khẳng định toàn bộ API hiện tại đạt.
+
 27–28/10/2026. Game mới dưới `/arcade`; bản câu hỏi và dữ liệu D1 được giữ riêng. Đây là bản local đã kiểm chứng, chưa phải kết quả diễn tập trên Wi‑Fi lớp hoặc một deployment WSS công khai.
 
 ## Bằng chứng hiện có

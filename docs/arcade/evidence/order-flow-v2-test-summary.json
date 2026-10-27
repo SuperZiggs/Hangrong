@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-28",
+  "productionCodeCommit": "ea27c47d708fdd94329984ede5a61183feceaaad",
+  "unit": {
+    "passed": 147,
+    "files": 21
+  },
+  "typecheck": "PASS",
+  "websiteBuild": "PASS",
+  "realtimeDryRun": {
+    "uploadKiB": 177.52,
+    "gzipKiB": 35.1,
+    "deployed": false
+  },
+  "assets": {
+    "groups": 47,
+    "frames": 305,
+    "shaAtlasFallback": "PASS"
+  },
+  "sourceLint": {
+    "errors": 0,
+    "existingWarnings": 6,
+    "scope": "tracked relevant TypeScript source"
+  },
+  "reports": {
+    "chrome": {
+      "startTime": "2026-10-27T22:07:34.429Z",
+      "duration": 295917.586,
+      "expected": 15,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "arcadeApi": {
+      "startTime": "2026-10-27T22:15:28.944Z",
+      "duration": 78795.71800000001,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "allApiSequential": {
+      "startTime": "2026-10-27T21:52:10.918Z",
+      "duration": 201535.478,
+      "expected": 39,
+      "skipped": 3,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "baselineLegacy40": {
+      "startTime": "2026-10-27T22:13:24.763Z",
+      "duration": 20308.141,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    }
+  },
+  "independentAcceptanceSha256": {
+    "tests/unit/arcade/order-flow-v2-independent.test.ts": "DFE0220D3645D1A327324FAAF804CEC6B7664DCE8779C49FD335957A61B4FFCE",
+    "tests/api/arcade-order-flow-v2.spec.ts": "94CC6BAEDBD48C42E14A4060175C523EACC48233659048F797BF1C2BB870CEEF",
+    "tests/e2e/arcade-order-flow-v2.spec.ts": "C78BC1A6EFA7F883CA9B686CE0E3E0385BE990BF1D6149AE4B8FC69DC9877815"
+  },
+  "legacy40": {
+    "status": "pre-existing local service stall, unresolved",
+    "baselineCommit": "d3dae7e9153dff3b8e19de9000a777ce4a575711",
+    "evidence": "same unchanged legacy cohort40 test fails against the pre-update production build",
+    "observation": "round2 GET after round1 answers/submits: last21 requests time out at10s; late server responses around104-105s",
+    "rootCause": "not proven; trace overhead hypothesis rejected by timings",
+    "changedLegacyProductionPaths": [],
+    "guardedSkipsInFullApi": 3
+  },
+  "limitations": [
+    "local automated load is not 26 physical laptops on classroom Wi-Fi",
+    "v2 did not repeat unchanged real600s v1 gate",
+    "old animation/FX may continue during pause",
+    "fixture screenshots are UI-boundary checks, not full real private-channel earning journeys"
+  ]
+}

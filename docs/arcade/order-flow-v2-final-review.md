@@ -10,4 +10,4 @@ Reviewer kiểm tra40 phép so sánh projection/stream trong bộ nhớ: hai ki�
 
 Không có Minor mới. Declined to judge: animation/FX cũ vẫn chạy khi MC pause, đã là hạn chế Minor ghi ở v1 và không được tuyên bố sửa toàn bộ trong v2. Quyết định của executor: giữ phạm vi; đồng hồ luật, spawn, phí và tiền dừng khi pause, nhưng hình ảnh cũ có thể tiếp tục động.
 
-Các lỗi hồi quy chạy đồng thời và một timeout40 người quiz cũ được giữ trong evidence và phải được xác minh lại; review không coi chúng là PASS.
+Sau review, toàn bộ15 Chrome và14 API arcade trên source đã sửa đều đạt. Timeout40 người quiz cũ còn tái hiện khi chạy riêng, trên D1 sạch và cả build trước cập nhật d3dae7e; đã giữ làm lỗi có từ trước chưa xử lý trong phạm vi arcade. Xem `order-flow-v2-verification.md`; không coi full API là PASS.

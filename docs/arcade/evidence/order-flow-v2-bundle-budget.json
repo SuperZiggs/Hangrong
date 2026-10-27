@@ -1,0 +1,17 @@
+{
+  "method": "Conservative gzip of every client JS/CSS chunk, including legacy and lazy Phaser, plus all four screen backdrops, self-contained wordmark and both local Vietnamese fonts. Audio and match atlases requested later are excluded.",
+  "clientChunks": 27,
+  "allClientJSCSSGzipBytes": 538572,
+  "bootArtFontBytes": 844099,
+  "bootArtFontKeys": [
+    "screens.title",
+    "screens.lobby",
+    "screens.loading",
+    "screens.results",
+    "screens.wordmark",
+    "fonts.title",
+    "fonts.body"
+  ],
+  "conservativeBootBytes": 1382671,
+  "budgetBytes": 2097152
+}
