@@ -206,7 +206,7 @@ describe('independent frozen arcade rules', () => {
     expect(world.players.p1.coins).toBe(12);
   });
 
-  it('U13 private channel costs 40 once and has at most one waiting order of value 8 every >=20s', async () => {
+  it('U13 private channel costs 40 once and has at most two waiting orders of value 8 every >=20s (v2 R2)', async () => {
     const { world, step } = await setup(); atStage(world, 360_001, 'stage3');
     const station = world.map.stations.find(s => s.kind === 'private-channel' && (!s.ownerId || s.ownerId === 'p1'));
     expect(station, 'Map must expose a private-channel station').toBeDefined(); Object.assign(world.players.p1, station);
@@ -217,7 +217,7 @@ describe('independent frozen arcade rules', () => {
     step(world, inputs(world, 'p1', { interactPressed: true }, 3), 1); expect(world.players.p1.coins).toBe(10);
     for (let i = 0; i < 600; i++) step(world, new Map(), 100);
     const ownOrders = Object.values(world.orders).filter(o => o.privateOwnerId === 'p1' && !o.settled);
-    expect(ownOrders).toHaveLength(1); expect(ownOrders[0].value).toBe(8);
+    expect(ownOrders).toHaveLength(2); expect(ownOrders[0].value).toBe(8);
   });
 
   it('U14 shared-route contributions freeze roster cost, never overspend or overfund, and accept final remainder', async () => {

@@ -1,5 +1,5 @@
 import {DurableObject} from 'cloudflare:workers';
-import {createWorld,stepWorld} from '../shared/arcade/world';
+import {createWorld,restoreWorldForCurrentRules,stepWorld} from '../shared/arcade/world';
 import {projectSnapshot} from '../shared/arcade/snapshot';
 import {RULES} from '../shared/arcade/config';
 import {constrainPlayer} from '../shared/arcade/motion';
@@ -16,7 +16,15 @@ export class ArcadeRoom extends DurableObject<RealtimeEnv>{
  private stream=new SnapshotStream();private updateSeq=0;
  private presence=new Map<string,Map<WebSocket,number>>();
  private data:Stored|null=null;private timer:ReturnType<typeof setInterval>|null=null;private lastTickAt=0;private accumulator=0;private inputs=new InputInbox();private disconnected=new Map<string,number>();private tickCostMs=0;
- constructor(ctx:DurableObjectState,env:RealtimeEnv){super(ctx,env);ctx.blockConcurrencyWhile(async()=>{this.data=await ctx.storage.get<Stored>('room')??null;if(this.data&&Date.now()<this.data.expiresAtMs){for(const ws of ctx.getWebSockets()){const meta=ws.deserializeAttachment() as Attachment;if(ws.readyState===1&&this.currentActor(meta))this.touchPresence(ws,meta);}if(!this.data.world.paused&&!['lobby','results','interrupted'].includes(this.data.world.phase)){this.data.world.phase='interrupted';await this.save();}}});}
+ constructor(ctx:DurableObjectState,env:RealtimeEnv){super(ctx,env);ctx.blockConcurrencyWhile(async()=>{
+  this.data=await ctx.storage.get<Stored>('room')??null;
+  if(this.data&&Date.now()<this.data.expiresAtMs){
+   const updated=restoreWorldForCurrentRules(this.data.world);
+   for(const ws of ctx.getWebSockets()){const meta=ws.deserializeAttachment() as Attachment;if(ws.readyState===1&&this.currentActor(meta))this.touchPresence(ws,meta);}
+   if(!this.data.world.paused&&!['lobby','results','interrupted'].includes(this.data.world.phase)){this.data.world.phase='interrupted';await this.save();}
+   else if(updated)await this.save();
+  }
+ });}
  private async save(){if(this.data)await this.ctx.storage.put('room',this.data);}
  private requireRoom(){if(!this.data)throw new ArcadeError('ROOM_NOT_FOUND','Không tìm thấy phòng.',404);if(Date.now()>=this.data.expiresAtMs)throw new ArcadeError('ROOM_EXPIRED','Phòng đã hết hạn.',410);return this.data;}
  private async identify(raw:string|null):Promise<{actor:Actor;digest:string|null}>{const d=this.requireRoom();if(!raw)return {actor:{role:'public'},digest:null};if(!validToken(raw))throw new ArcadeError('UNAUTHORIZED','Phiên không hợp lệ.',401);const digest=await hash(raw);if(digest===d.hostHash)return {actor:{role:'host'},digest};const p=d.roster.find(p=>p.hash===digest);if(!p)throw new ArcadeError('UNAUTHORIZED','Phiên đã hết quyền.',403);return {actor:{role:'player',playerId:p.playerId},digest};}

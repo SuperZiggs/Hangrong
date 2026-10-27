@@ -1,4 +1,5 @@
-import {generateMap} from './maps';
+import {activateCentralCustomers,generateMap} from './maps';
+import {carriedOrders} from './cargo';
 import {advanceMotion} from './motion';
 import {announcements,phaseAt} from './clock';
 import {abandonOrder,applyInteraction,near,recordGateCrossings,spawnOrders} from './orders';
@@ -6,9 +7,15 @@ import {buyUpgrade,contributeSharedRoute} from './economy';
 import type {InputFrame,MatchOptions,Player,PlayerId,StepResult,World} from './types';
 export function createWorld(options:MatchOptions):World{
  const map=generateMap(options.roster.length,options.seed),players:Record<string,Player>={};
- options.roster.forEach((entry,i)=>{const home=map.shops[i],point=map.spawns[i];players[entry.playerId]={...entry,...point,home:{...home},coins:options.initialCoins,carriedOrderId:null,dashRemainingMs:0,dashCooldownMs:0,pushProtectionMs:0,connected:true,direction:'S',dashX:0,dashY:1,lastActionSeq:-1,lastDashSeq:-1,abandonMs:0,privateChannel:false,privateNextAt:0,promotionCooldownMs:0,delivered:0,platformDeliveries:0,feesPaid:0,contributed:0,moving:false,insideGate:false,lastInputSeq:0};});
+ options.roster.forEach((entry,i)=>{const home=map.shops[i],point=map.spawns[i];players[entry.playerId]={...entry,...point,home:{...home},coins:options.initialCoins,carriedOrderId:null,carriedOrderIds:[],dashRemainingMs:0,dashCooldownMs:0,pushProtectionMs:0,connected:true,direction:'S',dashX:0,dashY:1,lastActionSeq:-1,lastDashSeq:-1,abandonMs:0,privateChannel:false,privateNextAt:0,promotionCooldownMs:0,delivered:0,platformDeliveries:0,feesPaid:0,contributed:0,moving:false,insideGate:false,lastInputSeq:0};});
  for(const station of map.stations)if(station.ownerIndex!==undefined)station.ownerId=options.roster[station.ownerIndex]?.playerId;
- return {runId:crypto.randomUUID(),seed:options.seed,tick:0,elapsedMs:0,phase:'practice',paused:false,players,orders:{},map,sharedRoute:{cost:12*options.roster.length,contributed:0,open:false},gateFee:2,orderCounter:0,spawnCursor:0,nextCommonSpawnAt:0,promotionQueue:[],events:[],announced:[],initialCoins:options.initialCoins};
+ return {runId:crypto.randomUUID(),seed:options.seed,rulesVersion:2,tick:0,elapsedMs:0,phase:'practice',paused:false,players,orders:{},map,sharedRoute:{cost:12*options.roster.length,contributed:0,open:false},gateFee:2,orderCounter:0,spawnCursor:0,nextCommonSpawnAt:0,commonSlots:map.pickups.map(()=>({orderId:null,nextAt:0})),publicDeliveryCounter:0,centralDeliveryCounter:0,outerDeliveryCounter:0,promotionQueue:[],events:[],announced:[],initialCoins:options.initialCoins};
+}
+export function restoreWorldForCurrentRules(world:World){
+ if(world.rulesVersion===2||['lobby','results','interrupted'].includes(world.phase))return false;
+ world.phase='interrupted';world.paused=false;
+ world.events.push({id:`rules-update:${world.runId}`,kind:'warning',at:world.elapsedMs,text:'Luật game đã cập nhật. MC hãy bắt đầu ván mới; tiến độ ván cũ được giữ để xem.'});
+ return true;
 }
 export function stepWorld(world:World,inputs:ReadonlyMap<PlayerId,InputFrame>,dtMs:number):StepResult{
  if(world.paused)return {events:[],phaseChanged:false};
@@ -21,10 +28,13 @@ export function stepWorld(world:World,inputs:ReadonlyMap<PlayerId,InputFrame>,dt
  }
  if(before!==world.phase&&world.phase==='stage3')world.gateFee=4;
  if(world.phase==='results'){for(const p of Object.values(world.players))p.moving=false;return {events:[],phaseChanged:before!==world.phase};}
- const events=[...announcements(world),...advanceMotion(world,inputs,dtMs)];recordGateCrossings(world);
+ const arrived=activateCentralCustomers(world);
+ const events=[...announcements(world),...advanceMotion(world,inputs,dtMs)];
+ if(arrived)events.push({id:`customers:${world.runId}`,kind:'customers-arrive',at:world.elapsedMs,x:world.map.width/2,y:world.map.riverY+world.map.riverHeight+350,text:'3 khách trung tâm đã đến! 85% đơn công khai mới giao về đây.'});
+ recordGateCrossings(world);
  for(const p of Object.values(world.players)){
   p.promotionCooldownMs=Math.max(0,p.promotionCooldownMs-dtMs);const f=inputs.get(p.playerId);if(!f||f.runId!==world.runId||!p.connected){p.abandonMs=0;continue;}
-  if(f.abandonHeld&&p.carriedOrderId&&near(p,p.home)){p.abandonMs+=dtMs;if(p.abandonMs>=1000)events.push(...abandonOrder(world,p.playerId));p.lastActionSeq=f.seq;continue;}p.abandonMs=0;
+  if(f.abandonHeld&&carriedOrders(p,world.orders).length&&near(p,p.home)){p.abandonMs+=dtMs;if(p.abandonMs>=1000)events.push(...abandonOrder(world,p.playerId));p.lastActionSeq=f.seq;continue;}p.abandonMs=0;
   if(f.interactPressed&&f.seq>p.lastActionSeq){p.lastActionSeq=f.seq;const action=applyInteraction(world,p.playerId);events.push(...action);
    if(action.length===0&&!p.carriedOrderId){const station=world.map.stations.find(s=>(!s.ownerId||s.ownerId===p.playerId)&&near(p,s));if(station)events.push(...(station.kind==='contribution'?contributeSharedRoute(world,p.playerId):buyUpgrade(world,p.playerId,station.kind)));}
   }

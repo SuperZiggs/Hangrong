@@ -1,8 +1,9 @@
 import {projectSnapshot,eventsFor,privateEventOwner} from './snapshot';
 import {diffSnapshot,recordChanges} from './transport';
+import {carriedOrders} from './cargo';
 import type {Actor,World,PublicSnapshot,Order,GameEvent} from './types';
 export const actorKey=(actor:Actor)=>`${actor.role}:${actor.playerId??''}`;
-type PrivatePart={orders:Record<string,Order>;players:Record<string,{carriedOrderId:string|null}>;events:GameEvent[]};
+type PrivatePart={orders:Record<string,Order>;players:Record<string,{carriedOrderId:string|null;carriedOrderIds:string[]}>;events:GameEvent[]};
 /** Encode the common view once, then attach only each recipient's private view. */
 export class SnapshotStream{
  private previous:PublicSnapshot|null=null;private privateViews=new Map<string,PrivatePart>();
@@ -16,7 +17,7 @@ export class SnapshotStream{
    const orders=Object.fromEntries(allPrivate.filter(o=>actor.role==='host'||actor.role==='player'&&o.privateOwnerId===actor.playerId).map(o=>[o.id,{...o}]));
    const prev=this.privateViews.get(key),actorEvents=hasPrivateEvents&&actor.role!=='public'?eventsFor(world,actor):current.events;const players:PrivatePart['players']={};
    if(actor.role!=='public'&&(Object.keys(orders).length||prev||actorEvents.length!==current.events.length)){
-    for(const p of Object.values(world.players))if(actor.role==='host'||p.playerId===actor.playerId)players[p.playerId]={carriedOrderId:p.carriedOrderId};
+    for(const p of Object.values(world.players))if(actor.role==='host'||p.playerId===actor.playerId){const ids=carriedOrders(p,world.orders).map(o=>o.id);players[p.playerId]={carriedOrderId:ids[0]??null,carriedOrderIds:ids};}
    }
    if(!Object.keys(orders).length&&!Object.keys(players).length){frames.set(key,common);continue;}
    if(full){const ownPlayers=Object.fromEntries(Object.entries(players).map(([id,p])=>[id,{...current.players[id],...p}]));frames.set(key,JSON.stringify({type:'snapshot',snapshot:{...current,orders:{...current.orders,...orders},players:{...current.players,...ownPlayers},events:actorEvents}}));}
