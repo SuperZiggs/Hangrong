@@ -1,8 +1,11 @@
-import {test,expect,type Page} from '@playwright/test';
+import {test,expect,type Page,type Browser} from '@playwright/test';
 import {createArcade,joinArcade,hostArcade,arcadeOK,bootstrapArcade,type ArcadePlayer,type ArcadeRoom} from '../support/arcade-independent';
 import type {PublicSnapshot} from '../../shared/arcade/types';
+let browsersToClose:Browser[]=[];
+test.afterEach(async({},info)=>{info.setTimeout(90000);await Promise.all(browsersToClose.map(b=>b.close()));browsersToClose=[];});
 test('three real keyboard clients contest one parcel, obstruct movement and deliver across the river',async({playwright,request,baseURL},info)=>{
  test.setTimeout(180000);const room=await createArcade(request),players=await Promise.all(['Sen','Đào','Mai'].map(n=>joinArcade(request,room,n)));const browsers=await Promise.all(players.map(()=>playwright.chromium.launch({channel:'chrome',args:['--disable-background-timer-throttling','--disable-renderer-backgrounding','--disable-backgrounding-occluded-windows']})));const contexts=await Promise.all(browsers.map(b=>b.newContext({baseURL,viewport:{width:1366,height:768}})));const pages:Page[]=[];const errors:string[]=[];
+ browsersToClose=browsers;
  try{
   for(let i=0;i<3;i++){await contexts[i].addInitScript(({code,token})=>localStorage.setItem(`cdgk:player:${code}`,token),{code:room.code,token:players[i].playerToken});const page=await contexts[i].newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(`/arcade/play/${room.code}`);pages.push(page);}
   await arcadeOK(await hostArcade(request,room,'start'));for(const page of pages){await expect(page.getByTestId('arcade-world')).toBeVisible();await expect(page.getByTestId('arcade-world')).toHaveAttribute('data-ready','true');}
@@ -41,5 +44,5 @@ test('three real keyboard clients contest one parcel, obstruct movement and deli
   await info.attach('keyboard-delivery.png',{body:await pages[winner].screenshot(),contentType:'image/png'});
   await info.attach('player-reconciliation.json',{body:Buffer.from(JSON.stringify(await Promise.all(pages.map(page=>page.getByTestId('arcade-world').getAttribute('data-reconcile-p95'))))),contentType:'application/json'});
   await info.attach('keyboard-contest-evidence.json',{body:Buffer.from(JSON.stringify({players:3,winner:players[winner].name,order:order.id,coins:result.players[owner].coins,delivered:1})),contentType:'application/json'});
- }finally{await hostArcade(request,room,'pause').catch(()=>{});await Promise.all(browsers.map(b=>b.close()));}
+ }finally{await hostArcade(request,room,'pause').catch(()=>{});}
 });

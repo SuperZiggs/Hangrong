@@ -8,10 +8,11 @@ Node24 LTS, npm và Chrome. Từ thư mục repo:
 
 ```powershell
 npm ci
-npm run arcade:dev
+npm run build
+npm run arcade:preview
 ```
 
-Website: `http://127.0.0.1:5189/arcade`. Realtime: `http://127.0.0.1:5191/health`. Dừng bằng Ctrl+C. Có thể chạy riêng `npm run dev -- --port 5189` và `npm run arcade:realtime` trong hai terminal.
+Website: `http://127.0.0.1:5189/arcade`. Realtime: `http://127.0.0.1:5191/health`. Dừng bằng Ctrl+C. `arcade:preview` mở bản production đã build cùng realtime. Khi sửa mã, dùng `npm run arcade:dev`; cũng có thể chạy riêng website và `npm run arcade:realtime` trong hai terminal.
 
 Các script hỗ trợ:
 
@@ -48,3 +49,5 @@ Chạy LAN HTTP cũng cần bind hai server ra địa chỉ LAN, đặt WS publi
 Phòng hết hạn sau24 giờ. Sảnh/pause/kết quả lưu state; trận đang chạy gặp khởi động lại bất ngờ chuyển interrupted thay vì dựng lại thành tích từ dữ liệu cũ. Bộ đếm20Hz chạy trong một room actor. Alarm20 giây giữ sự kiện nền khi phòng chưa có input; alarm ngừng tự lập lịch khi không còn ván active. Chỉ timer trong bộ nhớ không đủ bảo đảm không bị thu hồi sau thời gian không có sự kiện đến: [Cloudflare lifecycle](https://developers.cloudflare.com/durable-objects/concepts/durable-object-lifecycle/).
 
 Snapshot đầy đủ định kỳ cùng patch trung gian giữ server là nơi quyết định vị trí/xu/đơn. Client chỉ dự đoán chuyển động ngắn để hiển thị, không tự xác nhận điểm.
+
+Sequence tăng theo người chơi trong mỗi ván, không chỉ theo socket. Tab/máy phục hồi đọc ack trong bootstrap trước khi gửi lệnh mới. Traffic hợp lệ giữ thân connected; không nhận traffic khoảng3 giây thì thân hết chắn dù TCP chưa đóng. Khi resume sau runtime khởi động lại, server đối chiếu socket thực thay vì tin mãi cờ connected đã lưu.

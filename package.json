@@ -18,6 +18,7 @@
     "test:e2e": "playwright test --project=browser",
     "test:all": "npm run test:unit && npm run test:api && npm run test:e2e",
     "arcade:dev": "node scripts/run-arcade-local.mjs",
+    "arcade:preview": "node scripts/run-arcade-local.mjs --production",
     "arcade:realtime": "node scripts/run-arcade-realtime.mjs",
     "arcade:load": "node scripts/arcade-load.mjs",
     "arcade:assets": "node scripts/verify-arcade-assets.mjs"

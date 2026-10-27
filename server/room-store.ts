@@ -34,4 +34,14 @@ async function applyRoomMutation<T>(code:string,fn:(r:Room,now:number)=>T,advanc
  }
  throw new GameError('BUSY','Phòng đang nhận nhiều thao tác. Hãy thử lại.',409);
 }
-export async function currentRoom(code:string){return(await mutateRoom(code,()=>null,true)).room;}
+// Share only a pending state read. No value survives settlement, so an
+// acknowledged mutation is visible to the next read; actor DTOs stay per request.
+const readingRooms=new Map<string,Promise<Room>>();
+export async function currentRoom(code:string){
+ let reading=readingRooms.get(code);
+ if(!reading){
+  reading=mutateRoom(code,()=>null,true).then(result=>result.room);readingRooms.set(code,reading);
+  const clear=()=>{if(readingRooms.get(code)===reading)readingRooms.delete(code);};void reading.then(clear,clear);
+ }
+ const room=await reading;if(Date.now()>=room.expiresAtMs)throw new GameError('ROOM_EXPIRED','Phòng đã hết hạn. Hãy tạo phòng mới.',410);return room;
+}

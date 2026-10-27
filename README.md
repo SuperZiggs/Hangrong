@@ -1,6 +1,6 @@
 # Quyền lực số
 
-Chế độ hành động mới **Cuộc đua giành khách** ở `/arcade`: chạy, tranh đơn, giao hàng, lướt/xô và cùng mở lối đi. Tối thiểu3 người, đã xây bộ kiểm tra26 kết nối; bản local cần2 service. Chạy `npm run arcade:dev`, mở `http://127.0.0.1:5189/arcade`.
+Chế độ hành động mới **Cuộc đua giành khách** ở `/arcade`: chạy, tranh đơn, giao hàng, lướt/xô và cùng mở lối đi. Tối thiểu3 người, đã kiểm tra26 kết nối; bản local cần2 service. Chạy `npm run build` rồi `npm run arcade:preview`, mở `http://127.0.0.1:5189/arcade`. Khi sửa mã dùng `npm run arcade:dev`.
 
 - [Hướng dẫn MC của game hành động](docs/arcade/classroom-runbook.md)
 - [Cấu hình local/hosting và phần chưa được triển khai](docs/arcade/deployment.md)
