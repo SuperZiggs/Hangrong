@@ -21,8 +21,8 @@ test('three real keyboard clients contest one parcel, obstruct movement and deli
    while(Date.now()-began<30000){const pos=(await view(p)).players[p.playerId],dx=target.x-pos.x,dy=target.y-pos.y;
     if(Math.hypot(dx,dy)<=tolerance){console.log(`Stopped: ${p.name} at ${Math.round(pos.x)},${Math.round(pos.y)}`);return;}
     const horizontal=Math.abs(dx)>Math.abs(dy),distance=horizontal?Math.abs(dx):Math.abs(dy),key=horizontal?(dx>0?'KeyD':'KeyA'):(dy>0?'KeyS':'KeyW');
-    await pulse(index,key,Math.min(220,Math.max(35,(distance-12)/240*1000)));await page.waitForTimeout(140);
-   }throw new Error(`Player${index} could not walk to${JSON.stringify(target)}`);
+    await pulse(index,key,Math.min(220,Math.max(35,(distance-Math.min(12,tolerance/2))/240*1000)));await page.waitForTimeout(140);
+   }throw new Error(`Player${index} could not walk to${JSON.stringify(target)} from${JSON.stringify((await view(players[index])).players[players[index].playerId])}`);
   }
   await expect.poll(async()=>(await view(players[0])).phase,{timeout:75000}).toBe('stage1');
   await expect.poll(async()=>Object.keys((await view(players[0])).orders).length).toBeGreaterThan(0);const initial=await view(players[0]),order=Object.values(initial.orders).sort((a,b)=>a.delivery.x-b.delivery.x)[0];

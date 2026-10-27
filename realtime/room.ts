@@ -14,8 +14,9 @@ type Stored={code:string;createRequestId:string;hostHash:string;expiresAtMs:numb
 type Attachment={actor:Actor|null;hash:string|null;createdAt:number;seenAt:number;seq:number;rateAt:number;rateCount:number};
 export class ArcadeRoom extends DurableObject<RealtimeEnv>{
  private stream=new SnapshotStream();private updateSeq=0;
+ private presence=new Map<string,Map<WebSocket,number>>();
  private data:Stored|null=null;private timer:ReturnType<typeof setInterval>|null=null;private lastTickAt=0;private accumulator=0;private inputs=new InputInbox();private disconnected=new Map<string,number>();private tickCostMs=0;
- constructor(ctx:DurableObjectState,env:RealtimeEnv){super(ctx,env);ctx.blockConcurrencyWhile(async()=>{this.data=await ctx.storage.get<Stored>('room')??null;if(this.data&&!this.data.world.paused&&!['lobby','results','interrupted'].includes(this.data.world.phase)){this.data.world.phase='interrupted';await this.save();}});}
+ constructor(ctx:DurableObjectState,env:RealtimeEnv){super(ctx,env);ctx.blockConcurrencyWhile(async()=>{this.data=await ctx.storage.get<Stored>('room')??null;if(this.data&&Date.now()<this.data.expiresAtMs){for(const ws of ctx.getWebSockets()){const meta=ws.deserializeAttachment() as Attachment;if(ws.readyState===1&&this.currentActor(meta))this.touchPresence(ws,meta);}if(!this.data.world.paused&&!['lobby','results','interrupted'].includes(this.data.world.phase)){this.data.world.phase='interrupted';await this.save();}}});}
  private async save(){if(this.data)await this.ctx.storage.put('room',this.data);}
  private requireRoom(){if(!this.data)throw new ArcadeError('ROOM_NOT_FOUND','Không tìm thấy phòng.',404);if(Date.now()>=this.data.expiresAtMs)throw new ArcadeError('ROOM_EXPIRED','Phòng đã hết hạn.',410);return this.data;}
  private async identify(raw:string|null):Promise<{actor:Actor;digest:string|null}>{const d=this.requireRoom();if(!raw)return {actor:{role:'public'},digest:null};if(!validToken(raw))throw new ArcadeError('UNAUTHORIZED','Phiên không hợp lệ.',401);const digest=await hash(raw);if(digest===d.hostHash)return {actor:{role:'host'},digest};const p=d.roster.find(p=>p.hash===digest);if(!p)throw new ArcadeError('UNAUTHORIZED','Phiên đã hết quyền.',403);return {actor:{role:'player',playerId:p.playerId},digest};}
@@ -26,13 +27,25 @@ export class ArcadeRoom extends DurableObject<RealtimeEnv>{
  private send(ws:WebSocket,value:unknown){try{ws.send(typeof value==='string'?value:JSON.stringify(value));}catch{/* Closed peer; disconnect event releases its body. */}}
  private broadcast(){if(!this.data)return;const peers=this.ctx.getWebSockets().map(ws=>({ws,actor:this.currentActor(ws.deserializeAttachment() as Attachment)})).filter((p):p is {ws:WebSocket;actor:Actor}=>!!p.actor);if(!peers.length)return;const frames=this.stream.frames(this.data.world,peers.map(p=>p.actor),{serverNowMs:Date.now(),tickCostMs:this.tickCostMs,updateSeq:++this.updateSeq});for(const peer of peers)this.send(peer.ws,frames.get(actorKey(peer.actor))!);}
  private stop(){if(this.timer)clearInterval(this.timer);this.timer=null;this.accumulator=0;}
+ private touchPresence(ws:WebSocket,meta:Attachment){
+  const id=meta.actor?.role==='player'?meta.actor.playerId:undefined;if(!id)return;
+  let peers=this.presence.get(id);if(!peers){peers=new Map();this.presence.set(id,peers);}peers.set(ws,meta.seenAt);
+ }
+ private reconcilePresence(now:number){
+  const world=this.data!.world;
+  for(const p of Object.values(world.players)){
+   const peers=this.presence.get(p.playerId);let at:number|undefined;
+   if(peers)for(const seen of peers.values())at=Math.max(at??0,seen);
+   if(at!==undefined&&now-at<RULES.disconnectMs){if(!p.connected){p.connected=true;constrainPlayer(world,p);}this.disconnected.delete(p.playerId);}
+   else{const absentAt=this.disconnected.get(p.playerId)??at??now;this.disconnected.set(p.playerId,absentAt);if(now-absentAt>=RULES.disconnectMs){p.connected=false;this.inputs.delete(p.playerId);}}
+  }
+ }
  private startTimer(){this.stop();this.lastTickAt=Date.now();this.timer=setInterval(()=>this.tick(),RULES.tickMs);void this.ctx.storage.setAlarm(Date.now()+20000);}
  async alarm(){const w=this.data?.world;if(w&&!w.paused&&!['lobby','interrupted'].includes(w.phase)&&w.elapsedMs<RULES.endMs)await this.ctx.storage.setAlarm(Date.now()+20000);}
  private tick(){if(!this.data)return;const w=this.data.world;if(w.paused||w.phase==='lobby'||w.phase==='interrupted'){this.stop();return;}const now=Date.now(),gap=now-this.lastTickAt;this.lastTickAt=now;
   if(gap>3000){w.paused=true;w.events.push({id:`lag:${w.tick}`,kind:'warning',text:'Máy chủ chậm nhịp. MC có thể tiếp tục sau khi kết nối ổn định.',at:w.elapsedMs});this.stop();void this.save();this.broadcast();return;}
-  this.accumulator+=gap;const started=performance.now();let changed=false,steps=0;
+  this.accumulator+=gap;const started=performance.now();this.reconcilePresence(now);let changed=false,steps=0;
   while(this.accumulator>=RULES.tickMs&&steps++<60){this.accumulator-=RULES.tickMs;const frames=this.inputs.sample(now);
-   for(const [id,at]of this.disconnected)if(now-at>=RULES.disconnectMs&&w.players[id]){w.players[id].connected=false;this.inputs.delete(id);this.disconnected.delete(id);}
    const result=stepWorld(w,frames,RULES.tickMs);changed=changed||result.phaseChanged;
   }
   if(changed)void this.save();if(w.tick%2===0||changed)this.broadcast();if(w.elapsedMs>=RULES.endMs){this.stop();void this.save();}
@@ -40,7 +53,7 @@ export class ArcadeRoom extends DurableObject<RealtimeEnv>{
  }
  private lobbyWorld(){const d=this.requireRoom();d.world=createWorld({seed:d.code,initialCoins:20,roster:d.roster.map(p=>({playerId:p.playerId,name:p.name}))});d.world.phase='lobby';}
  private playerReply(p:Entrant){const code=this.requireRoom().code;return {code,playerId:p.playerId,playPath:`/arcade/play/${code}`};}
- private closePlayer(playerId:string){for(const ws of this.ctx.getWebSockets()){const a=ws.deserializeAttachment() as Attachment;if(a.actor?.playerId===playerId)try{ws.close(4001,'Phiên đã chuyển thiết bị.');}catch{}}}
+ private closePlayer(playerId:string){this.presence.delete(playerId);this.disconnected.set(playerId,Date.now());for(const ws of this.ctx.getWebSockets()){const a=ws.deserializeAttachment() as Attachment;if(a.actor?.playerId===playerId)try{ws.close(4001,'Phiên đã chuyển thiết bị.');}catch{}}}
  async fetch(request:Request){try{
   const url=new URL(request.url),operation=url.pathname.split('/').pop()!,code=url.pathname.split('/')[2];
   if(operation==='create'&&request.method==='POST'){
@@ -99,15 +112,15 @@ export class ArcadeRoom extends DurableObject<RealtimeEnv>{
   let message:Record<string,unknown>;try{message=JSON.parse(raw);}catch{throw new ArcadeError('INVALID_JSON','Gói tin không hợp lệ.');}if(!message||typeof message!=='object')throw new ArcadeError('INVALID_INPUT','Gói tin không hợp lệ.');
   if(!meta.actor){if(message.type!=='auth')throw new ArcadeError('AUTH_REQUIRED','Cần xác thực.');const identity=await this.identify(typeof message.token==='string'?message.token:null);meta.actor=identity.actor;meta.hash=identity.digest;meta.seenAt=Date.now();ws.serializeAttachment(meta);
    if(meta.actor.role==='player'&&meta.actor.playerId){const p=this.data!.world.players[meta.actor.playerId];if(p){p.connected=true;constrainPlayer(this.data!.world,p);}this.disconnected.delete(meta.actor.playerId);}
-   this.send(ws,{type:'snapshot',snapshot:this.snapshot(meta.actor)});return;
+   this.touchPresence(ws,meta);this.send(ws,{type:'snapshot',snapshot:this.snapshot(meta.actor)});return;
   }
   const actor=this.currentActor(meta);if(!actor){ws.close(4001,'Phiên đã hết quyền');return;}const now=Date.now();if(now-meta.rateAt>=1000){meta.rateAt=now;meta.rateCount=0;}if(++meta.rateCount>90)throw new ArcadeError('RATE_LIMIT','Thao tác quá nhanh.',429);meta.seenAt=now;
   if(message.type==='ping'){this.send(ws,{type:'pong',id:message.id});}
   else if(message.type==='input'){
    if(actor.role!=='player'||!actor.playerId)throw new ArcadeError('PLAYER_ONLY','Cần phiên người chơi.',403);const parsed=inputSchema.safeParse(message.input);if(!parsed.success)throw new ArcadeError('INVALID_INPUT','Thao tác không hợp lệ.');const f=parsed.data,w=this.data!.world;
-   if(f.runId===w.runId&&f.seq>meta.seq&&!['lobby','results','interrupted'].includes(w.phase)&&!w.paused){meta.seq=f.seq;this.inputs.set(actor.playerId,{frame:f,at:now});w.players[actor.playerId].lastInputSeq=f.seq;}
-  }else throw new ArcadeError('INVALID_MESSAGE','Không có loại thao tác này.');ws.serializeAttachment(meta);
+   if(f.runId===w.runId&&f.seq>meta.seq&&f.seq>w.players[actor.playerId].lastInputSeq&&!['lobby','results','interrupted'].includes(w.phase)&&!w.paused){meta.seq=f.seq;this.inputs.set(actor.playerId,{frame:f,at:now});w.players[actor.playerId].lastInputSeq=f.seq;}
+  }else throw new ArcadeError('INVALID_MESSAGE','Không có loại thao tác này.');ws.serializeAttachment(meta);this.touchPresence(ws,meta);
  }catch(e){const err=e instanceof ArcadeError?e:new ArcadeError('SERVER_ERROR','Không xử lý được gói tin.',500);this.send(ws,{type:'error',error:{code:err.code,message:err.message}});}}
- webSocketClose(ws:WebSocket){try{const m=ws.deserializeAttachment() as Attachment;if(m.actor?.playerId){const another=this.ctx.getWebSockets().some(peer=>peer!==ws&&peer.readyState===1&&this.currentActor(peer.deserializeAttachment() as Attachment)?.playerId===m.actor!.playerId);if(!another){this.inputs.delete(m.actor.playerId);this.disconnected.set(m.actor.playerId,Date.now());}}}catch{}}
+ webSocketClose(ws:WebSocket){try{const m=ws.deserializeAttachment() as Attachment;if(m.actor?.playerId){const peers=this.presence.get(m.actor.playerId);peers?.delete(ws);if(!peers?.size){this.presence.delete(m.actor.playerId);this.inputs.delete(m.actor.playerId);this.disconnected.set(m.actor.playerId,Date.now());}}}catch{}}
  webSocketError(ws:WebSocket){this.webSocketClose(ws);}
 }
