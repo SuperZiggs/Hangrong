@@ -446,5 +446,18 @@
     "realtime/room.ts": "a7236bed2838719bd81f651464f40af469efb155c7f4c4c1870af731dde3b69d",
     "server/room-store.ts": "96e706d35c01193ad80d152634d2bc4d52d553bd9ec9d315290ff9263ebb3a51",
     "shared/arcade/world.ts": "308807183d0895842101f5e7d612100979c9bf9436b64212f78d7886fa8e1fc0"
+  },
+  "integratedCheckout": {
+    "path": "E:/MLN122/web-game",
+    "branch": "work/quyen-luc-so",
+    "method": "local fast-forward from b7d0ad9; no push",
+    "npmCi": "PASS,732 packages; lockfile unchanged",
+    "typecheck": "PASS",
+    "unit": "115/115 PASS,18 files",
+    "assets": "47 groups,305 frames hash/atlas/fallback PASS",
+    "independentE02Chrome": "PASS on original checkout at5189,18.5s body",
+    "website": "http://127.0.0.1:5189/arcade",
+    "realtimeHealth": "http://127.0.0.1:5191/health",
+    "data": "Original D1 untouched; prior dist retained under work/pre-arcade-dist"
   }
 }

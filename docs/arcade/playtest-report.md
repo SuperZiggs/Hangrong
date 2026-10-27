@@ -53,3 +53,7 @@ Các lần trước chưa đạt RTT được giữ trong báo cáo thử: bản
 ## Nguồn kiểm tra và quyết định
 
 [`independent-matrix.md`](independent-matrix.md), [`independent-red-baseline.md`](independent-red-baseline.md), [`acceptance-matrix.md`](acceptance-matrix.md), [`implementation-record.md`](implementation-record.md), [`final-review.md`](final-review.md), [`visual-review.md`](visual-review.md). Bộ arcade acceptance độc lập giữ nguyên SHA256. Kết quả tổng và hash lưu trong [`evidence/final-test-summary.json`](evidence/final-test-summary.json).
+
+## Checkout bàn giao
+
+Đã fast-forward local về `E:/MLN122/web-game`, cài đúng lockfile, kiểm tra lại TypeScript/115unit/47asset và E02 Chrome trên thư mục này. `npm run arcade:preview` mở website5189 và realtime5191; HTTP cả hai200. Bản dist cũ giữ ở `work/pre-arcade-dist`; D1 gốc giữ nguyên. Worktree phát triển còn giữ raw art và recording bị ignore. Không push hay deploy.
