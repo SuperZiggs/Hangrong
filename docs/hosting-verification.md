@@ -48,3 +48,9 @@ Cấu hình đã chuẩn bị cho `https://hangrong1.vercel.app`, website `hangr
 - [Bằng chứng JSON không chứa capability](arcade/evidence/arcade-only-live-20261028.json). Ảnh và script smoke ở `work/arcade-only-live-*` trong canonical, không đưa token vào tài liệu/Git.
 
 Giới hạn: production smoke dùng ba người và pha chạy thử; không khẳng định đã chạy lại600giây hoặc chịu tải cả lớp. Không giải mã pixel QR. Giữ các báo cáo arcade lịch sử với ghi chú supersession; chúng không chứng nhận sản phẩm quiz hiện tại.
+
+## Đồng bộ và dọn local
+
+Đã fast-forward cả `E:\MLN122\web-game` và `E:\MLN122\Hangrong-deploy` từ bản cũ tới source arcade đã phát hành. File `.env.hosting.local` trong clone deploy giữ nguyên SHA256; `hosting:prepare` của clone chạy thành công với generator mới. Mỗi bản `dist` được thay từ build canonical:177file khớp SHA256 từng file. Preview5189/5191 đã mở lại bằng nguồn mới; root local200/titlearcade, realtime health200. Dữ liệu phòng local giữ nguyên.
+
+Đã xóa hai bản build sinh tự động `.codex-build/hosting-baseline-20261028`, `hosting-green-20261028` và hai backup `web-game/work/pre-arcade-dist`, `pre-order-flow-v2-dist-20261028` còn chứa ứng dụng cũ. Junction dependency được tháo trước khi xóa; thư viện chung vẫn còn. Không xóa coursework, raw arcade assets, Git history hoặc state/database. Các server test riêng5210/5211 đã dừng; preview người dùng5189/5191 được giữ hoạt động.

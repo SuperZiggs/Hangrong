@@ -42,11 +42,11 @@
 
 ### Task3: Publish correct source and verify domain
 
-- [ ] Commit and push reviewed change to `SuperZiggs/Hangrong` main; fast-forward both other checkouts while preserving ignored operator env.
-- [ ] Prepare real hosting config from canonical worktree with operator's existing public addresses; verify target Worker names and secret name only.
-- [ ] Deploy compatible realtime/website Worker artifacts to the existing Cloudflare account without changing namespaces or deleting data.
-- [ ] Verify production root opens arcade and old routes are gone; smoke create/join/host/socket/reconnect in a separate test room; leave the test room paused.
-- [ ] Update verification report with actual results, scope of physical cleanup and any limits. Current Git history is the rollback mechanism.
+- [x] Commit and push reviewed change to `SuperZiggs/Hangrong` main; fast-forward both other checkouts while preserving ignored operator env.
+- [x] Prepare real hosting config from canonical worktree with operator's existing public addresses; verify target Worker names and secret name only.
+- [x] Deploy compatible realtime/website Worker artifacts to the existing Cloudflare account without changing namespaces or deleting data.
+- [x] Verify production root opens arcade and old routes are gone; smoke create/join/host/socket/reconnect in a separate test room; leave the test room paused.
+- [x] Update verification report with actual results, scope of physical cleanup and any limits. Current Git history is the rollback mechanism.
 
 ## Ledger
 
@@ -54,3 +54,6 @@
 - Live observation: Vercel `/` title is the quiz, while `/arcade` title is Cuộc đua giành khách; source confirms the route split.
 - Operator account authenticated and website Worker already has `HANGRONG_ORIGIN_SECRET`; value was not read. Public origin is `https://hangrong1.vercel.app` and Worker names `hangrong` / `hangrong-realtime`.
 - Independent author owns tests/ and new matrix/baseline. Production edits wait for valid RED; no separate user approval is needed for the explicitly authorized cleanup and correction.
+
+- Final: root renders the existing Lobby directly,160/160 unit +24/24 hosting +10 API +2 Chrome passed. Production smoke passed at19:06UTC+7 with3players/WSS/QR/reconnect, room paused.
+- Website public-fetch flag fixed actualCloudflare1042 without changing realtime or auth. Existing main checkouts fast-forwarded, operator env hash preserved,177 copied build files each SHA256 identical. Removed only named generated legacy build snapshots and empty quiz directories.
