@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { arcadeAuth, arcadeError, arcadeOK, arcadePath, arcadeRequestId, arcadeToken, bootstrapArcade, createArcade, hostArcade, inputFrame, joinArcade, noArcadeSecrets, openArcadeSocket, runningArcade, sleep, type ArcadeSnapshot, type ArcadeSocket } from '../support/arcade-independent';
+import { arcadeAuth, arcadeError, arcadeOK, arcadePath, arcadeRequestId, arcadeToken, bootstrapArcade, createArcade, hostArcade, inputFrame, joinArcade, noArcadeSecrets, openArcadeSocket, runningArcade, sleep, type ArcadeSocket } from '../support/arcade-independent';
 
 test('A01 room request/capability retries are atomic and expire in 24h', async ({ request }) => {
   const requestId = arcadeRequestId(); const hostToken = arcadeToken(); const before = Date.now();
@@ -185,11 +185,8 @@ test('A10 real 600s run reaches results, stops scoring at 540s, retains scoreboa
   await testInfo.attach('real-600s-observations.json', { body: Buffer.from(JSON.stringify(observed)), contentType: 'application/json' });
 });
 
-test('A11 original quiz API and security isolation survive arcade creation', async ({ request }) => {
-  const arcade = await createArcade(request); const quizToken = arcadeToken();
-  const quizResponse = await request.post('/api/rooms', { data: { requestId: arcadeRequestId(), hostToken: quizToken } });
-  const quiz = await arcadeOK(quizResponse); expect(quiz.code).toMatch(/^\d{6}$/);
-  const publicQuiz = await arcadeOK(await request.get(`/api/rooms/${quiz.code}/state`)); expect(publicQuiz.role).toBe('public');
-  await arcadeError(await request.post(`/api/rooms/${quiz.code}/host`, { headers: arcadeAuth(arcade.hostToken), data: { requestId: arcadeRequestId(), action: 'start' } }), [401, 403]);
-  await arcadeError(await hostArcade(request, arcade, 'start', {}, quizToken), [401, 403]);
+test('A11 quiz API is removed while unrelated capabilities still cannot control arcade', async ({ request }) => {
+  const arcade = await createArcade(request); const foreignToken = arcadeToken();
+  expect((await request.post('/api/rooms', { data: { requestId: arcadeRequestId(), hostToken: foreignToken } })).status()).toBe(404);
+  await arcadeError(await hostArcade(request, arcade, 'start', {}, foreignToken), [401, 403]);
 });

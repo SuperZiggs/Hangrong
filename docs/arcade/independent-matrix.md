@@ -1,5 +1,7 @@
 # Independent arcade acceptance matrix
 
+> Supersession — 2026-10-28: the user explicitly removed the legacy quiz. A11 now checks quiz API removal and retains the unrelated-capability arcade denial. The active product/removal contract is [arcade-only-test-matrix.md](../arcade-only-test-matrix.md); historical arcade test reports remain unchanged.
+
 Source: `docs/arcade/frozen-requirements.md` plus public-contract clarifications from the requirements owner. The author has not read implementation plans, art design, or new production code. Matrix written before executable tests. Tests are owned by the independent author; implementation must satisfy them without weakening assertions.
 
 Commands (bundled Node on PATH):
@@ -31,7 +33,7 @@ Commands (bundled Node on PATH):
 | UI title, accessible controls, HUD and world | E01/E02 | Vietnamese create/join; real buttons; visible canvas, coins/order/fee/timer/E/dash; pause readable | E |
 | Keyboard safety / recovery | E03 | Held E/Space one edge; typing/modal/blur stops input; no URL capability | E |
 | Responsive / zoom / muted audio | E01/E02 | Lobby 360px no overflow; 1366×768 at 125%; user-facing audio toggle default muted | E |
-| Existing quiz/data/security | A11 + existing unit/API/E2E suites | Existing lobby/quiz API still works and arcade token cannot host quiz | A + existing suites |
+| Removed quiz / arcade capability boundary | A11 + N02 in the active arcade-only matrix | Quiz API returns 404; an unrelated capability cannot control arcade. N02 additionally checks all removed quiz operation and top-level host/play routes. | A + `node tests/hosting/run-hosting-acceptance.mjs` |
 | Real 26-socket classroom-equivalent traffic | A09 | 26 actual authenticated sockets simultaneously receive activity with one local IP; bounded input accepted | A |
 | Real 600s elapsed run / results persistence | A10 | No fake clock/DB mutation: phases/results/CSV and scoreboard at actual 600s | A (test timeout 660s) |
 | Render/load metrics | E02 | Attach real browser navigation/render timings and playfield screenshot | E |

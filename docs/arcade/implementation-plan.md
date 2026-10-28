@@ -1,5 +1,7 @@
 # Cuộc đua giành khách Implementation Plan
 
+> Supersession — 2026-10-28: the user explicitly removed the legacy quiz. This historical plan's quiz-preservation and quiz-regression instructions no longer govern the product; use [arcade-only-test-matrix.md](../arcade-only-test-matrix.md) for the active removal/hosting contract. Historical arcade implementation reports and evidence remain unchanged.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Xây game hành động nhiều người trên laptop, có tranh đơn/cản đường, ván khoảng 10 phút và bộ hình ảnh, animation, UI, FX, âm thanh hoàn chỉnh theo Game Studio.

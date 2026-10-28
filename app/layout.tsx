@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import "./game.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Quyền lực số — Ai nắm luật chơi?",
-  description: "Game tình huống cùng lớp: chơi solo hoặc theo nhóm, từ 3 lượt tham gia. Nhận diện quyền lực, ứng phó biến cố và giữ quyền chủ động qua 3 vòng, 90 điểm.",
+  title: "Cuộc đua giành khách — Thành phố đổi luật",
+  description: "Game hành động nhiều người: tranh đơn, lướt, cản đường và tìm lối đi của riêng mình.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

@@ -10,6 +10,9 @@ function label(value, key) {
 }
 
 export function createHostingConfigs(buildConfig, env, root) {
+  if ([buildConfig.name, buildConfig.topLevelName].includes('quyen-luc-so')) {
+    throw new Error('The quyen-luc-so quiz build is obsolete. Run npm run build for Cuộc đua giành khách first.');
+  }
   const publicURL = new URL(env.PUBLIC_SITE_ORIGIN);
   if (publicURL.protocol !== 'https:' || publicURL.username || publicURL.password ||
       publicURL.pathname !== '/' || publicURL.search || publicURL.hash || publicURL.hostname.includes('*')) {
@@ -19,15 +22,8 @@ export function createHostingConfigs(buildConfig, env, root) {
   const websiteName = label(env.CLOUDFLARE_WEBSITE_NAME || 'hangrong', 'CLOUDFLARE_WEBSITE_NAME');
   const realtimeName = label(env.CLOUDFLARE_REALTIME_NAME || 'hangrong-realtime', 'CLOUDFLARE_REALTIME_NAME');
   if (websiteName === realtimeName) throw new Error('Website and realtime Worker names must differ.');
-  const databaseId = env.CLOUDFLARE_D1_DATABASE_ID;
-  if (!/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(databaseId ?? '') ||
-      databaseId === '00000000-0000-4000-8000-000000000000' || /^0+-0+-0+-0+-0+$/.test(databaseId)) {
-    throw new Error('CLOUDFLARE_D1_DATABASE_ID must be the real database UUID from Cloudflare.');
-  }
-  const databaseName = env.CLOUDFLARE_D1_DATABASE_NAME || 'hangrong';
-  if (!/^[\w-]{1,64}$/.test(databaseName)) throw new Error('Invalid CLOUDFLARE_D1_DATABASE_NAME.');
-  if (!buildConfig.main || !buildConfig.assets?.directory || !buildConfig.d1_databases?.some(db => db.binding === 'DB')) {
-    throw new Error('Run npm run build first; the build must include a DB binding and client assets.');
+  if (!buildConfig.main || !buildConfig.assets?.directory) {
+    throw new Error('Run npm run build first; the build must include a Worker entrypoint and client assets.');
   }
   const website = {
     ...buildConfig,
@@ -35,13 +31,11 @@ export function createHostingConfigs(buildConfig, env, root) {
     topLevelName: websiteName,
     main: path.resolve(root, 'dist/server', buildConfig.main),
     assets: { ...buildConfig.assets, directory: path.resolve(root, 'dist/server', buildConfig.assets.directory) },
-    d1_databases: buildConfig.d1_databases.map(db => db.binding !== 'DB' ? db : {
-      ...db, database_name: databaseName, database_id: databaseId, migrations_dir: path.resolve(root, 'drizzle'),
-    }),
     vars: { PUBLIC_SITE_ORIGIN: publicURL.origin, ARCADE_SERVICE_URL: `https://${realtimeName}.${subdomain}.workers.dev` },
   };
   // The build watcher is local-only; the entry/assets paths above are absolute.
   delete website.build;
+  delete website.d1_databases;
   const template = JSON.parse(readFileSync(path.join(root, 'realtime/wrangler.jsonc'), 'utf8'));
   const realtime = {
     ...template, name: realtimeName, main: path.resolve(root, 'realtime', template.main),

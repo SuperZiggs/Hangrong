@@ -2,7 +2,7 @@
 
 Triển khai bằng tài khoản riêng: xem [Vercel + Cloudflare](../hosting-vercel-cloudflare.md). Website/API qua proxy Vercel đã xác thực; WebSocket kết nối trực tiếp realtime Worker. Dùng `.env.hosting.example` và `npm run hosting:prepare` để sinh cấu hình riêng, giữ các địa chỉ local bên dưới cho phát triển.
 
-Hai phần tách biệt: website React/Vinext tại `/arcade`, service realtime Cloudflare Durable Objects trong `realtime/`. Dữ liệu, API và D1 của game câu hỏi giữ nguyên.
+Hai phần tách biệt: website React/Vinext tại `/` và `/arcade`, service realtime Cloudflare Durable Objects trong `realtime/`. Cả hai trang hiển thị cùng sảnh và giữ query mã phòng. Game không dùng D1.
 
 ## Cập nhật luật hàng ngày28/10/2026
 
@@ -32,11 +32,11 @@ npm run arcade:load -- --clients 26 --seconds 120 --rendered 3 --out test-result
 npm run arcade:assets
 ```
 
-Ca A10 trong `arcade-independent.spec.ts` chạy600 giây thật, mặc định không rút ngắn thời gian. Bộ quiz cũ cần migration D1 local theo README trước khi chạy hồi quy.
+Ca A10 trong `arcade-independent.spec.ts` chạy600 giây thật, mặc định không rút ngắn thời gian. Không cần áp migration D1 để chạy các bài kiểm tra arcade.
 
 ## Service có địa chỉ dùng chung
 
-Phiên này kiểm tra Wrangler và nhận kết quả **chưa đăng nhập Cloudflare**. Chưa phát hành service, chưa có URL staging/WSS được xác minh. Một website đã có hosting không tự tạo ra namespace Durable Objects cho service mới.
+Trạng thái triển khai hiện tại được ghi tại [báo cáo hosting](../hosting-verification.md). Một website đã có hosting không tự tạo ra namespace Durable Objects cho service mới.
 
 Khi dùng tài khoản Cloudflare được giao, deploy cấu hình `realtime/wrangler.jsonc` bằng Wrangler. Giữ migration `v1` cho lớp `ArcadeRoom`, namespace riêng `ARCADE_ROOMS`.
 

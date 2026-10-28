@@ -1,5 +1,7 @@
 # Frozen acceptance requirements — Cuộc đua giành khách
 
+> Supersession — 2026-10-28: the user explicitly removed the legacy quiz and selected the canonical `cuoc-dua-gianh-khach` worktree. Earlier requirements to preserve quiz routes/data/regression tests are superseded by [arcade-only-test-matrix.md](../arcade-only-test-matrix.md). This packet remains a historical record; its arcade rules, security contracts, and past evidence are not rewritten.
+
 Approved by user on 27 October 2026: implement the laptop action game and complete asset set. This packet contains observable requirements/contracts, not implementation algorithms. Independent test author reads this packet and current code only; do not read the implementation plan or future product code before defining tests.
 
 ## Experience and rules

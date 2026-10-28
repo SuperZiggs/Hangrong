@@ -1,7 +1,7 @@
 import { spawn, spawnSync } from 'node:child_process';
 import http from 'node:http';
-import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -9,13 +9,14 @@ process.chdir(root);
 const publicOrigin = 'https://hangrong.vercel.app';
 const secret = 'hosting-acceptance-only-shared-secret-2026';
 const buildRoot = process.env.HOSTING_BUILD_ROOT ? resolve(process.env.HOSTING_BUILD_ROOT) : root;
-const websiteConfig = resolve(buildRoot, 'dist/server/wrangler.json');
+const generatedConfig = resolve(buildRoot, 'dist/server/wrangler.json');
 const state = resolve('.wrangler/hosting-acceptance', `${Date.now()}-${process.pid}`);
 mkdirSync(state, { recursive: true });
 const children = [];
 let proxy;
 let stopping = false;
-const env = { ...process.env, WRANGLER_SEND_METRICS: 'false', WRANGLER_LOG_PATH: resolve(state, 'wrangler.log') };
+const env = { ...process.env, HOSTING_SOURCE_CONFIG: generatedConfig, WRANGLER_SEND_METRICS: 'false', WRANGLER_LOG_PATH: resolve(state, 'wrangler.log') };
+for (const key of ['DB', 'CLOUDFLARE_D1_DATABASE_ID', 'CLOUDFLARE_D1_DATABASE_NAME']) delete env[key];
 
 function command(args, label) {
   return new Promise((accept, reject) => {
@@ -76,17 +77,23 @@ try {
     const probe = http.createServer(); probe.once('error', reject); probe.listen(port, '127.0.0.1', () => probe.close(accept));
   });
   if (!process.argv.includes('--skip-build') && buildRoot === root) await command(['scripts/run-framework.mjs', 'build'], 'build');
-  await command(['--import', './scripts/sites-env.mjs', './node_modules/wrangler/bin/wrangler.js', 'd1', 'execute', 'DB', '--local', '--config', websiteConfig, '--persist-to', state, '--file', 'drizzle/0000_redundant_gunslinger.sql'], 'migration');
+  // Prove actual gameplay with no D1 binding, even before the generated build is fixed.
+  // A separate acceptance assertion checks the original generated config too.
+  const built = JSON.parse(readFileSync(generatedConfig, 'utf8'));
+  const websiteConfig = resolve(state, 'website-no-d1.wrangler.json');
+  const fixture = { ...built, main: resolve(dirname(generatedConfig), built.main), assets: { ...built.assets, directory: resolve(dirname(generatedConfig), built.assets.directory) }, d1_databases: [] };
+  delete fixture.build;
+  writeFileSync(websiteConfig, JSON.stringify(fixture));
   const common = ['--import', './scripts/sites-env.mjs', './node_modules/wrangler/bin/wrangler.js', 'dev', '--local', '--ip', '127.0.0.1', '--inspector-port', '0'];
   const realtime = server([...common, '--config', 'realtime/wrangler.jsonc', '--persist-to', resolve(state, 'realtime'), '--port', '5207', '--var', `ARCADE_ALLOWED_ORIGINS:${publicOrigin},http://127.0.0.1:5208`, '--var', 'ARCADE_PUBLIC_WS_URL:ws://127.0.0.1:5207'], 'realtime');
   started.push(realtime);
   await ready('http://127.0.0.1:5207/health', realtime);
   const website = server([...common, '--config', websiteConfig, '--persist-to', state, '--port', '5205', '--var', `PUBLIC_SITE_ORIGIN:${publicOrigin}`, '--var', `HANGRONG_ORIGIN_SECRET:${secret}`, '--var', 'ARCADE_SERVICE_URL:http://127.0.0.1:5207'], 'website');
   started.push(website);
-  await ready('http://127.0.0.1:5205/', website, { 'x-origin-secret': secret, 'x-real-ip': '192.0.2.253' });
+  await ready('http://127.0.0.1:5205/arcade', website, { 'x-origin-secret': secret, 'x-real-ip': '192.0.2.253' });
   const local = server([...common, '--config', websiteConfig, '--persist-to', state, '--port', '5208', '--var', 'PUBLIC_SITE_ORIGIN:', '--var', 'HANGRONG_ORIGIN_SECRET:', '--var', 'ARCADE_SERVICE_URL:http://127.0.0.1:5207'], 'direct-mode');
   started.push(local);
-  await ready('http://127.0.0.1:5208/', local);
+  await ready('http://127.0.0.1:5208/arcade', local);
   proxy = http.createServer((incoming, outgoing) => {
     appendFileSync(resolve(state, 'proxy.log'), `${incoming.method} ${incoming.url}\n`);
     // Vercel supplies x-real-ip; Cloudflare sees the same Vercel peer for all visitors.

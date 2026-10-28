@@ -29,7 +29,10 @@ const worker = {
         },
       };
     }
-    return runWithConnectorBinding(binding, () => handler.fetch(incoming, env, ctx));
+    const response = await runWithConnectorBinding(binding, () => handler.fetch(incoming, env, ctx));
+    // Unknown routes can reject uploads before the framework reads their body.
+    if (response.status >= 400) await discardRejectedBody(incoming);
+    return response;
   },
 };
 

@@ -1,33 +1,40 @@
-# Kiểm chứng cấu hình Vercel + Cloudflare
+# Kiểm chứng Cuộc đua giành khách trên Vercel + Cloudflare
 
-Ngày 28/10/2026. Đây là kết quả source và runtime local; chưa tạo tài nguyên hoặc phát hành trên tài khoản Vercel/Cloudflare thật.
+Ngày 28/10/2026. Nguồn canonical: `E:\MLN122\.worktrees\cuoc-dua-gianh-khach`. Yêu cầu người dùng đã thay thế sản phẩm quiz bằng game arcade hiện có.
+
+## Phạm vi đã sửa
+
+Trang chủ và `/arcade` dùng cùng Lobby, giữ query mã phòng. Đã gỡ giao diện/API/engine/content/schema/migration và tài liệu riêng của quiz, cùng 22 file test chỉ dành cho quiz. Package đổi thành `cuoc-dua-gianh-khach`; bỏ Drizzle và yêu cầu D1. Hosting từ chối build cũ có identity `quyen-luc-so`.
+
+So với baseline `8637fa5`, các cây `game/arcade`, `shared/arcade`, `realtime`, `assets/arcade`, `public/arcade/assets` không đổi. Lịch sử Git và bằng chứng arcade cũ vẫn có thể phục hồi; không xóa database cloud hoặc state phòng.
+
+## Kết quả local
 
 | Kiểm tra | Kết quả |
 |---|---|
-| `npm run typecheck` | PASS |
-| `npm run test:unit` | 179/179 PASS, 25 files sau sửa tên biến môi trường |
-| Acceptance hosting độc lập | 22/22 PASS, không skip/flaky, 4,2 giây sau sửa tên biến môi trường |
-| Build production Vinext | PASS |
-| ESLint các file code/test mới và Worker entry | PASS |
-| `npm run arcade:assets` | 47 nhóm, 305 frames; checksum/atlas/fallback PASS |
-| Vercel config so với schema công khai của nhà cung cấp | Hợp lệ |
-| `hosting:prepare` với account fixture | PASS, không ghi secret |
-| Website/realtime `wrangler deploy --dry-run` | Cả hai PASS, không ghi remote |
-| D1 migration từ cấu hình đã sinh, database kiểm thử riêng | Lần đầu áp thành công; lần hai không có migration mới |
-| Review độc lập toàn bộ thay đổi và fix cuối | Không còn lỗi P1/P2 được phát hiện |
+| TypeScript | PASS |
+| Unit | 158/158 PASS, 20 files |
+| Hosting độc lập | 24/24 PASS, 4,4 giây, không skip/retry; gateway và direct mode |
+| API arcade gốc A01–A09 + A11 | 10/10 PASS, 15,2 giây; không chạy lại A10 600 giây |
+| Chrome E01/E02 | 2/2 PASS, 3,7 giây; responsive + create/join/start/play/pause/replay |
+| Build Vinext | PASS, chỉ còn trang arcade và API arcade/catch-all404 |
+| ESLint | PASS, 0 lỗi, 7 cảnh báo có sẵn; bỏ qua output sinh tự động `realtime/work` |
+| Asset | 47 nhóm, 305 frames, SHA256/atlas/fallback PASS |
+| Worker dry-run | Website và realtime PASS; website cuối 2172,74KiB / gzip594,93KiB |
+| Review độc lập | Không phát hiện P1/P2 còn lại sau các sửa nhánh lỗi |
 
-Acceptance kiểm tra thật HTTP proxy → website Worker → D1/realtime Durable Objects, cùng WebSocket trực tiếp và browser Chrome. Các trường hợp gồm tạo/tham gia/điều khiển phòng, phân quyền, Origin chính xác, secret giả, IP riêng từng người chơi, phản hồi không cache, QR hiển thị và link giữ public origin. Chi tiết RED/GREEN và tính nguyên vẹn assertions trong [baseline](hosting-red-baseline.md), [matrix](hosting-acceptance-matrix.md).
+Log hosting cuối: `.wrangler/hosting-acceptance/1793184243518-26408`. API/browser results: `test-results/arcade-only-api.json`, `test-results/arcade-only-browser.json`. Các file sinh này được Git bỏ qua.
 
-Preview người dùng trên5189 đang giữ `dist` trên Windows, nên build trong bản sao nguồn `E:\MLN122\.codex-build\hosting-green-20261028`. Hash SHA-256 của gateway, entry, arcade proxy, config generator, Vite config và realtime source/config đều khớp checkout chính khi chốt kết quả. Các kiểm thử dùng D1/registry/cổng riêng và đã đóng tiến trình của chúng; không tắt preview người dùng.
+RED và audit assertions tại [baseline](hosting-red-baseline.md), [matrix](arcade-only-test-matrix.md). Bộ hosting giữ nguyên assertions trong các lượt sửa.
 
-Lần kiểm chứng giữa chừng phát hiện error-response503 do đường trả lỗi sớm/transport trong workerd. Bản cuối đọc bỏ body bị từ chối trong giới hạn8KiB/1giây; có bốn unit tests cho body nhỏ, liên tục, treo và lỗi transport. Registry kiểm thử cũng được tách riêng; assertions độc lập không được nới để đạt PASS. Không suy diễn A/B vượt bằng chứng đã ghi ở baseline.
+## Lỗi runtime phát hiện trong quá trình xác minh
 
-Giới hạn: chưa đo tải trên hosting thật, chưa xác minh domain/DNS/TLS/header Vercel thực tế hoặc hạn mức tài khoản. QR được kiểm tra ảnh hiển thị và link sao chép, chưa giải mã pixel ảnh. Không chạy lại toàn bộ game acceptance600giây trong thay đổi hosting này. Build vẫn có cảnh báo chunk lớn của ứng dụng hiện có và deprecation `punycode`; chúng không làm build thất bại.
+Ban đầu root redirect hợp lệ nhưng fixture browser không chuyển tiếp các request sau redirect; chọn render trực tiếp cùng Lobby để giữ URL/mã phòng và giảm thêm một bước điều hướng. Không đổi assertion để bỏ qua lỗi.
 
-Sau khi deploy, thực hiện phần kiểm chứng domain thật trong [hướng dẫn](hosting-vercel-cloudflare.md#4-kiểm-chứng-trước-buổi-chơi) trước buổi học.
+Chuỗi POST trả lỗi rồi GET tiếp theo làm local workerd chờ khoảng25 giây. Chỉ drain Request ở Worker ngoài cùng chưa đủ: Vinext chuyển quyền sở hữu stream bằng `new Request(...)`/NextRequest. Catch-all API trả JSON404 và đọc bỏ body có giới hạn tại Request của route. Các nhánh từ chối Origin/thiếu service và code/operation không hợp lệ cũng dọn body tại owner thực, giữ status/auth/no-store. Giới hạn8KiB/1giây giữ nguyên; không tăng timeout, không mở quyền truy cập. Hai ca N02 cuối đạt111ms/81ms.
 
-## Sửa tên biến theo lỗi dashboard Vercel
+## Triển khai production
 
-Giao diện tạo project thực tế từ chối `VERCEL_ORIGIN_SECRET` và hiển thị giá trị do hệ thống quản lý. Bản sửa đổi hợp đồng ứng dụng thành `HANGRONG_ORIGIN_SECRET` ở cả Vercel và website Worker; header HTTP `x-origin-secret`, giá trị bí mật và các kiểm tra quyền giữ nguyên. Cấu hình, hướng dẫn và test harness đã được cập nhật đồng bộ. Không suy diễn rằng schema JSON đã kiểm chứng đầy đủ quy tắc tên biến trên dashboard.
+Cấu hình đã chuẩn bị cho `https://hangrong1.vercel.app`, website `hangrong`, realtime `hangrong-realtime` trên subdomain `dinhloc-truong2005`. Giữ migration Durable Objects v1 và secret hiện có; không đọc giá trị secret.
 
-Kiểm thử độc lập ghi RED hợp lệ 10 fail/18 pass, sau đó 28/28 unit cho contract/gateway/config và 22/22 hành trình hosting PASS; toàn bộ unit là179/179 PASS. Build, typecheck, ESLint và kiểm tra schema cấu hình cũng PASS. Xem regression note trong [baseline](hosting-red-baseline.md). Đây vẫn là kiểm chứng local; việc nhập biến mới trên dashboard thuộc bước triển khai thực.
+Trạng thái phát hành và smoke production sẽ được bổ sung sau khi push/deploy thành công. Các kết quả local ở trên không thay thế xác minh domain thật hoặc diễn tập tải lớp học.

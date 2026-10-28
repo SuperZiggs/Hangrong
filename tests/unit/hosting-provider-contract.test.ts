@@ -60,7 +60,7 @@ function evaluateProxy(request: Request) {
 
 describe('Vercel operator environment contract', () => {
   it('requires only operator-provisionable env inputs for the active HTTP proxy route', () => {
-    const route = routeFor('/api/rooms');
+    const route = routeFor('/api/arcade/rooms');
     const required = new Set([
       ...route.env ?? [], ...references(route.dest),
       ...(route.transforms ?? []).flatMap(transform => [...transform.env ?? [], ...references(transform.args)]),
@@ -71,20 +71,20 @@ describe('Vercel operator environment contract', () => {
 
   it('injects the provisioned app secret and the actual Worker accepts that same env contract', async () => {
     const body = JSON.stringify({ requestId: 'provider-contract-request', name: 'Nhóm Cà phê' });
-    const request = evaluateProxy(new Request(`${publicOrigin}/api/rooms?probe=one%20two&repeat=1&repeat=2`, {
+    const request = evaluateProxy(new Request(`${publicOrigin}/api/arcade/rooms?probe=one%20two&repeat=1&repeat=2`, {
       method: 'POST', body,
       headers: {
         origin: publicOrigin, 'content-type': 'application/json', authorization: 'Bearer retained-player-capability',
         'x-origin-secret': 'forged-client-secret', 'x-real-ip': '2001:db8::19',
       },
     }));
-    expect(request.url).toBe(`${operatorSettings.CLOUDFLARE_ORIGIN}/api/rooms?probe=one%20two&repeat=1&repeat=2`);
+    expect(request.url).toBe(`${operatorSettings.CLOUDFLARE_ORIGIN}/api/arcade/rooms?probe=one%20two&repeat=1&repeat=2`);
     expect(request.headers.get('x-origin-secret')).toBe(operatorSettings.HANGRONG_ORIGIN_SECRET);
     const env = { PUBLIC_SITE_ORIGIN: publicOrigin, HANGRONG_ORIGIN_SECRET: operatorSettings.HANGRONG_ORIGIN_SECRET };
     const result = prepareGatewayRequest(request, env);
     expect(result).toBeInstanceOf(Request);
     const accepted = result as Request;
-    expect(accepted.url).toBe(`${publicOrigin}/api/rooms?probe=one%20two&repeat=1&repeat=2`);
+    expect(accepted.url).toBe(`${publicOrigin}/api/arcade/rooms?probe=one%20two&repeat=1&repeat=2`);
     expect(accepted.method).toBe('POST');
     expect(await accepted.text()).toBe(body);
     expect(accepted.headers.get('authorization')).toBe('Bearer retained-player-capability');
