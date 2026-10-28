@@ -24,6 +24,7 @@ The runner builds unless `--skip-build` is supplied. `HOSTING_BUILD_ROOT` can po
 | N04 / N05 | Actual config preparation requires no D1 identity, removes inherited DB bindings, preserves the SQLite DO v1 migration and exact public origin, and rejects the known legacy quiz build identity. |
 | N07 | Git comparison against canonical baseline `8637fa5` protects tracked arcade engine/shared rules/art. Existing arcade suites are retained. |
 | N08 | Actual Worker entry returns a router 404 while finishing the otherwise unread POST upload; status, response body and no-store remain intact. Only the framework router is stubbed in this focused unit test. |
+| N09 | Generated website config includes `global_fetch_strictly_public` exactly once for the existing public realtime URL fetch. Existing website compatibility flags are retained; realtime compatibility flags stay unchanged. |
 
 The gateway uses `x-origin-secret` from `HANGRONG_ORIGIN_SECRET`. It receives each visitor's documented `x-real-ip`; the proxy supplies one synthetic Cloudflare peer address. Test-only visitor/peer selectors are consumed by the proxy, never interpreted by application code. Public origin is one exact HTTPS origin. Arcade WebSockets connect directly to realtime rather than through the HTTP gateway.
 

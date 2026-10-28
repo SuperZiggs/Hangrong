@@ -72,3 +72,17 @@ No production file or frozen hosting assertion was edited by the independent aut
 N08 SHA-256: `tests/unit/hosting-worker-entry.test.ts` = `C3C7CF4926C210F70950436054F89092F8AC458291E18162AFF4A3051A28270B`. Targeted ESLint passes. This is new coverage for the error-path regression; the six prior handoff hashes remain unchanged.
 
 After the parent changed the Worker entry, the independent author reran N08: **1/1 PASS**, 176 ms. Its SHA-256 still matches RED, as does the frozen hosting suite hash. The complete real-runtime suite remains the required proof for the POST/GET transport sequence.
+
+## 2026-10-28: public Worker fetch compatibility regression (N09)
+
+The parent reported that a real Vercel smoke request to `POST /api/arcade/rooms` returned 404 with `error code: 1042`, while the root page served the correct arcade. The [Cloudflare Fetch documentation](https://developers.cloudflare.com/workers/runtime-apis/fetch/) identifies service bindings or `global_fetch_strictly_public` as the supported Worker-to-Worker fetch options. The [1042 error reference](https://developers.cloudflare.com/workers/observability/errors/) also lists an unserved `workers.dev` URL as another possible cause, so a local config unit test cannot by itself prove the live incident is resolved.
+
+The frozen amendment retains the public-URL architecture: only the generated website config must enable `global_fetch_strictly_public`, exactly once. It must preserve `nodejs_compat` and other existing website flags. The realtime compatibility flags stay at their existing `['nodejs_compat']` value. The independent author strengthened the old website flag assertion and added two functional config-generator cases: required flag initially absent, and already present alongside another existing flag. Expectations snapshot the input flags before calling the actual generator, so input mutation cannot hide a dropped flag. No security, body, root, HTTP, or runtime-budget test changed.
+
+```powershell
+node node_modules/vitest/vitest.mjs run tests/unit/hosting-config.test.ts
+```
+
+Valid RED before generator edits: **17 tests, 2 failed / 15 passed**, 202 ms. The default config and the additional-existing-flags case fail because the actual website output lacks `global_fetch_strictly_public`. The already-enabled case passes, including the single-occurrence and unchanged-realtime assertions. No cloud request, account, syntax/import failure, or source-string assertion caused RED. The parent received the result before production generator changes.
+
+Current `tests/unit/hosting-config.test.ts` SHA-256 is `735A37BBAE9549668D52E410680E899FCEC158B572B293B9C64F0ED480E1130B`; this intentional requirement amendment supersedes the historical config-test hash in the original arcade-only handoff table. Targeted ESLint passes. The author did not edit production or deploy. A post-fix unit run and actual provider smoke are still required to confirm the corresponding outcomes.

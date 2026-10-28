@@ -1,0 +1,56 @@
+{
+  "origin": "https://hangrong1.vercel.app",
+  "checkedAt": "2026-10-28T12:06:35.266Z",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/rooms",
+      "status": 404
+    },
+    {
+      "method": "POST",
+      "path": "/api/rooms",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/api/rooms/123456/state",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/host/123456",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/play/123456",
+      "status": 404
+    }
+  ],
+  "passed": true,
+  "roomCode": "X44KIKBF",
+  "players": 3,
+  "rulesVersion": 2,
+  "finalPaused": true,
+  "wssOrigin": "wss://hangrong-realtime.dinhloc-truong2005.workers.dev",
+  "browserErrors": [],
+  "qrAndCopyOrigin": "https://hangrong1.vercel.app",
+  "checks": [
+    "production root",
+    "quiz routes404",
+    "mobile overflow",
+    "UI create",
+    "three joins",
+    "host start",
+    "Phaser ready",
+    "WSS authentication",
+    "pause/resume",
+    "WSS reconnect identity"
+  ]
+}

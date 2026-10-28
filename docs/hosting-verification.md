@@ -13,7 +13,7 @@ So với baseline `8637fa5`, các cây `game/arcade`, `shared/arcade`, `realtime
 | Kiểm tra | Kết quả |
 |---|---|
 | TypeScript | PASS |
-| Unit | 158/158 PASS, 20 files |
+| Unit | 160/160 PASS, 20 files |
 | Hosting độc lập | 24/24 PASS, 4,4 giây, không skip/retry; gateway và direct mode |
 | API arcade gốc A01–A09 + A11 | 10/10 PASS, 15,2 giây; không chạy lại A10 600 giây |
 | Chrome E01/E02 | 2/2 PASS, 3,7 giây; responsive + create/join/start/play/pause/replay |
@@ -37,4 +37,14 @@ Chuỗi POST trả lỗi rồi GET tiếp theo làm local workerd chờ khoảng
 
 Cấu hình đã chuẩn bị cho `https://hangrong1.vercel.app`, website `hangrong`, realtime `hangrong-realtime` trên subdomain `dinhloc-truong2005`. Giữ migration Durable Objects v1 và secret hiện có; không đọc giá trị secret.
 
-Trạng thái phát hành và smoke production sẽ được bổ sung sau khi push/deploy thành công. Các kết quả local ở trên không thay thế xác minh domain thật hoặc diễn tập tải lớp học.
+Đã deploy website và realtime từ worktree canonical. Lần đầu POST tạo phòng trả404 kèm Cloudflare1042; realtime health200. Thêm `global_fetch_strictly_public` vào cấu hình website để hỗ trợ URL fetch giữa hai Worker cùng tài khoản theo [Cloudflare Fetch docs](https://developers.cloudflare.com/workers/runtime-apis/fetch/). Giữ các flag cũ, chỉ thêm một lần, realtime không đổi. N09 RED2FAIL/15PASS trước sửa; sau sửa toàn bộ160unit PASS và dry-run website PASS.
+
+- Website version: `8b0ce1ce-9c86-48d2-b879-7ac8dba19c93`.
+- Realtime version: `3531da0f-7e59-4339-ba82-55658b165863`.
+- Domain: [hangrong1.vercel.app](https://hangrong1.vercel.app).
+- Smoke19:06 ngày28/10/2026 (UTC+7): PASS. Tạo phòng bằng Chrome UI, ba người tham gia, MC bắt đầu, canvas Phaser ready, auth WSS, pause/resume, reconnect giữ playerId. Phòng kiểm tra riêng đã để paused.
+- QR hiển thị và link sao chép đúng domain Vercel; kiểm tra mobile không tràn ngang; không có pageerror.
+- Root200 với metadata arcade; GET/POST API quiz và các trang host/play cũ404.
+- [Bằng chứng JSON không chứa capability](arcade/evidence/arcade-only-live-20261028.json). Ảnh và script smoke ở `work/arcade-only-live-*` trong canonical, không đưa token vào tài liệu/Git.
+
+Giới hạn: production smoke dùng ba người và pha chạy thử; không khẳng định đã chạy lại600giây hoặc chịu tải cả lớp. Không giải mã pixel QR. Giữ các báo cáo arcade lịch sử với ghi chú supersession; chúng không chứng nhận sản phẩm quiz hiện tại.

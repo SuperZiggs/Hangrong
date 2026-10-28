@@ -23,7 +23,7 @@ describe('operator Cloudflare config preparation', () => {
     expect(website.main).toBe(path.resolve(root, 'dist/server/index.js'));
     expect(website.assets.directory).toBe(path.resolve(root, 'dist/client'));
     expect(website.no_bundle).toBe(true);
-    expect(website.compatibility_flags).toEqual(['nodejs_compat']);
+    expect(website.compatibility_flags).toEqual(expect.arrayContaining(['nodejs_compat', 'global_fetch_strictly_public']));
     expect(website.rules).toEqual([{ type: 'ESModule', globs: ['**/*.js', '**/*.mjs'] }]);
     expect(website.d1_databases ?? []).toEqual([]);
     expect(website.vars).toEqual({ PUBLIC_SITE_ORIGIN: 'https://hangrong.vercel.app', ARCADE_SERVICE_URL: 'https://hangrong-realtime.my-account.workers.dev' });
@@ -35,6 +35,18 @@ describe('operator Cloudflare config preparation', () => {
     expect(serialized).not.toContain('old-secret');
     expect(serialized).not.toContain('runtime-only-secret');
     expect(serialized).not.toMatch(/migrations_dir|drizzle|"binding":"DB"/);
+  });
+
+  it.each([
+    { compatibilityFlags: ['nodejs_compat', 'streams_enable_constructors'] },
+    { compatibilityFlags: ['nodejs_compat', 'global_fetch_strictly_public', 'streams_enable_constructors'] },
+  ])('enables public Worker fetch once while preserving existing website flags and realtime flags: %j', ({ compatibilityFlags }) => {
+    const originalFlags = [...compatibilityFlags];
+    const { website, realtime } = createHostingConfigs({ ...build, compatibility_flags: compatibilityFlags }, settings, root);
+    expect(website.compatibility_flags).toEqual(expect.arrayContaining(originalFlags));
+    expect(website.compatibility_flags.filter((flag: string) => flag === 'global_fetch_strictly_public')).toHaveLength(1);
+    expect(new Set(website.compatibility_flags).size).toBe(website.compatibility_flags.length);
+    expect(realtime.compatibility_flags).toEqual(['nodejs_compat']);
   });
 
   it('supports operator-selected worker names and origins without changing the durable object migration', () => {

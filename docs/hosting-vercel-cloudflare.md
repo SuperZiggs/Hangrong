@@ -32,7 +32,7 @@ npm run hosting:deploy:realtime
 npm run hosting:deploy:website
 ```
 
-`hosting:prepare` chỉ sinh cấu hình local từ build mới. Script từ chối build cũ có tên `quyen-luc-so`, loại binding D1 kế thừa, giữ migration Durable Objects `v1` và tạo đúng URL HTTPS/WSS. Website và realtime cần cùng phiên bản luật. Giữ tên realtime Worker khi cập nhật để giữ namespace/phòng hiện có.
+`hosting:prepare` chỉ sinh cấu hình local từ build mới. Script từ chối build cũ có tên `quyen-luc-so`, loại binding D1 kế thừa, giữ migration Durable Objects `v1` và tạo đúng URL HTTPS/WSS. Cấu hình website có `global_fetch_strictly_public` để gọi realtime Worker cùng tài khoản bằng URL; thiếu cờ này có thể gặp1042 dù local vẫn chạy. Website và realtime cần cùng phiên bản luật. Giữ tên realtime Worker khi cập nhật để giữ namespace/phòng hiện có.
 
 Nếu chưa có secret: tạo chuỗi ngẫu nhiên dài ít nhất 32 ký tự bằng trình quản lý mật khẩu, lưu riêng rồi nhập vào website Worker:
 

@@ -29,6 +29,7 @@ export function createHostingConfigs(buildConfig, env, root) {
     ...buildConfig,
     name: websiteName,
     topLevelName: websiteName,
+    compatibility_flags: [...new Set([...(buildConfig.compatibility_flags ?? []), 'global_fetch_strictly_public'])],
     main: path.resolve(root, 'dist/server', buildConfig.main),
     assets: { ...buildConfig.assets, directory: path.resolve(root, 'dist/server', buildConfig.assets.directory) },
     vars: { PUBLIC_SITE_ORIGIN: publicURL.origin, ARCADE_SERVICE_URL: `https://${realtimeName}.${subdomain}.workers.dev` },
