@@ -48,10 +48,12 @@ npm run hosting:deploy:website
 Tạo một chuỗi ngẫu nhiên mạnh dài ít nhất 32 ký tự bằng trình quản lý mật khẩu; lưu riêng để nhập cùng một giá trị trên hai nền tảng. Nhập dưới dạng secret của website Worker:
 
 ```powershell
-node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js secret put VERCEL_ORIGIN_SECRET --config .hosting/website.wrangler.json
+node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js secret put HANGRONG_ORIGIN_SECRET --config .hosting/website.wrangler.json
 ```
 
 Chưa nhập secret thì website ở chế độ gateway sẽ trả lỗi cấu hình; đây không phải chế độ hoạt động để chia sẻ cho người chơi.
+
+Tên hiện tại là `HANGRONG_ORIGIN_SECRET`. Nếu đã làm theo hướng dẫn cũ với `VERCEL_ORIGIN_SECRET`, thêm cùng giá trị dưới tên mới ở Cloudflare và Vercel. Với website đang phục vụ người chơi, nhập secret tên mới trên Worker trước khi deploy code cập nhật để tránh lỗi503 do thiếu secret. Không cần thay chuỗi bí mật chỉ vì đổi tên biến.
 
 ## 3. Kết nối repo với Vercel
 
@@ -62,7 +64,7 @@ Import repo `SuperZiggs/Hangrong`, chọn branch `main`:
 - **Output Directory:** `public` theo `vercel.json`.
 - **Environment Variables / Production:**
   - `CLOUDFLARE_ORIGIN`: HTTPS origin website Worker, ví dụ `https://hangrong.my-account.workers.dev`, không thêm dấu `/` cuối.
-  - `VERCEL_ORIGIN_SECRET`: cùng giá trị bí mật đã nhập vào website Worker.
+  - `HANGRONG_ORIGIN_SECRET`: cùng giá trị bí mật đã nhập vào website Worker.
 
 Deploy/redeploy Vercel sau khi đặt biến. Nếu domain được cấp khác `.env.hosting.local`, sửa `PUBLIC_SITE_ORIGIN`, chạy `hosting:prepare` và deploy lại cả hai Worker. Không trỏ `CLOUDFLARE_ORIGIN` về Vercel vì sẽ tạo vòng lặp proxy.
 

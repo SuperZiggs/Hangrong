@@ -30,7 +30,7 @@
 
 **Files:** create `worker/gateway.ts`; modify `worker/index.ts`, `cloudflare-env.d.ts`; independent acceptance suite under `tests/` chosen by test author.
 
-**Interfaces:** `prepareGatewayRequest(request: Request, env: GatewayEnv): Request | Response`, where env has optional `PUBLIC_SITE_ORIGIN` and `VERCEL_ORIGIN_SECRET`. Vercel supplies `x-origin-secret` and its provider-owned `x-real-ip`.
+**Interfaces:** `prepareGatewayRequest(request: Request, env: GatewayEnv): Request | Response`, where env has optional `PUBLIC_SITE_ORIGIN` and `HANGRONG_ORIGIN_SECRET`. Vercel supplies `x-origin-secret` and its provider-owned `x-real-ip`.
 
 - [x] Record independent RED acceptance baseline against the current production runtime, with dedicated D1 state.
 - [x] Implement at the Worker boundary: when both env settings are absent, retain direct/local mode; when configured, validate settings, require a timing-safe secret match, reject foreign Origin and invalid/missing visitor IP, rebase the logical request URL to the configured public origin, and supply the validated client IP to the existing limiter.
@@ -71,3 +71,4 @@
 - Task 2 done: 177/177 unit tests, typecheck, real config generation, provider schema, both Worker dry-runs, and D1 migration/repeat checks PASS.
 - Task 3 done: operator guide and verification report complete; independent reviewer found no remaining P1/P2. Source snapshot hashes match the checkout.
 - Ruling: one coherent release commit for the gateway, deployment config, independent tests and guide; live cloud publication remains outside this source-preparation request until accounts are available.
+- Provider correction: the user's Vercel import UI rejected the previous `VERCEL_ORIGIN_SECRET` key. Use the app-owned `HANGRONG_ORIGIN_SECRET` consistently in the Worker, proxy and operator guide; keep header and capability validation unchanged. Independent regression: RED 10/28, then GREEN 179 unit and 22 hosting scenarios.

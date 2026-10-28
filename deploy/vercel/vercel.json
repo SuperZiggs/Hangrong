@@ -20,8 +20,8 @@
           "type": "request.headers",
           "op": "set",
           "target": { "key": "x-origin-secret" },
-          "args": "${VERCEL_ORIGIN_SECRET}",
-          "env": ["VERCEL_ORIGIN_SECRET"]
+          "args": "${HANGRONG_ORIGIN_SECRET}",
+          "env": ["HANGRONG_ORIGIN_SECRET"]
         },
         {
           "type": "request.headers",

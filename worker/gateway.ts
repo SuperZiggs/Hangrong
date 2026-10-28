@@ -3,7 +3,7 @@ import { isIP } from 'node:net';
 
 export interface GatewayEnv {
   PUBLIC_SITE_ORIGIN?: string;
-  VERCEL_ORIGIN_SECRET?: string;
+  HANGRONG_ORIGIN_SECRET?: string;
 }
 
 export async function discardRejectedBody(request: Request): Promise<void> {
@@ -37,7 +37,7 @@ function error(code: string, message: string, status: number) {
 
 /** Verify the Vercel hop before allowing its origin or visitor IP into the app. */
 export function prepareGatewayRequest(request: Request, env: GatewayEnv): Request | Response {
-  const { PUBLIC_SITE_ORIGIN: configuredOrigin, VERCEL_ORIGIN_SECRET: secret } = env;
+  const { PUBLIC_SITE_ORIGIN: configuredOrigin, HANGRONG_ORIGIN_SECRET: secret } = env;
   if (!configuredOrigin && !secret) return request;
 
   let publicOrigin: URL;

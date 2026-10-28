@@ -60,3 +60,40 @@ Acceptance integrity (SHA-256):
 | `tests/hosting/run-hosting-acceptance.mjs` | `21934952CD34C3AD26F03DF895676A15DA230BB735697BA98D37CC63BFD439FB` (registry isolation setup correction) |
 
 `node node_modules/eslint/bin/eslint.js tests/hosting` also passes. The final proof remains local integration, with the deployment and QR-decoding limitations stated above.
+
+## Provider environment contract regression: HANGRONG_ORIGIN_SECRET
+
+The provider UI subsequently rejected the operator-entered `VERCEL_ORIGIN_SECRET` key and showed a system-populated value. The corrected public contract uses `HANGRONG_ORIGIN_SECRET` in both the Vercel request-header environment transform and the website Worker. The `x-origin-secret` header and authentication rules remain the same. The earlier 22/22 GREEN above is evidence for the previous revision; it does not by itself certify this renamed contract.
+
+Before production changes, the independent author updated only the harness environment fixtures, existing gateway/config unit-test environment keys, the matrix, and a new `tests/unit/hosting-provider-contract.test.ts`. Existing negative/authorization assertions were retained. H11 extracts the environment inputs actually declared/referenced by the active Vercel route and header transforms, enforces the app-owned input contract instead of depending on `VERCEL_`-prefixed operator settings, evaluates the configured request-header transform, and feeds that request into the actual Worker gateway. It checks that the injected app secret overwrites a forged client header and that body, method, bearer, query, public Origin, and visitor IP survive. It is a configuration-contract evaluator, not execution of Vercel's hosted routing engine.
+
+RED command:
+
+```powershell
+node node_modules/vitest/vitest.mjs run tests/unit/hosting-provider-contract.test.ts tests/unit/hosting-gateway.test.ts tests/unit/hosting-config.test.ts
+```
+
+Result before production rename: **28 tests executed, 10 failed, 18 passed**, 292 ms. Both new provider cases fail because the actual proxy still requires `VERCEL_ORIGIN_SECRET`: the app-owned-reference assertion receives that previous name, and environment expansion cannot supply it from the corrected operator settings. Eight updated gateway cases fail because the existing Worker does not recognize `HANGRONG_ORIGIN_SECRET` (503 instead of an accepted Request/403/502, or an unintended direct-mode Request when only the new secret is configured). The unchanged config-preparation behavior already passes. No import, syntax, missing dependency, or deployment-account failure caused RED. The parent was notified of these results before production coding. The full integration harness was not started against the old snapshot after the rename of fixtures.
+
+This revision intentionally changes fixture/harness hashes; the historical frozen hashes above remain historical evidence. New SHA-256 values at RED handoff:
+
+| Artifact | Corrected-contract hash |
+| --- | --- |
+| `tests/hosting/hosting.spec.ts` | `172C2A0AB6B948196C1C7FE31C25DD30669AC6A5A3FA5678466AB5EEB41B68C0` (journey and negative assertions unchanged) |
+| `tests/hosting/playwright.config.ts` | `2769755376506E28173BAD64917F0E72F08BEC9A4DA1E525DFAB2E4C6FD0F823` |
+| `tests/hosting/run-hosting-acceptance.mjs` | `9D9A5499E015117BDDC60FB27FD85FA5F6388279D8C8E39FA3CD077AC9498526` |
+| `tests/unit/hosting-gateway.test.ts` | `AF10675F779D57001C611CA59EBD2EC4B37797252058EBFA66476D04029BF1BD` |
+| `tests/unit/hosting-config.test.ts` | `CA21610F983205DF4B9D835E55ECCF4F01521F181D5F8EFC8ECDB581DD9F48F6` |
+| `tests/unit/hosting-provider-contract.test.ts` | `7A888763107DC31E0274BA5D3D5992320435B7EB52918C46A0B7C5DA5352049D` |
+
+Targeted ESLint on the harness and these three unit files passes. GREEN for the corrected contract must use the rebuilt snapshot and these updated fixtures; no provider deployment is implied by local test results.
+
+### Corrected-contract GREEN
+
+After the parent confirmed the rebuilt `E:\MLN122\.codex-build\hosting-green-20261028` snapshot was stable, the author reran the exact unit command above: **28/28 PASS** (187 ms). Then the updated integration harness ran with that snapshot: **22/22 PASS, 0 skipped, 0 flaky** (4.2 seconds of Playwright execution).
+
+```powershell
+$env:HOSTING_BUILD_ROOT='E:\MLN122\.codex-build\hosting-green-20261028'; node tests/hosting/run-hosting-acceptance.mjs
+```
+
+Evidence: `.wrangler/hosting-acceptance/1793180915909-16444/playwright.log`, the neighboring per-server/proxy logs, and `test-results/hosting-acceptance-results.json`. All six corrected-contract hashes in the table above were verified again and match. The full suite retains every prior Origin, secret-spoof, per-client quota, authorization, no-cache, body, WebSocket, QR/share-domain, and direct-mode case. A final loopback probe confirmed ports 5205, 5206, 5207, and 5208 were closed. No deployment account, live DNS/TLS, or hosted Vercel router was exercised.

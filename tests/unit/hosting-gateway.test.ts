@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { prepareGatewayRequest } from '../../worker/gateway';
 
 const secret = 'gateway-only-secret-with-at-least-32-characters';
-const env = { PUBLIC_SITE_ORIGIN: 'https://hangrong.vercel.app', VERCEL_ORIGIN_SECRET: secret };
+const env = { PUBLIC_SITE_ORIGIN: 'https://hangrong.vercel.app', HANGRONG_ORIGIN_SECRET: secret };
 const gatewayHeaders = { 'x-origin-secret': secret, 'x-real-ip': '2001:db8::7', origin: 'https://hangrong.vercel.app' };
 
 describe('gateway configuration and protocol boundaries', () => {
@@ -32,8 +32,8 @@ describe('gateway configuration and protocol boundaries', () => {
 
   it.each([
     { PUBLIC_SITE_ORIGIN: 'https://hangrong.vercel.app' },
-    { VERCEL_ORIGIN_SECRET: secret },
-    { ...env, VERCEL_ORIGIN_SECRET: 'short' },
+    { HANGRONG_ORIGIN_SECRET: secret },
+    { ...env, HANGRONG_ORIGIN_SECRET: 'short' },
     { ...env, PUBLIC_SITE_ORIGIN: 'http://hangrong.vercel.app' },
     { ...env, PUBLIC_SITE_ORIGIN: 'https://*.vercel.app' },
     { ...env, PUBLIC_SITE_ORIGIN: 'https://hangrong.vercel.app/arcade' },

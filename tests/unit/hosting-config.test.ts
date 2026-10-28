@@ -9,14 +9,14 @@ const build = {
   assets: { directory: '../client' },
   rules: [{ type: 'ESModule', globs: ['**/*.js', '**/*.mjs'] }],
   d1_databases: [{ binding: 'DB', database_name: 'site-creator-d1', database_id: '00000000-0000-4000-8000-000000000000' }],
-  vars: { VERCEL_ORIGIN_SECRET: 'old-secret-that-must-not-escape' },
+  vars: { HANGRONG_ORIGIN_SECRET: 'old-secret-that-must-not-escape' },
 };
 const settings = {
   PUBLIC_SITE_ORIGIN: 'https://hangrong.vercel.app',
   CLOUDFLARE_WORKERS_SUBDOMAIN: 'my-account',
   CLOUDFLARE_D1_DATABASE_ID: '12345678-1234-4123-8123-123456789abc',
   CLOUDFLARE_D1_DATABASE_NAME: 'hangrong',
-  VERCEL_ORIGIN_SECRET: 'runtime-only-secret-must-not-be-written',
+  HANGRONG_ORIGIN_SECRET: 'runtime-only-secret-must-not-be-written',
 };
 
 describe('operator Cloudflare config preparation', () => {

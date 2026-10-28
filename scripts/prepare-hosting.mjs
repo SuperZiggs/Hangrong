@@ -63,7 +63,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       writeFileSync(path.join(output, `${name}.wrangler.json`), `${JSON.stringify(config, null, 2)}\n`);
     }
     console.log('Prepared .hosting/website.wrangler.json and .hosting/realtime.wrangler.json (no remote changes).');
-    console.log('Set the same VERCEL_ORIGIN_SECRET in the website Worker and Vercel before sharing the game.');
+    console.log('Set the same HANGRONG_ORIGIN_SECRET in the website Worker and Vercel before sharing the game.');
   } catch (error) {
     console.error(`Hosting preparation failed: ${error.message}`);
     process.exitCode = 1;

@@ -81,10 +81,10 @@ try {
   const realtime = server([...common, '--config', 'realtime/wrangler.jsonc', '--persist-to', resolve(state, 'realtime'), '--port', '5207', '--var', `ARCADE_ALLOWED_ORIGINS:${publicOrigin},http://127.0.0.1:5208`, '--var', 'ARCADE_PUBLIC_WS_URL:ws://127.0.0.1:5207'], 'realtime');
   started.push(realtime);
   await ready('http://127.0.0.1:5207/health', realtime);
-  const website = server([...common, '--config', websiteConfig, '--persist-to', state, '--port', '5205', '--var', `PUBLIC_SITE_ORIGIN:${publicOrigin}`, '--var', `VERCEL_ORIGIN_SECRET:${secret}`, '--var', 'ARCADE_SERVICE_URL:http://127.0.0.1:5207'], 'website');
+  const website = server([...common, '--config', websiteConfig, '--persist-to', state, '--port', '5205', '--var', `PUBLIC_SITE_ORIGIN:${publicOrigin}`, '--var', `HANGRONG_ORIGIN_SECRET:${secret}`, '--var', 'ARCADE_SERVICE_URL:http://127.0.0.1:5207'], 'website');
   started.push(website);
   await ready('http://127.0.0.1:5205/', website, { 'x-origin-secret': secret, 'x-real-ip': '192.0.2.253' });
-  const local = server([...common, '--config', websiteConfig, '--persist-to', state, '--port', '5208', '--var', 'PUBLIC_SITE_ORIGIN:', '--var', 'VERCEL_ORIGIN_SECRET:', '--var', 'ARCADE_SERVICE_URL:http://127.0.0.1:5207'], 'direct-mode');
+  const local = server([...common, '--config', websiteConfig, '--persist-to', state, '--port', '5208', '--var', 'PUBLIC_SITE_ORIGIN:', '--var', 'HANGRONG_ORIGIN_SECRET:', '--var', 'ARCADE_SERVICE_URL:http://127.0.0.1:5207'], 'direct-mode');
   started.push(local);
   await ready('http://127.0.0.1:5208/', local);
   proxy = http.createServer((incoming, outgoing) => {
