@@ -1,6 +1,6 @@
 # Cuộc đua giành khách — điều chỉnh nguồn hàng và khách trung tâm
 
-Ngày: 28/10/2026. Trạng thái: người dùng đã duyệt toàn bộ bản thiết kế; đang triển khai và kiểm chứng trong worktree riêng.
+Ngày: 28/10/2026. Trạng thái: người dùng đã duyệt toàn bộ bản thiết kế; đã triển khai, kiểm chứng và bàn giao local tại checkout chính. Xem `../../arcade/order-flow-v2-verification.md` cho bằng chứng và lỗi quiz40 người có từ trước còn tồn tại.
 
 ## Mục tiêu
 

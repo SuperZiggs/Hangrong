@@ -59,3 +59,11 @@ Command unit: `node node_modules/vitest/vitest.mjs run --maxWorkers=1`; typechec
 ## Giới hạn
 
 Nhịp45/20 giây và giá8 xu là cấu hình đã duyệt để chơi thử, chưa được xác nhận cân bằng qua sinh viên. Kiểm chứng local không thay cho Wi-Fi lớp/26 laptop thật hoặc staging WSS. Không lặp lại bài600s thực của v1 vì các mốc thời gian được giữ; unit v2 vẫn kiểm tra360/540/600s. Hạn chế animation/FX còn chạy lúc MC pause đã ghi ở bản v1 không được tuyên bố là đã sửa toàn bộ trong thay đổi này.
+
+## Bàn giao local đã kiểm chứng
+
+Fast-forward checkout sạch `E:/MLN122/web-game`, nhánh `work/quyen-luc-so`, từ d3dae7e lên7cdd67a (code+evidence), sau đó đồng bộ commit tài liệu bàn giao. Bản `dist` cũ được chuyển nguyên vẹn vào `work/pre-order-flow-v2-dist-20261028`;200 file dist chép từ build đã kiểm chứng khớp SHA256 từng file. Không đụng/reset D1 hoặc kho trạng thái arcade gốc.
+
+PID launcher cũ đã hết hoạt động; xác minh5189/5191 trống trước khi mở đúng `node scripts/run-arcade-local.mjs --production`, PID19824 tại thời điểm bàn giao. Website [`http://127.0.0.1:5189/arcade`](http://127.0.0.1:5189/arcade) và realtime5191 đều200; tạo phòng/bootstrap host qua proxy thật trả `rulesVersion=2`. Trong checkout chính,147/147 unit và TypeScript đạt; hai smoke Chrome trên đúng5189 đạt: tạo/join/start/pause/replay và nhặt bằng bàn phím với đồng hồ hồi45s,0 flaky. Hai body20,2s/4,5s, tổng88,5s gồm đóng browser.
+
+MC chọn **Chơi lại** hoặc tạo phòng mới để dùng luật mới; giữ tiến độ ván cũ ở trạng thái gián đoạn thay vì tự đổi xu. Chỉ bàn giao local, không push/deploy cloud. Worktree `E:/MLN122/.worktrees/cuoc-dua-gianh-khach` được giữ vì chứa raw asset và evidence gốc. Ledger và mọi quyết định: [`order-flow-v2-implementation-record.md`](order-flow-v2-implementation-record.md). Bằng chứng bàn giao không chứa token: [`evidence/order-flow-v2-local-handoff.json`](evidence/order-flow-v2-local-handoff.json).

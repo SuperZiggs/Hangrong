@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-28",
+  "originalCheckout": "E:\\MLN122\\web-game",
+  "originalBranch": "work/quyen-luc-so",
+  "codeAndInitialEvidenceFastForward": "7cdd67ab1c43bcdb33186e55a31d9014b6cd7430",
+  "productionCodeCommit": "ea27c47d708fdd94329984ede5a61183feceaaad",
+  "verifiedDistFiles": 200,
+  "allCopiedDistSha256Match": true,
+  "previousDistBackup": "E:/MLN122/web-game/work/pre-order-flow-v2-dist-20261028",
+  "integratedUnit": {
+    "passed": 147,
+    "files": 21
+  },
+  "integratedTypecheck": "PASS, exit0",
+  "integratedChrome": {
+    "startTime": "2026-10-28T00:00:37.489Z",
+    "duration": 88499.916,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "health": {
+    "websiteStatus": 200,
+    "realtimeHealthStatus": 200,
+    "newRoomHostBootstrapStatus": 200,
+    "newRoomRulesVersion": 2,
+    "originalWebsite": "http://127.0.0.1:5189/arcade",
+    "originalRealtime": "http://127.0.0.1:5191",
+    "originalDataReset": false
+  },
+  "runtime": {
+    "launcherPidAtHandoff": 19824,
+    "command": "node scripts/run-arcade-local.mjs --production"
+  },
+  "database": "original .wrangler/state and .wrangler/arcade-state preserved; no schema/data reset",
+  "publication": "local only; no remote push or cloud deploy",
+  "retainedWorktree": "E:\\MLN122\\.worktrees\\cuoc-dua-gianh-khach"
+}
