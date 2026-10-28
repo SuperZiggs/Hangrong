@@ -1,12 +1,12 @@
 # Đề xuất triển khai Vercel + Cloudflare
 
-Ngày: 28/10/2026. Trạng thái: bản thiết kế ngắn chờ người dùng duyệt; chưa sửa cấu hình triển khai, chưa tạo tài nguyên cloud.
+Ngày: 28/10/2026. Trạng thái: đã chỉnh và kiểm chứng mã nguồn/cấu hình theo yêu cầu người dùng ngày 28/10/2026; chưa tạo tài nguyên cloud. Xem [kết quả kiểm chứng](../../hosting-verification.md).
 
 ## Mục tiêu và phạm vi
 
 Đưa toàn bộ game câu hỏi và game arcade hiện tại lên mạng, với một địa chỉ Vercel dùng cho MC và người chơi. Dùng Vercel Hobby và Cloudflare Workers Free trong hạn mức, không bật gói trả phí. Tên dự án đề xuất của người thực hiện là `quyen-luc-so`; địa chỉ cuối cùng phụ thuộc tên còn trống và tài khoản được dùng.
 
-Người dùng đã chọn nền tảng Vercel + Cloudflare. Cách Vercel làm proxy bên dưới là đề xuất của người thực hiện, chưa được người dùng duyệt riêng.
+Người dùng đã chọn nền tảng Vercel + Cloudflare và yêu cầu chỉnh mã sau khi nhận đề xuất Vercel làm proxy. Phạm vi triển khai hiện tại là source/config host-ready; phát hành cloud và kiểm chứng domain thật cần quyền truy cập tài khoản tương ứng.
 
 ## Các phương án
 

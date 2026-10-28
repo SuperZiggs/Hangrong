@@ -1,5 +1,7 @@
 # Cấu hình và giới hạn triển khai
 
+Triển khai bằng tài khoản riêng: xem [Vercel + Cloudflare](../hosting-vercel-cloudflare.md). Website/API qua proxy Vercel đã xác thực; WebSocket kết nối trực tiếp realtime Worker. Dùng `.env.hosting.example` và `npm run hosting:prepare` để sinh cấu hình riêng, giữ các địa chỉ local bên dưới cho phát triển.
+
 Hai phần tách biệt: website React/Vinext tại `/arcade`, service realtime Cloudflare Durable Objects trong `realtime/`. Dữ liệu, API và D1 của game câu hỏi giữ nguyên.
 
 ## Cập nhật luật hàng ngày28/10/2026

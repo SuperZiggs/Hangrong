@@ -1,5 +1,13 @@
 # Quyền lực số
 
+## Hosting Vercel + Cloudflare
+
+[Hướng dẫn triển khai đầy đủ](docs/hosting-vercel-cloudflare.md). Trên Vercel, chọn **Root Directory `deploy/vercel`** và framework **Other**; website/API vẫn chạy bằng Cloudflare Workers, D1 và Durable Objects. Chạy `npm run hosting:prepare` sau khi điền `.env.hosting.local` theo file ví dụ để sinh cấu hình Cloudflare riêng; secret chỉ nhập trong cài đặt hai nền tảng.
+
+Đường vào Worker xác minh proxy trước khi sử dụng domain Vercel và IP khách. QR giữ domain Vercel; WebSocket đi trực tiếp realtime Worker. `npm run test:hosting` chạy kiểm chứng local với dữ liệu riêng, không phát hành cloud.
+
+## Game và cách chạy local
+
 Chế độ hành động mới **Cuộc đua giành khách** ở `/arcade`: chạy, tranh đơn, giao hàng, lướt/xô và cùng mở lối đi. Tối thiểu3 người, đã kiểm tra26 kết nối; bản local cần2 service. Chạy `npm run build` rồi `npm run arcade:preview`, mở `http://127.0.0.1:5189/arcade`. Khi sửa mã dùng `npm run arcade:dev`.
 
 - [Hướng dẫn MC của game hành động](docs/arcade/classroom-runbook.md)

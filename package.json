@@ -21,7 +21,12 @@
     "arcade:preview": "node scripts/run-arcade-local.mjs --production",
     "arcade:realtime": "node scripts/run-arcade-realtime.mjs",
     "arcade:load": "node scripts/arcade-load.mjs",
-    "arcade:assets": "node scripts/verify-arcade-assets.mjs"
+    "arcade:assets": "node scripts/verify-arcade-assets.mjs",
+    "test:hosting": "node tests/hosting/run-hosting-acceptance.mjs",
+    "hosting:prepare": "node --env-file=.env.hosting.local scripts/prepare-hosting.mjs",
+    "hosting:db:migrate": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 migrations apply DB --remote --config .hosting/website.wrangler.json",
+    "hosting:deploy:website": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js deploy --config .hosting/website.wrangler.json",
+    "hosting:deploy:realtime": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js deploy --config .hosting/realtime.wrangler.json"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

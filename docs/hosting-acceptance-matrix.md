@@ -1,0 +1,32 @@
+# Hosting acceptance matrix
+
+Frozen contract: the public website is one exact HTTPS origin (`https://hangrong.vercel.app` in this suite). Its HTTP gateway authenticates to the website Worker with `x-origin-secret` from `VERCEL_ORIGIN_SECRET`, forwards `x-real-ip` for each visitor, and may supply `x-forwarded-*`. Only authenticated gateway requests may trust those headers. Direct/local mode remains usable without gateway configuration. Arcade HTTP goes through the website; its WebSocket connects directly to the realtime Worker, using an exact Origin allowlist. Existing capabilities, bounded bodies, and `Cache-Control: no-store` remain effective.
+
+The author has received requirements and existing code only. No proposed design or implementation plan was read.
+
+Run every executable row with:
+
+```powershell
+node tests/hosting/run-hosting-acceptance.mjs
+```
+
+| ID | Requirement / risk | Level and scenario | Observable outcome |
+| --- | --- | --- | --- |
+| H01 | Quiz remains usable at public gateway | Real HTTP gateway → website Worker → local D1: create, idempotent retry, three joins, host start, authenticated/public state | Successful JSON; stable room on retry; distinct teams; correct roles; host command accepted; no capabilities in public state; no-store |
+| H02 | Arcade remains usable at public gateway | Real HTTP gateway → website Worker → realtime Worker + Durable Object: create, three joins, host start, bootstrap | Correct room and players; forwarded bearer distinguishes host/player/public; bootstrap returns a direct realtime socket URL; no-store |
+| H03 | Gateway identity and Origin are mandatory trust boundaries | HTTP requests with exact public Origin and absent/wrong/case-changed secret; malicious/suffix/subdomain/http/null Origins with valid secret | 403; error bodies do not expose capabilities or gateway secret; no-store |
+| H04 | Hostname/forwarded-header spoof cannot change the allowlist | Valid secret but hostile Origin, forged forwarded-host/proto/for; direct requests with forged public forwarded-host and no secret | 403 even if forwarded hostname matches attacker Origin |
+| H05 | Quiz create rate limit identifies individual authenticated visitors | 11 new creates by visitor A, first create by B, all through the same proxy/Cloudflare peer; then A changes x-forwarded-for | A receives 10 successes then 429; B succeeds; A remains limited despite forged x-forwarded-for; no-store |
+| H06 | Invalid gateway credentials cannot bypass trusted direct-IP limit | Same direct Cloudflare IP exhausts 10 creates, varying untrusted x-real-ip and x-forwarded-for without valid secret | Eleventh returns 429, or requests fail closed before reaching create; forwarded headers cannot grant more allowance |
+| H07 | Forwarding preserves HTTP method/body/query and authorization | POST UTF-8 names and retry IDs, GET `state?probe=...`, PUT method mismatch, malformed/over-8KiB JSON, missing/foreign bearer, unauthorized export | Data is preserved; GET works; unsupported mutation does not mutate state; bad bodies rejected; host-only operations stay forbidden; no-store on application responses |
+| H08 | Arcade WebSocket uses exact public Origin | Actual RFC6455 handshakes directly against realtime Worker with public Origin; HTTP/null/suffix/subdomain/other public hostname attempts | Exact public Origin connects and authenticates; others return 403; bootstrap never points WS at gateway |
+| H09 | QR/share links keep public website hostname | Browser lives at virtual HTTPS public origin; real HTTP gateway fetches documents/assets/API; quiz/arcade host UI generates QR and copies join URL | QR is rendered and copied link uses `https://hangrong.vercel.app`, with original quiz/arcade join query |
+| H10 | Local/direct compatibility | Separate website Worker with gateway variables unset; real local create/join and arcade bootstrap using its own Origin | Existing local same-Origin flows succeed; hostile Origin stays forbidden; no-store |
+
+Test topology: private website :5205, HTTP gateway :5206, realtime :5207, no-gateway compatibility website :5208. Gateway adds a fixed synthetic `CF-Connecting-IP` to represent the same Cloudflare-observed Vercel peer, while the test visitor IP is sent as documented `x-real-ip`. All tests cross the actual Worker boundary; D1 and Durable Objects use a fresh per-run directory under `.wrangler/hosting-acceptance`. The proxy forwards the request path including query, method, body, Origin, and bearer; it authenticates using a fixed test-only secret. The credential is never a deployment credential.
+
+If a running preview holds the workspace `dist` directory open on Windows, point `HOSTING_BUILD_ROOT` at a separately built copy of the same source. The runner then uses that copy's generated Worker config/assets and skips rebuilding the locked directory. The code under test must match the intended commit. `--skip-build` also accepts an already built workspace. `x-test-peer-ip` is stripped at the test proxy boundary and selects an isolated synthetic Cloudflare peer for the limiter scenario, so earlier successful creates cannot consume that scenario's quota; within H05 both visitors have the exact same peer IP.
+
+Each Worker process also receives separate Wrangler and Miniflare registry directories under that run's state. This keeps the test website/direct-mode instances, which use the same Worker name, from sharing discovery state with each other or the user's existing preview.
+
+Limits: this is a local proxy contract acceptance suite, not a deployed Vercel routing/DNS/TLS/account test. Chrome request routing gives the browser the public HTTPS document origin while forwarding each real HTTP request through the local gateway. QR rendering plus copied URL tests origin retention; it does not independently decode QR pixels. The suite does not replay a full 10-minute match because existing independent game suites cover game rules and duration.
